@@ -1,0 +1,860 @@
+---
+// Sandeq Rush Game Showcase Page (English Version)
+// Fully localized with authentic press kit assets, video, and screenshots
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SectionLabel from '../../../../components/SectionLabel.astro';
+import Link from '../../../../components/Link.astro';
+
+const gameTitle = 'Sandeq Rush';
+const releaseYear = '2026';
+const version = 'v0.3.1';
+const engine = 'Godot Engine 4.6.3';
+const platform = 'Android 16 (API Level 36) · Google Play';
+const genre = 'Arcade Sailing Racing · Cultural Maritime Edu';
+
+const stages = [
+  {
+    num: '01',
+    name: 'Polewali Bay',
+    distance: '900 meters',
+    wind: 'Left crosswind (13 knots)',
+    desc: 'Warm-up stage in tranquil bay waters. Master dual-touch sliders for sail trim and crew ballast balancing.',
+    accent: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+  },
+  {
+    num: '02',
+    name: 'Majene Coastal Waters',
+    distance: '1,100 meters',
+    wind: 'Wind reversal halfway through the course',
+    desc: 'Intense 4-boat sprint against traditional rival crews (Pambusuang, Tinambung, Majene) pushing past 30+ knots.',
+    accent: 'bg-sky-500/10 border-sky-500/30 text-sky-400',
+  },
+  {
+    num: '03',
+    name: 'Cape Rangas',
+    distance: '1,000 meters',
+    wind: 'Headwind (Wind coming straight from the front)',
+    desc: 'Tactical navigation trial. Execute rapid zig-zag tacking maneuvers to slice into incoming headwinds.',
+    accent: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+  },
+  {
+    num: '04',
+    name: 'Makassar Strait',
+    distance: '1,400 meters',
+    wind: 'Open ocean swells & shifting gale gusts',
+    desc: 'High-stake rolling waves and turbulent wind gusts. Extreme crew balancing required to avoid sudden capsizing.',
+    accent: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
+  },
+  {
+    num: '05',
+    name: 'Losari Beach (Makassar)',
+    distance: 'Championship Finale',
+    wind: 'Heavy finishing gusts',
+    desc: 'The iconic finish line of the annual West Sulawesi Sandeq Race, celebrating hundreds of nautical miles conquered.',
+    accent: 'bg-accent/15 border-accent/40 text-accent',
+  },
+];
+
+const screenshots = [
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-3.png',
+    title: 'Main Menu & Sailor Profile',
+    caption: 'Hero interface featuring 3D logo, Sandeq Race Career, interactive tutorial, and local leaderboards.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-7.png',
+    title: '5 Career Stages & Star Tracker',
+    caption: 'Championship map tracing Polewali Bay to Losari Beach with stage best times and star progression.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-13.png',
+    title: 'Guided Interactive Tutorial',
+    caption: 'Beginner-friendly step-by-step guidance teaching sail tension and outrigger ballast controls.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-27.png',
+    title: 'Intense 4-Boat Fleet Racing in Majene',
+    caption: 'High-octane competition with dynamic wave spray particles and real-time boat telemetry.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-40.png',
+    title: 'Peak 32-Knot Velocity Action',
+    caption: 'Harnessing a 23-knot crosswind gust with perfect crew trim to claim the 1st position.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-55.5.png',
+    title: 'Victory Podium & Maritime Fact Cards',
+    caption: 'Race results celebration combined with educational cards highlighting Mandar maritime heritage.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-62.png',
+    title: 'Sandeq Maritime Encyclopedia (12 Entries)',
+    caption: 'Integrated cultural knowledge base detailing Sandeq naval anatomy, tacking science, and traditions.',
+  },
+  {
+    src: '/games/sandeq-rush/screenshots/screenshot-32.png',
+    title: 'Pause Overlay & Android Safe Area',
+    caption: 'Adaptive layout respecting camera notches with automatic race pausing during phone calls.',
+  },
+];
+
+const boats = [
+  {
+    src: '/games/sandeq-rush/game-assets/perahu/boat_player.png',
+    name: "Player's Sandeq (Red & White)",
+    role: 'Flagship Player Vessel',
+    desc: 'Triangular racing sail with signature checkerboard pattern and balanced bamboo outriggers.',
+  },
+  {
+    src: '/games/sandeq-rush/game-assets/perahu/rival_blue.png',
+    name: 'Passandeq Pambusuang (Blue)',
+    role: 'Rival Fleet 01',
+    desc: 'Renowned for exceptional wave stability when navigating deep rough coastal chop.',
+  },
+  {
+    src: '/games/sandeq-rush/game-assets/perahu/rival_yellow.png',
+    name: 'Layar Tinambung (Yellow-Black)',
+    role: 'Rival Fleet 02',
+    desc: 'Optimized for fierce downwind bursts and rapid acceleration out of turning points.',
+  },
+  {
+    src: '/games/sandeq-rush/game-assets/perahu/rival_green.png',
+    name: 'Angin Majene (Green)',
+    role: 'Rival Fleet 03',
+    desc: 'Master of tactical zig-zag tacking maneuvers when cutting directly into oncoming wind.',
+  },
+];
+
+const encyclopedias = [
+  {
+    term: 'Sandeq Sailboat',
+    category: 'Vessel',
+    text: 'Derived from the Mandar word for "sharp", referring to its razor-thin hull design engineered to slice through ocean swells with minimum hydrodynamic friction.',
+  },
+  {
+    term: 'Sombal (Triangular Sail)',
+    category: 'Anatomy',
+    text: 'A forward-raked triangular sail generating aerodynamic lift comparable to modern aircraft wings, producing remarkable speeds without motor propulsion.',
+  },
+  {
+    term: 'Palatto & Outriggers',
+    category: 'Stability',
+    text: 'Bamboo stabilizers extended on both sides of the hull. They provide critical counter-balance against intense wind pressure and prevent capsizing.',
+  },
+  {
+    term: 'Passandeq & Crew Ballast',
+    category: 'Seafarers',
+    text: 'Skilled Mandar navigators who leap onto elevated outriggers (pallayarang), using their own body weight to offset powerful tipping moments.',
+  },
+  {
+    term: 'Tacking (Zig-zag Navigation)',
+    category: 'Navigation',
+    text: 'A sailing technique required when heading toward the wind direction, alternating course angles in a rapid zig-zag pattern.',
+  },
+  {
+    term: 'Traditional Sandeq Race',
+    category: 'Cultural Heritage',
+    text: 'One of the longest and most revered traditional sailing regattas in Indonesia, racing hundreds of kilometers across the Makassar Strait.',
+  },
+];
+---
+
+<BaseLayout
+  lang="en"
+  title={`${gameTitle} — Traditional Mandar Sailing Racing Game for Android`}
+  description="Sandeq Rush is an arcade sailing racing game celebrating the world-famous traditional outrigger sailboat of the Mandar culture. Experience authentic wind physics up to 32 knots, 5 career stages, and maritime lore."
+>
+  <main class="relative bg-paper text-ink overflow-hidden">
+
+    <!-- HERO SECTION WITH HIGH-CONTRAST OVERLAYS & CRISP TYPOGRAPHY -->
+    <section class="relative min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-rule bg-[#07131b]">
+      
+      <!-- Video Loop Background with Strong Contrast Backdrop Filter -->
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="/games/sandeq-rush/video/sandeq-rush-hero-poster.jpg"
+          class="h-full w-full object-cover opacity-20 filter brightness-[0.4] contrast-[1.25] saturate-[0.8]"
+        >
+          <source src="/games/sandeq-rush/video/sandeq-rush-hero-loop.mp4" type="video/mp4" />
+        </video>
+        <!-- Dark Deep-Sea Gradient Overlays to protect text contrast -->
+        <div class="absolute inset-0 bg-[#07131b]/80 backdrop-blur-[2px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#07131b] via-[#07131b]/70 to-[#07131b]/95"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#07131b] via-[#07131b]/50 to-[#07131b]"></div>
+      </div>
+
+      <div class="wrap relative z-10 py-16 sm:py-24">
+        
+        <!-- Breadcrumb & Top Bar -->
+        <div class="mb-8 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div class="flex items-center gap-2 text-slate-300">
+            <Link href="/en" class="hover:text-accent transition-colors text-slate-300">Home</Link>
+            <span class="text-slate-500">/</span>
+            <Link href="/en/game" class="hover:text-accent transition-colors text-slate-300">Games</Link>
+            <span class="text-slate-500">/</span>
+            <span class="text-amber-400 font-semibold">{gameTitle}</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 border border-amber-500/50 bg-amber-500/15 px-3 py-1 text-amber-300 text-xs font-mono font-medium tracking-wide">
+              <span class="h-2 w-2 rounded-full bg-amber-400 animate-ping"></span>
+              FLAGSHIP GAME · GODOT 4
+            </span>
+            <Link
+              href="/game/sandeq-rush"
+              class="border border-white/25 bg-white/10 px-3 py-1 text-white hover:text-amber-300 hover:border-amber-400/50 transition-colors text-xs font-medium"
+              title="Versi Bahasa Indonesia"
+            >
+              Versi ID ↗
+            </Link>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Left Column: Big Logo, Headline, Intro -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Game Logo & Icon Strip -->
+            <div class="flex items-center gap-5">
+              <div class="relative group shrink-0">
+                <img
+                  src="/games/sandeq-rush/sandeq-rush-icon-1024.png"
+                  alt="Sandeq Rush App Icon"
+                  class="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl border-2 border-white/30 shadow-2xl object-cover bg-[#0d1d27]"
+                />
+                <span class="absolute -bottom-2 -right-2 bg-accent text-white font-mono text-[11px] font-bold px-2 py-0.5 rounded shadow-lg border border-white/20">
+                  {version}
+                </span>
+              </div>
+              <div>
+                <img
+                  src="/games/sandeq-rush/sandeq-rush-logo.png"
+                  alt="Sandeq Rush Logo"
+                  class="h-24 sm:h-32 md:h-36 w-auto object-contain drop-shadow-[0_12px_30px_rgba(0,0,0,0.85)] filter brightness-105"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <p class="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold flex items-center gap-2">
+                <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                Arcade Racing · Mandar Wind Physics · Maritime Education
+              </p>
+              <h1 class="font-serif text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.08] font-normal tracking-[-0.02em] text-white drop-shadow-md">
+                Pilot the Fastest Outrigger Sailboat in the Archipelago.
+              </h1>
+            </div>
+
+            <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-normal drop-shadow">
+              Cut through the waves of Makassar Strait at speeds over 30 knots! Experience authentic traditional Indonesian sailing mechanics powered by dynamic wind simulation, tactical tacking maneuvers, and crew outrigger counterbalancing.
+            </p>
+
+            <!-- CTA Buttons with Bright High-Contrast Styling -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="#gameplay-video"
+                class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3.5 font-mono text-xs font-bold text-white transition-all hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-900/40"
+              >
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                Watch Gameplay Video
+              </a>
+              <a
+                href="#stages"
+                class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3.5 font-mono text-xs font-medium text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+              >
+                5 Career Stages ↓
+              </a>
+              <a
+                href="#gallery"
+                class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3.5 font-mono text-xs font-medium text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+              >
+                Screenshots ↓
+              </a>
+            </div>
+
+            <!-- Quick Specs Row -->
+            <div class="pt-4 flex flex-wrap gap-4 border-t border-white/15 font-mono text-xs text-slate-300">
+              <div><strong class="text-white">Target Release:</strong> Google Play Store 2026</div>
+              <div class="text-slate-600">•</div>
+              <div><strong class="text-white">Engine:</strong> Godot 4.6.3</div>
+              <div class="text-slate-600">•</div>
+              <div><strong class="text-white">Controls:</strong> Dual Touch Screen Sliders</div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Interactive Card Preview -->
+          <div class="lg:col-span-5">
+            <div class="relative overflow-hidden rounded-xl border border-white/20 bg-[#0c1c27]/95 p-5 shadow-2xl backdrop-blur-md">
+              
+              <!-- Card Header -->
+              <div class="flex items-center justify-between border-b border-white/15 pb-3 font-mono text-xs text-slate-300">
+                <span class="flex items-center gap-2 text-amber-400 font-bold">
+                  <span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  RACE TELEMETRY
+                </span>
+                <span class="text-slate-400">MAKASSAR STRAIT</span>
+              </div>
+
+              <!-- Animated Poster Graphic -->
+              <div class="relative my-4 aspect-[16/10] overflow-hidden rounded-lg border border-white/20 bg-black group">
+                <img
+                  src="/games/sandeq-rush/screenshots/screenshot-40.png"
+                  alt="Sandeq Rush Racing Action"
+                  class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-4">
+                  <div class="font-mono text-xs text-white">
+                    <span class="text-amber-400 font-bold">POSITION 1/4 · 32 KNOTS</span>
+                    <p class="text-slate-200 text-xs mt-0.5">Leading the fleet in Majene Coastal Waters</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Metric Stats -->
+              <div class="grid grid-cols-3 gap-2 text-center font-mono text-xs">
+                <div class="border border-white/15 bg-white/5 p-2 rounded">
+                  <span class="block text-[10px] text-slate-400 uppercase">Max Velocity</span>
+                  <span class="text-sm font-bold text-amber-400">32+ Knots</span>
+                </div>
+                <div class="border border-white/15 bg-white/5 p-2 rounded">
+                  <span class="block text-[10px] text-slate-400 uppercase">Career Stages</span>
+                  <span class="text-sm font-bold text-white">5 Courses</span>
+                </div>
+                <div class="border border-white/15 bg-white/5 p-2 rounded">
+                  <span class="block text-[10px] text-slate-400 uppercase">Encyclopedia</span>
+                  <span class="text-sm font-bold text-emerald-400">12 Entries</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GAMEPLAY TRAILER SECTION -->
+    <section id="gameplay-video" class="py-16 sm:py-24 border-b border-rule bg-paper-2">
+      <div class="wrap">
+        
+        <div class="max-w-3xl mb-8">
+          <SectionLabel num="01" title="Gameplay Demonstration" />
+          <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+            Witness Sandeq Rush in Real-Time Motion
+          </h2>
+          <p class="text-base text-ink-2 leading-relaxed">
+            Raw captured gameplay from the Godot Engine prototype. See how shifting wind directions demand real-time crew repositioning and sail angle adjustment.
+          </p>
+        </div>
+
+        <!-- Video Player Frame -->
+        <div class="relative overflow-hidden border border-rule bg-[#07131b] shadow-2xl rounded-lg">
+          
+          <!-- Cockpit Header -->
+          <div class="flex items-center justify-between border-b border-white/15 bg-[#0f212c] px-4 py-3 font-mono text-xs text-white">
+            <div class="flex items-center gap-2">
+              <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+              <span class="ml-2 font-semibold text-white">SANDEQ_RUSH_GAMEPLAY_RAW.MP4</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-4 text-xs text-slate-300">
+              <span>FPS: 60</span>
+              <span>RES: 1280x720</span>
+              <span>AUDIO: STEREO</span>
+            </div>
+          </div>
+
+          <!-- Video Element -->
+          <div class="relative aspect-video w-full bg-black">
+            <video
+              controls
+              preload="metadata"
+              poster="/games/sandeq-rush/video/sandeq-rush-hero-poster.jpg"
+              class="h-full w-full object-contain"
+            >
+              <source src="/games/sandeq-rush/video/sandeq-rush-gameplay.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video playback.
+            </video>
+          </div>
+
+          <!-- Video Footer Caption -->
+          <div class="border-t border-white/15 bg-[#0f212c] p-4 text-xs font-mono text-slate-300 flex flex-wrap justify-between items-center gap-3">
+            <span>Official Gameplay Demo v0.3.1 (Godot 4 Physics &amp; Wind Simulation)</span>
+            <span class="text-amber-400 font-semibold">Developed by Alfandhy, S.T. — Polewali Mandar</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SAILING MECHANICS & PHYSICS -->
+    <section class="py-16 sm:py-24 border-b border-rule">
+      <div class="wrap">
+        
+        <div class="max-w-3xl mb-12">
+          <SectionLabel num="02" title="Core Mechanics & Physics" />
+          <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+            More Than Racing: Bringing Maritime Science to Life
+          </h2>
+          <p class="text-base text-ink-2 leading-relaxed">
+            The Sandeq is acknowledged by maritime historians as one of the fastest sailing crafts ever conceived due to its razor-sharp hydrodynamic hull and triangular rigging. Sandeq Rush translates these authentic principles into engaging gameplay.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">01 / WIND ANGLE</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Triangular Sail Aerodynamics</h3>
+              <p class="text-sm text-ink-2 leading-relaxed">
+                Pull the left slider upwards to tighten sail tension during heavy gusts, or slacken sheets when wind angles shift to maintain propulsive lift.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
+              Parameters: Angle of Attack &amp; Aerodynamic Lift
+            </div>
+          </div>
+
+          <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">02 / OUTRIGGER COUNTERWEIGHT</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Crew Ballast on Outriggers</h3>
+              <p class="text-sm text-ink-2 leading-relaxed">
+                Strong winds exert tipping torque on the narrow hull. Shift crew members (pakkadacai) out onto the windward outrigger to counter heeling and avoid capsizing.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
+              Parameters: Torque Moment &amp; Crew Gravitational Center
+            </div>
+          </div>
+
+          <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">03 / ZIG-ZAG NAVIGATION</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Tacking Maneuver (Pindah Haluan)</h3>
+              <p class="text-sm text-ink-2 leading-relaxed">
+                When encountering headwind stages, sailboats cannot head directly straight. Tap the tactical button to execute rapid zig-zag tacking cuts into the oncoming gale.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
+              Parameters: Tacking Angle &amp; Turn Velocity
+            </div>
+          </div>
+
+          <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">04 / TOUCH ERGONOMICS</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Mobile Dual-Thumb Precision</h3>
+              <p class="text-sm text-ink-2 leading-relaxed">
+                Intuitive layout tailored for landscape smartphone gaming, featuring camera notch safe-areas, auto-pause on notifications, and responsive tactile feel.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
+              Parameters: Analog Touch Sliders &amp; Screen Safe-Area
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5 CAREER STAGES -->
+    <section id="stages" class="py-16 sm:py-24 border-b border-rule bg-paper-2">
+      <div class="wrap">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div class="max-w-2xl">
+            <SectionLabel num="03" title="Career Mode 'Sandeq Race'" />
+            <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+              5 Legendary West Sulawesi Coastal Stages
+            </h2>
+            <p class="text-base text-ink-2 leading-relaxed">
+              Conquer the championship course by course. Collect 3 stars per stage finish to unlock confidential entries in the integrated maritime encyclopedia.
+            </p>
+          </div>
+          <div class="font-mono text-xs text-ink-2 border border-rule bg-paper p-3">
+            Total Regatta Course: <span class="font-bold text-ink">4,400+ virtual meters</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          {
+            stages.map((st) => (
+              <div class="border border-rule bg-paper p-6 sm:p-7 transition-all hover:border-accent hover:shadow-md">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  
+                  <div class="lg:col-span-1 font-mono text-2xl font-bold text-accent">
+                    {st.num}
+                  </div>
+
+                  <div class="lg:col-span-4">
+                    <span class={`inline-block font-mono text-[11px] px-2.5 py-0.5 border rounded mb-2 ${st.accent}`}>
+                      {st.distance}
+                    </span>
+                    <h3 class="font-serif text-2xl text-ink font-normal">{st.name}</h3>
+                    <span class="font-mono text-xs text-ink-2 block mt-1">{st.wind}</span>
+                  </div>
+
+                  <div class="lg:col-span-5 text-sm text-ink-2 leading-relaxed">
+                    {st.desc}
+                  </div>
+
+                  <div class="lg:col-span-2 flex lg:justify-end items-center gap-1 font-mono text-xs text-amber-500">
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span class="text-ink-2 ml-1 text-[11px]">(3 Stars)</span>
+                  </div>
+
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SCREENSHOT GALLERY -->
+    <section id="gallery" class="py-16 sm:py-24 border-b border-rule">
+      <div class="wrap">
+        
+        <div class="max-w-3xl mb-12">
+          <SectionLabel num="04" title="Screenshot Gallery" />
+          <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+            High-Resolution Gameplay Captures
+          </h2>
+          <p class="text-base text-ink-2 leading-relaxed">
+            Click on any screenshot to inspect the full-resolution preview in the lightbox viewer.
+          </p>
+        </div>
+
+        <!-- Grid of Screenshots -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            screenshots.map((s, index) => (
+              <button
+                type="button"
+                class="screenshot-thumb group text-left border border-rule bg-paper-2 overflow-hidden transition-all hover:border-accent hover:shadow-lg focus:outline-none cursor-pointer"
+                data-index={index}
+                data-src={s.src}
+                data-title={s.title}
+                data-caption={s.caption}
+              >
+                <div class="aspect-[16/9] w-full overflow-hidden bg-black/10 relative">
+                  <img
+                    src={s.src}
+                    alt={s.title}
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="bg-ink/90 text-paper font-mono text-xs px-2.5 py-1 rounded backdrop-blur font-bold">
+                      Expand ↗
+                    </span>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-serif text-base font-normal text-ink group-hover:text-accent transition-colors">
+                    {s.title}
+                  </h3>
+                  <p class="text-xs text-ink-2 line-clamp-2 mt-1 leading-relaxed">
+                    {s.caption}
+                  </p>
+                </div>
+              </button>
+            ))
+          }
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div
+      id="lightbox-modal"
+      class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="relative w-full max-w-5xl flex flex-col items-center">
+        <!-- Close Button -->
+        <button
+          id="lightbox-close"
+          type="button"
+          class="absolute -top-12 right-0 text-white hover:text-amber-400 font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer py-1.5 px-3.5 border border-white/30 bg-white/10"
+        >
+          <span>✕</span> Close (ESC)
+        </button>
+
+        <!-- Main Image -->
+        <div class="relative w-full aspect-video max-h-[75vh] flex items-center justify-center overflow-hidden border border-white/20 bg-black">
+          <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="max-h-full max-w-full object-contain"
+          />
+        </div>
+
+        <!-- Captions & Nav Buttons -->
+        <div class="w-full mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-white font-mono text-xs">
+          <div>
+            <h4 id="lightbox-title" class="font-serif text-lg font-normal text-white"></h4>
+            <p id="lightbox-caption" class="text-slate-300 text-xs mt-1 max-w-xl"></p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              id="lightbox-prev"
+              type="button"
+              class="px-3.5 py-1.5 border border-white/30 bg-white/10 hover:border-amber-400 hover:text-amber-400 text-white cursor-pointer transition-colors"
+            >
+              ← Previous
+            </button>
+            <span id="lightbox-counter" class="text-slate-300 px-2 font-medium"></span>
+            <button
+              id="lightbox-next"
+              type="button"
+              class="px-3.5 py-1.5 border border-white/30 bg-white/10 hover:border-amber-400 hover:text-amber-400 text-white cursor-pointer transition-colors"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOATS FLEET & AI CREATIVE PIPELINE -->
+    <section class="py-16 sm:py-24 border-b border-rule bg-paper-2">
+      <div class="wrap">
+        
+        <div class="max-w-3xl mb-12">
+          <SectionLabel num="05" title="Fleet & AI Art Pipeline" />
+          <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+            Authentic Maritime Heritage via AI Workflows
+          </h2>
+          <p class="text-base text-ink-2 leading-relaxed">
+            All boat illustrations, canvas sail geometry, and coastal scenery (dawn, midday, twilight along Mandar coast) were designed by Alfandhy utilizing generative AI visual pipelines (Higgsfield), carefully curated, anatomically corrected, and integrated into Godot Engine.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            boats.map((b) => (
+              <div class="border border-rule bg-paper p-5 flex flex-col justify-between">
+                <div>
+                  <div class="aspect-[4/3] bg-paper-2 border border-rule/50 flex items-center justify-center p-3 mb-4 overflow-hidden group">
+                    <img
+                      src={b.src}
+                      alt={b.name}
+                      class="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <span class="font-mono text-[11px] text-accent font-semibold block mb-1">{b.role}</span>
+                  <h3 class="font-serif text-lg text-ink font-normal mb-2">{b.name}</h3>
+                  <p class="text-xs text-ink-2 leading-relaxed">{b.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MARITIME LITERACY & ENCYCLOPEDIA -->
+    <section class="py-16 sm:py-24 border-b border-rule">
+      <div class="wrap">
+        
+        <div class="max-w-3xl mb-12">
+          <SectionLabel num="06" title="Maritime Literacy" />
+          <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
+            Integrated Sandeq Knowledge Base
+          </h2>
+          <p class="text-base text-ink-2 leading-relaxed">
+            Players unlock 12 cultural encyclopedia entries that unpack the nautical engineering and traditions of the Mandar seafarers. The game functions both as adrenaline-fueled entertainment and a cultural preservation catalyst.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            encyclopedias.map((item, idx) => (
+              <div class="border border-rule bg-paper-2 p-6">
+                <div class="flex items-center justify-between border-b border-rule pb-3 mb-4">
+                  <span class="font-mono text-xs text-accent uppercase tracking-wider">{item.category}</span>
+                  <span class="font-mono text-xs text-ink-2">#{String(idx + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 class="font-serif text-xl text-ink font-normal mb-2">{item.term}</h3>
+                <p class="text-sm text-ink-2 leading-relaxed">{item.text}</p>
+              </div>
+            ))
+          }
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL SPECS & PLAY STORE COMPLIANCE -->
+    <section class="py-16 sm:py-24 bg-[#07131b] text-white border-t border-rule">
+      <div class="wrap">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-400 font-bold uppercase tracking-wider">
+              <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+              COMPLIANCE &amp; USER SAFETY
+            </div>
+            <h2 class="font-serif text-[clamp(2.25rem,4.5vw,3.75rem)] leading-tight font-normal text-white">
+              Engineered for Google Play Store (Android 16 Standard)
+            </h2>
+            <p class="text-slate-200 leading-relaxed text-base">
+              Sandeq Rush adheres to current Google Play release guidelines targeting Android API level 36. Built upon zero telemetry collection and no third-party behavioral trackers, ensuring safe play for students, families, and gamers of all ages.
+            </p>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+              <Link
+                href="/en/game/sandeq-rush/privacy"
+                class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3 font-mono text-xs font-bold text-white hover:bg-orange-500 transition-colors shadow-lg shadow-orange-950/40"
+              >
+                Read Dedicated Privacy Policy (EN) →
+              </Link>
+              <Link
+                href="/game/sandeq-rush/privacy"
+                class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3 font-mono text-xs font-medium text-white hover:border-white hover:bg-white/20 transition-colors"
+              >
+                Versi Bahasa Indonesia ↗
+              </Link>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 border border-white/20 bg-[#0c1c27] p-6 sm:p-8 space-y-5 font-mono text-xs">
+            <div class="border-b border-white/15 pb-3 flex items-center justify-between text-slate-300">
+              <span class="text-amber-400 font-bold uppercase">Game Specification Details</span>
+              <span class="text-slate-400">ID.SANDEQRUSH.GAME</span>
+            </div>
+
+            <div class="space-y-3 divide-y divide-white/10">
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Game Title:</span>
+                <span class="text-white font-semibold">{gameTitle}</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Current Build:</span>
+                <span class="text-amber-400 font-semibold">{version} (Godot 4.6.3)</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Target Platform:</span>
+                <span class="text-white">{platform}</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Distribution Package:</span>
+                <span class="text-white">Android App Bundle (.aab) &amp; APK</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Engine &amp; Logic:</span>
+                <span class="text-white">Godot GDScript · Custom 2D Physics</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Developer &amp; Art:</span>
+                <span class="text-white">Alfandhy, S.T. (West Sulawesi, ID)</span>
+              </div>
+              <div class="pt-2 flex justify-between">
+                <span class="text-slate-400">Telemetry Policy:</span>
+                <span class="text-emerald-400 font-bold">Zero Data Collection (Safe for Kids)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<script>
+  // Lightbox functionality for screenshots
+  function setupLightbox() {
+    const thumbs = document.querySelectorAll('.screenshot-thumb');
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalTitle = document.getElementById('lightbox-title');
+    const modalCaption = document.getElementById('lightbox-caption');
+    const modalCounter = document.getElementById('lightbox-counter');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    if (!modal || !modalImg || thumbs.length === 0) return;
+
+    let currentIndex = 0;
+    const items = Array.from(thumbs).map((thumb) => ({
+      src: thumb.getAttribute('data-src') || '',
+      title: thumb.getAttribute('data-title') || '',
+      caption: thumb.getAttribute('data-caption') || '',
+    }));
+
+    function showItem(index: number) {
+      if (index < 0) index = items.length - 1;
+      if (index >= items.length) index = 0;
+      currentIndex = index;
+
+      const item = items[currentIndex];
+      modalImg.src = item.src;
+      modalImg.alt = item.title;
+      if (modalTitle) modalTitle.textContent = item.title;
+      if (modalCaption) modalCaption.textContent = item.caption;
+      if (modalCounter) modalCounter.textContent = `${currentIndex + 1} / ${items.length}`;
+    }
+
+    function openModal(index: number) {
+      showItem(index);
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    thumbs.forEach((thumb, idx) => {
+      thumb.addEventListener('click', () => openModal(idx));
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    prevBtn?.addEventListener('click', () => showItem(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => showItem(currentIndex + 1));
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
+      if (e.key === 'ArrowRight') showItem(currentIndex + 1);
+    });
+  }
+
+  setupLightbox();
+  document.addEventListener('astro:page-load', setupLightbox);
+</script>

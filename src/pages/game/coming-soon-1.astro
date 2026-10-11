@@ -1,0 +1,53 @@
+---
+// Halaman Game Coming Soon (ID) — Template untuk Game 2 dan Game 3
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import Link from '../../components/Link.astro';
+
+interface Props {
+  projectNum?: string;
+  projectCode?: string;
+}
+
+const { projectNum = '02', projectCode = 'Project Mandar II' } = Astro.props;
+---
+
+<BaseLayout
+  title={`${projectCode} — Segera Hadir`}
+  description="Proyek game edukatif dan eksplorasi gameplay baru oleh Alfandhy sedang dalam tahap riset dan pengembangan."
+>
+  <main class="py-20 sm:py-32">
+    <div class="wrap max-w-3xl text-center">
+      
+      <div class="inline-flex items-center gap-2 border border-rule bg-paper-2 px-3 py-1 font-mono text-xs text-ink-2 mb-6">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
+        STAGE: IN DEVELOPMENT · PROYEK #{projectNum}
+      </div>
+
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal text-ink mb-6">
+        {projectCode}
+      </h1>
+
+      <p class="text-base sm:text-lg leading-relaxed text-ink-2 max-w-xl mx-auto mb-10">
+        Game ini sedang dirancang dan dikembangkan dengan memanfaatkan integrasi teknologi AI, fisika permainan yang menarik, serta nilai edukasi kearifan lokal.
+      </p>
+
+      <div class="border border-dashed border-rule bg-paper-2/50 p-8 max-w-md mx-auto mb-12">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent block mb-2">[ COMING SOON ]</span>
+        <p class="font-mono text-xs text-ink-2">
+          Detail konsep, devlog, dan tangkapan layar gameplay akan segera dipublikasikan di halaman ini.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <Link href="/game/sandeq-rush" class="border border-ink bg-ink px-5 py-2.5 font-mono text-xs text-paper hover:bg-accent hover:border-accent">
+          Lihat Game Sandeq Rush →
+        </Link>
+        <Link href="/" class="border border-rule px-5 py-2.5 font-mono text-xs text-ink hover:text-accent">
+          ← Kembali ke Beranda
+        </Link>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

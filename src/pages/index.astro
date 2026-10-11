@@ -1,63 +1,145 @@
 ---
-// Beranda SEMENTARA (Fase 1) — untuk menguji fondasi & komponen.
-// Akan diganti total di Fase 2 sesuai PLAN 4.1.
+// Beranda — PLAN 4.1, acuan visual: docs/prototype-beranda.html
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Tag from '../components/Tag.astro';
-import SectionTitle from '../components/SectionTitle.astro';
-import Timeline from '../components/Timeline.astro';
-import { SITE } from '../data/site';
+import SectionLabel from '../components/SectionLabel.astro';
+import WorkRow from '../components/WorkRow.astro';
+import Link from '../components/Link.astro';
+import HeroAnimation from '../components/HeroAnimation.astro';
+import { SITE, SOCIALS } from '../data/site';
+import imgAlfandhy from '../assets/images/alfandhy.png';
+
+const featured = (await getCollection('work', ({ data }) => data.featured)).sort((a, b) => a.data.order - b.data.order).slice(0, 1);
+
+const approach = ['Desain & microstock', 'Pendidikan', 'Game', 'Prompt engineering'];
+
+const now = [
+  { label: 'Membangun', text: 'Sandeq Rush, persiapan rilis di Google Play.' },
+  { label: 'Mengajar', text: 'DKV, Desain Brief, Mikroprosesor, dan Informatika.' },
+  { label: 'Belajar', text: 'Pipeline aset game dan motion dengan AI.' },
+];
+const nowDate = new Intl.DateTimeFormat('id-ID', { month: 'short', year: 'numeric' }).format(new Date());
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alfandhy',
+  honorificSuffix: 'S.T.',
+  url: SITE.url,
+  jobTitle: 'AI Enthusiast, Educator, Game Developer',
+  address: { '@type': 'PostalAddress', addressLocality: 'Polewali Mandar', addressRegion: 'Sulawesi Barat', addressCountry: 'ID' },
+  knowsAbout: ['Artificial Intelligence', 'Prompt Engineering', 'Desain Komunikasi Visual', 'Game Development'],
+  sameAs: SOCIALS.map((s) => s.href).filter((h) => !h.startsWith('[')),
+};
 ---
 
-<BaseLayout description={SITE.description}>
-  <section class="relative overflow-hidden">
-    <div class="bg-grid absolute inset-0" aria-hidden="true"></div>
-    <div
-      class="absolute -top-40 left-1/2 size-[520px] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="container-site relative py-24 sm:py-32">
-      <Tag variant="accent" class="animate-fade-up">
-        <span class="size-1.5 animate-pulse rounded-full bg-accent-2"></span> Fase 1 · Fondasi
-      </Tag>
-      <h1 class="mt-6 max-w-3xl animate-fade-up font-heading text-4xl font-bold leading-[1.05] sm:text-6xl">
-        Website baru <span class="text-gradient">sedang dibangun.</span>
-      </h1>
-      <p class="mt-5 max-w-xl animate-fade-up text-lg text-muted">{SITE.tagline}</p>
-      <div class="mt-8 flex animate-fade-up flex-wrap gap-3">
-        <Button href="/work" id="btn-work">Lihat Karya <span aria-hidden="true">→</span></Button>
-        <Button href="/about" variant="secondary" id="btn-about">Tentang Saya</Button>
-        <Button href="/game/sandeqrush" variant="warm" id="btn-sandeq">Sandeq Rush</Button>
-        <Button href="/contact" variant="ghost" id="btn-contact">Kontak</Button>
+<BaseLayout jsonLd={personLd}>
+  <!-- HERO -->
+  <section class="pt-12 pb-[88px] sm:pt-[72px] sm:pb-[120px]">
+    <div class="wrap">
+      <p class="label r mb-10">AI Enthusiast — Polewali Mandar, Sulawesi Barat</p>
+      <div class="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+        <div class="r flex flex-col justify-between gap-8 lg:col-span-8">
+          <HeroAnimation class="w-full" />
+          <h1 class="display">Saya memakai AI untuk <em>mendesain,</em> mengajar, dan membangun game.</h1>
+        </div>
+
+        <div class="r grid grid-cols-1 items-end gap-5 sm:grid-cols-[1fr_1.2fr] lg:col-span-4 lg:block">
+          <div class="portrait relative flex aspect-[4/5] items-end overflow-hidden border border-rule bg-paper-2">
+            <Image src={imgAlfandhy} alt="Alfandhy, S.T." class="absolute inset-0 h-full w-full object-cover saturate-[.85]" />
+          </div>
+          <div>
+            <p class="text-base text-ink-2 lg:mt-5">
+              Seorang AI Enthusiast yang memadukan teknologi ke dalam dunia desain dan pendidikan, serta saat ini sedang fokus mengembangkan game edukatif.
+            </p>
+            <Link href="/#karya" id="hero-work-link" class="mt-3.5 inline-block text-base text-ink">Lihat karya →</Link>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="container-site py-16">
-    <SectionTitle eyebrow="Komponen" title='Uji <span class="text-gradient">Card &amp; Tag</span>' description="Pratinjau komponen dasar dari design system." />
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <Card eyebrow="AI" title="AI untuk Desain" description="Contoh kartu layanan dengan efek spotlight." href="#" class="reveal" />
-      <Card eyebrow="Game" badge="Coming soon" title="Sandeq Rush" description="Contoh kartu dengan glow hangat." glow="warm" href="#" class="reveal" />
-      <Card eyebrow="Edu" title="Media Ajar" description="Kartu tanpa link." class="reveal">
-        <div class="flex flex-wrap gap-2">
-          <Tag>Prompt</Tag><Tag variant="accent">AI</Tag><Tag variant="warm">Game</Tag>
-        </div>
-      </Card>
+  <!-- 01 — KARYA TERPILIH -->
+  <section id="karya" class="pb-[88px] sm:pb-[140px]">
+    <div class="wrap">
+      <SectionLabel num="01" title="Karya Terpilih">
+        <Link href="/game/sandeq-rush" class="label">Halaman game →</Link>
+      </SectionLabel>
+      <div>
+        {
+          featured.map((w, i) => (
+            <WorkRow
+              num={String(i + 1).padStart(2, '0')}
+              title={w.data.title}
+              summary={w.data.summary}
+              href={w.data.href ?? `/work/${w.id}`}
+              tags={w.data.tags}
+              cover={w.data.cover}
+              coverAlt={w.data.coverAlt}
+              placeholder={w.data.placeholder}
+              placeholderLabel={w.data.placeholderLabel}
+            />
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="container-site py-16">
-    <SectionTitle eyebrow="Komponen" title="Uji Timeline" />
-    <div class="mt-10 max-w-2xl">
-      <Timeline
-        items={[
-          { period: 'Sekarang', title: 'Guru', org: 'SMK Negeri Tapango', tags: ['Mikroprosesor', 'DKV', 'Informatika'] },
-          { period: '[TAHUN]', title: 'Founder', org: 'SMEGTA MEDIA', description: 'Kontributor Adobe Stock & ekstrakurikuler.' },
-          { period: '[TAHUN]', title: 'S1 Informatika (S.T.)', org: '[NAMA KAMPUS]' },
-        ]}
-      />
+  <!-- 02 — CARA SAYA BEKERJA DENGAN AI -->
+  <section id="pendekatan" class="pb-[88px] sm:pb-[140px]">
+    <div class="wrap">
+      <SectionLabel num="02" title="Cara saya bekerja dengan AI" />
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+        <ul class="r lg:col-span-4">
+          {
+            approach.map((item, i) => (
+              <li class="flex items-baseline justify-between border-b border-rule py-3.5 font-serif text-[1.375rem]">
+                {item}
+                <span class="font-mono text-xs text-ink-2">{String(i + 1).padStart(2, '0')}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="r space-y-[1em] font-serif text-[clamp(1.375rem,2.2vw,1.875rem)] leading-[1.35] font-light tracking-[-0.005em] lg:col-span-6 lg:col-start-6">
+          <p>
+            Bagi saya AI bukan pengganti proses kreatif, melainkan <em class="text-accent">alat kerja</em>, seperti pensil dan grid bagi desainer.
+          </p>
+          <p>
+            Saya memakainya untuk mempercepat eksplorasi, lalu memilih, menyunting, dan menyelesaikan karya dengan tangan sendiri. Hal yang sama saya
+            ajarkan kepada siswa di kelas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — SEKARANG -->
+  <section id="sekarang" class="pb-[88px] sm:pb-[140px]">
+    <div class="wrap">
+      <SectionLabel num="03" title="Sekarang">
+        <span class="label">{nowDate}</span>
+      </SectionLabel>
+      <dl class="r grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+        {
+          now.map((n) => (
+            <div>
+              <dt class="label mb-2">{n.label}</dt>
+              <dd class="max-w-[30ch]">{n.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Arsir tipis sebagai penanda tempat foto (hilang setelah foto asli dipasang) */
+  .portrait::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(135deg, transparent 0 14px, rgb(22 20 15 / 0.04) 14px 15px);
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+// Halaman Indeks Koleksi Game (ID) — /game
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import Link from '../../components/Link.astro';
+
+const games = [
+  {
+    num: '01',
+    title: 'Sandeq Rush',
+    badge: 'Rilis 2026',
+    badgeType: 'active',
+    summary: 'Game balap perahu layar Sandeq tradisional Mandar untuk Android. Menjelajahi angin selat Makassar dengan mekanik fisika layar dan visual bernuansa budaya lokal.',
+    href: '/game/sandeq-rush',
+    platform: 'Android / Google Play Store',
+    tools: 'Godot Engine · Generative AI',
+    image: '/games/sandeq-rush/sandeq-rush-logo.png',
+  },
+  {
+    num: '02',
+    title: 'Project Mandar II',
+    badge: 'Coming Soon',
+    badgeType: 'soon',
+    summary: 'Eksplorasi petualangan naratif interaktif dengan latar sejarah maritim Sulawesi Barat dan tantangan puzzle lingkungan.',
+    href: '/game/coming-soon-1',
+    platform: 'Mobile & Web',
+    tools: 'Dalam Riset & Desain',
+  },
+  {
+    num: '03',
+    title: 'Eduplay Arcade',
+    badge: 'Coming Soon',
+    badgeType: 'soon',
+    summary: 'Kumpulan mini game edukatif interaktif untuk membantu siswa memahami konsep logika desain, warna, dan multimedia interaktif secara menyenangkan.',
+    href: '/game/coming-soon-2',
+    platform: 'Web & Android',
+    tools: 'Tahap Pembuatan Prototipe',
+  },
+];
+---
+
+<BaseLayout
+  title="Koleksi Game — Alfandhy"
+  description="Daftar proyek game edukatif dan budaya maritim oleh Alfandhy, termasuk Sandeq Rush untuk Android."
+>
+  <main class="py-16 sm:py-24">
+    <div class="wrap">
+      
+      <div class="mb-12">
+        <SectionLabel num="GAME" title="Laboratorium Game Edukatif" />
+        <h1 class="font-serif text-[clamp(2.5rem,6vw,5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink mt-6 mb-4">
+          Game &amp; Eksplorasi Interaktif
+        </h1>
+        <p class="text-base sm:text-lg text-ink-2 max-w-2xl leading-relaxed">
+          Menggabungkan kearifan lokal bahari Mandar, kecerdasan buatan dalam pembuatan aset, dan rancangan game edukatif yang ramah keluarga.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          games.map((g) => (
+            <div class="border border-rule bg-paper-2 p-7 flex flex-col justify-between group hover:border-accent transition-colors">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-xs text-accent">PROYEK {g.num}</span>
+                  <span class:list={[
+                    'font-mono text-[11px] px-2 py-0.5 border',
+                    g.badgeType === 'active' ? 'border-accent text-accent bg-accent/10 font-medium' : 'border-rule text-ink-2'
+                  ]}>
+                    {g.badge}
+                  </span>
+                </div>
+
+                <h2 class="font-serif text-2xl text-ink font-normal mb-3 group-hover:text-accent transition-colors">
+                  {g.title}
+                </h2>
+
+                {g.image && (
+                  <div class="mb-4 aspect-[16/9] w-full overflow-hidden border border-rule/60 bg-[#0c1b24] p-3 flex items-center justify-center">
+                    <img
+                      src={g.image}
+                      alt={g.title}
+                      class="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+
+                <p class="text-sm leading-relaxed text-ink-2 mb-6">
+                  {g.summary}
+                </p>
+              </div>
+
+              <div class="border-t border-rule pt-4 mt-4">
+                <div class="font-mono text-[11px] text-ink-2/80 mb-3 space-y-1">
+                  <div><span class="text-ink-2/60">Platform:</span> {g.platform}</div>
+                  <div><span class="text-ink-2/60">Tech:</span> {g.tools}</div>
+                </div>
+
+                <Link
+                  href={g.href}
+                  class:list={[
+                    'inline-flex items-center gap-1 font-mono text-xs underline underline-offset-4',
+                    g.badgeType === 'active' ? 'text-ink group-hover:text-accent font-medium' : 'text-ink-2 hover:text-ink'
+                  ]}
+                >
+                  {g.badgeType === 'active' ? 'Buka Halaman Game →' : 'Lihat Status Proyek →'}
+                </Link>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

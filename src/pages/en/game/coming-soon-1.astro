@@ -1,0 +1,50 @@
+---
+// Halaman Game Coming Soon 1 (EN)
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionLabel from '../../../components/SectionLabel.astro';
+import Link from '../../../components/Link.astro';
+
+const projectNum = '02';
+const projectCode = 'Project Mandar II';
+---
+
+<BaseLayout
+  lang="en"
+  title={`${projectCode} — Coming Soon`}
+  description="Educational game experiment and gameplay prototype by Alfandhy currently under research and development."
+>
+  <main class="py-20 sm:py-32">
+    <div class="wrap max-w-3xl text-center">
+      
+      <div class="inline-flex items-center gap-2 border border-rule bg-paper-2 px-3 py-1 font-mono text-xs text-ink-2 mb-6">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
+        STAGE: IN DEVELOPMENT · PROJECT #{projectNum}
+      </div>
+
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal text-ink mb-6">
+        {projectCode}
+      </h1>
+
+      <p class="text-base sm:text-lg leading-relaxed text-ink-2 max-w-xl mx-auto mb-10">
+        This title is actively designed leveraging creative AI workflows, authentic regional cultural mechanics, and accessible arcade physics.
+      </p>
+
+      <div class="border border-dashed border-rule bg-paper-2/50 p-8 max-w-md mx-auto mb-12">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent block mb-2">[ COMING SOON ]</span>
+        <p class="font-mono text-xs text-ink-2">
+          Concept artworks, design devlogs, and playable demo previews will be posted here soon.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <Link href="/en/game/sandeq-rush" class="border border-ink bg-ink px-5 py-2.5 font-mono text-xs text-paper hover:bg-accent hover:border-accent">
+          View Sandeq Rush Game →
+        </Link>
+        <Link href="/en" class="border border-rule px-5 py-2.5 font-mono text-xs text-ink hover:text-accent">
+          ← Return to Home
+        </Link>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

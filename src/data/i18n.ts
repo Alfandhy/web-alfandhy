@@ -1,0 +1,166 @@
+// Dictionary translasi ID dan EN untuk seluruh website
+
+export type Lang = 'id' | 'en';
+
+export const DICT = {
+  id: {
+    meta: {
+      tagline: 'Menggabungkan AI, desain, dan pendidikan untuk menghidupkan ide.',
+      description: 'Alfandhy — AI Enthusiast dari Polewali Mandar. Memadukan AI dalam dunia desain dan pendidikan, serta aktif mengembangkan game edukatif.',
+      privacyTitle: 'Kebijakan Privasi — Alfandhy',
+      privacyDesc: 'Kebijakan privasi umum untuk situs web personal alfandhy.my.id.',
+    },
+    nav: [
+      { label: 'Beranda', href: '/' },
+      { label: 'Karya', href: '/#karya' },
+      {
+        label: 'Game',
+        href: '/game',
+        children: [
+          { label: 'Sandeq Rush', href: '/game/sandeq-rush', status: 'Rilis 2026', badge: 'New' },
+          { label: 'Project Mandar II', href: '/game/coming-soon-1', status: 'Segera Hadir', badge: 'Soon' },
+          { label: 'Eduplay Arcade', href: '/game/coming-soon-2', status: 'Segera Hadir', badge: 'Soon' },
+        ],
+      },
+      { label: 'Edu', href: '/#pendekatan' },
+      { label: 'Tentang', href: '/#tentang' },
+      { label: 'Kontak', href: '/#kontak' },
+    ],
+    hero: {
+      badge: 'AI Enthusiast — Polewali Mandar, Sulawesi Barat',
+      headlinePre: 'Saya memakai AI untuk ',
+      headlineEmp: 'mendesain,',
+      headlinePost: ' mengajar, dan membangun game.',
+      bio: 'Seorang AI Enthusiast yang memadukan teknologi ke dalam dunia desain dan pendidikan, serta saat ini sedang fokus mengembangkan game edukatif.',
+      ctaWork: 'Lihat karya →',
+      altPhoto: 'Foto Profil Alfandhy, S.T.',
+    },
+    karya: {
+      sectionNum: '01',
+      sectionTitle: 'Karya Terpilih',
+      allLink: 'Semua karya',
+    },
+    approach: {
+      sectionNum: '02',
+      sectionTitle: 'Cara saya bekerja dengan AI',
+      items: ['Desain & microstock', 'Pendidikan', 'Game', 'Prompt engineering'],
+      quote1: 'Bagi saya AI bukan pengganti proses kreatif, melainkan ',
+      quote1Emp: 'alat kerja',
+      quote1Post: ', seperti pensil dan grid bagi desainer.',
+      quote2: 'Saya memakainya untuk mempercepat eksplorasi, lalu memilih, menyunting, dan menyelesaikan karya dengan tangan sendiri. Hal yang sama saya ajarkan kepada siswa di kelas.',
+    },
+    now: {
+      sectionNum: '03',
+      sectionTitle: 'Sekarang',
+      items: [
+        { label: 'Membangun', text: 'Sandeq Rush, persiapan rilis di Google Play.' },
+        { label: 'Mengajar', text: 'DKV, Desain Brief, Mikroprosesor, dan Informatika.' },
+        { label: 'Belajar', text: 'Pipeline aset game dan motion dengan AI.' },
+      ],
+    },
+    contact: {
+      sectionNum: '04',
+      sectionTitle: 'Kontak & Kolaborasi',
+      headingPre: 'Punya proyek atau ingin ',
+      headingEmp: 'berkolaborasi?',
+      desc: 'Terbuka untuk diskusi pengembangan game edukatif, eksplorasi pipeline AI kreatif, kurikulum DKV & multimedia, hingga sesi workshop kolaboratif.',
+      salinBtn: 'Salin',
+      tersalinBtn: 'Tersalin!',
+      cardStatus: 'STATUS: TERSEDIA',
+      cardFocusTitle: 'Area yang Sedang Difokuskan:',
+      focusItems: [
+        { num: '01.', text: 'Pengembangan Game Edukatif (Sandeq Rush)' },
+        { num: '02.', text: 'Prompt Engineering & AI Media Workflow' },
+        { num: '03.', text: 'Desain Grafis, Branding & Microstock' },
+        { num: '04.', text: 'Pemateri Workshop & Edukasi Vokasi' },
+      ],
+      location: 'POLEWALI MANDAR, ID',
+      privacyLink: 'Kebijakan Privasi',
+    },
+    common: {
+      skipToContent: 'Lewati ke konten',
+      menu: 'Menu',
+      close: 'Tutup',
+    },
+  },
+  en: {
+    meta: {
+      tagline: 'Merging AI, design, and education to bring ideas to life.',
+      description: 'Alfandhy — AI Enthusiast from Polewali Mandar. Integrating AI into design and education, currently developing educational games.',
+      privacyTitle: 'Privacy Policy — Alfandhy',
+      privacyDesc: 'General privacy policy for the personal portfolio website alfandhy.my.id.',
+    },
+    nav: [
+      { label: 'Home', href: '/en' },
+      { label: 'Work', href: '/en#karya' },
+      {
+        label: 'Game',
+        href: '/en/game',
+        children: [
+          { label: 'Sandeq Rush', href: '/en/game/sandeq-rush', status: 'Release 2026', badge: 'New' },
+          { label: 'Project Mandar II', href: '/en/game/coming-soon-1', status: 'Coming Soon', badge: 'Soon' },
+          { label: 'Eduplay Arcade', href: '/en/game/coming-soon-2', status: 'Coming Soon', badge: 'Soon' },
+        ],
+      },
+      { label: 'Edu', href: '/en#pendekatan' },
+      { label: 'About', href: '/en#tentang' },
+      { label: 'Contact', href: '/en#kontak' },
+    ],
+    hero: {
+      badge: 'AI Enthusiast — Polewali Mandar, West Sulawesi',
+      headlinePre: 'I use AI to ',
+      headlineEmp: 'design,',
+      headlinePost: ' teach, and build games.',
+      bio: 'An AI Enthusiast who bridges technology with visual design and education, currently focused on developing educational games.',
+      ctaWork: 'Explore work →',
+      altPhoto: 'Portrait of Alfandhy, S.T.',
+    },
+    karya: {
+      sectionNum: '01',
+      sectionTitle: 'Selected Work',
+      allLink: 'All projects',
+    },
+    approach: {
+      sectionNum: '02',
+      sectionTitle: 'How I collaborate with AI',
+      items: ['Design & microstock', 'Education', 'Game development', 'Prompt engineering'],
+      quote1: 'To me, AI is not a substitute for creativity, but a ',
+      quote1Emp: 'working instrument',
+      quote1Post: ' — just like a pencil and a typographic grid.',
+      quote2: 'I harness AI to accelerate exploration, then handcraft, curate, and refine every piece personally. This same philosophy guides what I teach in my classrooms.',
+    },
+    now: {
+      sectionNum: '03',
+      sectionTitle: 'Now',
+      items: [
+        { label: 'Building', text: 'Sandeq Rush, preparing for release on Google Play.' },
+        { label: 'Teaching', text: 'Visual Communication Design, Design Brief, and Informatics.' },
+        { label: 'Learning', text: 'AI-assisted game asset pipelines and motion graphics.' },
+      ],
+    },
+    contact: {
+      sectionNum: '04',
+      sectionTitle: 'Contact & Collaboration',
+      headingPre: 'Have a project or want to ',
+      headingEmp: 'collaborate?',
+      desc: 'Open to discussions on educational game development, creative AI pipelines, multimedia design curricula, and collaborative workshop sessions.',
+      salinBtn: 'Copy',
+      tersalinBtn: 'Copied!',
+      cardStatus: 'STATUS: AVAILABLE',
+      cardFocusTitle: 'Current Focus Areas:',
+      focusItems: [
+        { num: '01.', text: 'Educational Game Development (Sandeq Rush)' },
+        { num: '02.', text: 'Prompt Engineering & Creative AI Workflows' },
+        { num: '03.', text: 'Graphic Design, Branding & Microstock' },
+        { num: '04.', text: 'Keynote Speaker & Vocational Workshops' },
+      ],
+      location: 'POLEWALI MANDAR, ID',
+      privacyLink: 'Privacy Policy',
+    },
+    common: {
+      skipToContent: 'Skip to content',
+      menu: 'Menu',
+      close: 'Close',
+    },
+  },
+};

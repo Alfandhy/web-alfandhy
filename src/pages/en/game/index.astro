@@ -1,0 +1,117 @@
+---
+// Halaman Indeks Koleksi Game (EN) — /en/game
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionLabel from '../../../components/SectionLabel.astro';
+import Link from '../../../components/Link.astro';
+
+const games = [
+  {
+    num: '01',
+    title: 'Sandeq Rush',
+    badge: 'Release 2026',
+    badgeType: 'active',
+    summary: 'Fast-paced outrigger sailboat racing game for Android inspired by traditional Mandar seamanship. Harness the winds across the Makassar Strait with cultural authenticity.',
+    href: '/en/game/sandeq-rush',
+    platform: 'Android / Google Play Store',
+    tools: 'Godot Engine · Generative AI Pipelines',
+    image: '/games/sandeq-rush/sandeq-rush-logo.png',
+  },
+  {
+    num: '02',
+    title: 'Project Mandar II',
+    badge: 'Coming Soon',
+    badgeType: 'soon',
+    summary: 'Interactive narrative adventure exploring West Sulawesi maritime lore, coastal environments, and environmental puzzle mechanics.',
+    href: '/en/game/coming-soon-1',
+    platform: 'Mobile & Web',
+    tools: 'Concept Research & Mechanics Design',
+  },
+  {
+    num: '03',
+    title: 'Eduplay Arcade',
+    badge: 'Coming Soon',
+    badgeType: 'soon',
+    summary: 'A collection of playful educational mini-games helping students explore color theory, visual logic, and multimedia creativity.',
+    href: '/en/game/coming-soon-2',
+    platform: 'Web & Android',
+    tools: 'Active Prototyping Phase',
+  },
+];
+---
+
+<BaseLayout
+  lang="en"
+  title="Games & Interactive Projects — Alfandhy"
+  description="Explore games and interactive educational experiences developed by Alfandhy, featuring Sandeq Rush for Android."
+>
+  <main class="py-16 sm:py-24">
+    <div class="wrap">
+      
+      <div class="mb-12">
+        <SectionLabel num="GAME" title="Educational Game Lab" />
+        <h1 class="font-serif text-[clamp(2.5rem,6vw,5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink mt-6 mb-4">
+          Games &amp; Interactive Works
+        </h1>
+        <p class="text-base sm:text-lg text-ink-2 max-w-2xl leading-relaxed">
+          Bridging maritime heritage, creative AI pipelines, and accessible family-friendly gameplay mechanics.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          games.map((g) => (
+            <div class="border border-rule bg-paper-2 p-7 flex flex-col justify-between group hover:border-accent transition-colors">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-xs text-accent">PROJECT {g.num}</span>
+                  <span class:list={[
+                    'font-mono text-[11px] px-2 py-0.5 border',
+                    g.badgeType === 'active' ? 'border-accent text-accent bg-accent/10 font-medium' : 'border-rule text-ink-2'
+                  ]}>
+                    {g.badge}
+                  </span>
+                </div>
+
+                <h2 class="font-serif text-2xl text-ink font-normal mb-3 group-hover:text-accent transition-colors">
+                  {g.title}
+                </h2>
+
+                {g.image && (
+                  <div class="mb-4 aspect-[16/9] w-full overflow-hidden border border-rule/60 bg-[#0c1b24] p-3 flex items-center justify-center">
+                    <img
+                      src={g.image}
+                      alt={g.title}
+                      class="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+
+                <p class="text-sm leading-relaxed text-ink-2 mb-6">
+                  {g.summary}
+                </p>
+              </div>
+
+              <div class="border-t border-rule pt-4 mt-4">
+                <div class="font-mono text-[11px] text-ink-2/80 mb-3 space-y-1">
+                  <div><span class="text-ink-2/60">Platform:</span> {g.platform}</div>
+                  <div><span class="text-ink-2/60">Tech:</span> {g.tools}</div>
+                </div>
+
+                <Link
+                  href={g.href}
+                  class:list={[
+                    'inline-flex items-center gap-1 font-mono text-xs underline underline-offset-4',
+                    g.badgeType === 'active' ? 'text-ink group-hover:text-accent font-medium' : 'text-ink-2 hover:text-ink'
+                  ]}
+                >
+                  {g.badgeType === 'active' ? 'Open Game Overview →' : 'View Project Status →'}
+                </Link>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

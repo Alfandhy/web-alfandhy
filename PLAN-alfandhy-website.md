@@ -64,47 +64,85 @@
 ```
 
 **Navigasi utama (header):** Home · Work · Games · Edu · About · Contact
-**Footer:** tagline, link sosial media, link Privacy, © tahun, "Made with AI & ❤️ in Polewali Mandar"
+**Footer:** ajakan kontak + email besar, link sosial media (teks), link Privacy, "© 2026 Alfandhy — Polewali Mandar"
 
 ---
 
-## 3. Design System
+## 3. Design System — "Editorial + Aksen Mandar"
 
-**Arah visual:** gelap futuristik yang tetap hangat, untuk memberi kesan AI tanpa terasa dingin.
-*(Ubah bagian ini kalau ingin gaya terang minimalis.)*
+**Konsep:** website ini dibaca seperti **majalah desain**, bukan landing page startup.
+Terang, tenang, tipografi besar, banyak ruang kosong, dan karya nyata sebagai pusat perhatian.
+Identitas lokal (layar perahu Sandeq, laut Mandar) hadir lewat **warna aksen**, bukan dekorasi.
+Profesional karena **menahan diri**: satu aksen, dua font, garis tipis, tanpa efek.
 
 **Warna (CSS variables / Tailwind theme):**
 ```
---bg:        #0B0F1A   (latar utama, navy sangat gelap)
---surface:   #141A2A   (kartu)
---border:    #232B40
---text:      #E8ECF4
---muted:     #8A93A8
---accent:    #4F8CFF   (biru AI, aksen utama)
---accent-2:  #22D3C5   (teal, gradien bersama accent)
---warm:      #FFB547   (oranye hangat, untuk Sandeq Rush dan CTA khusus)
+--paper:     #F4F1EA   (latar utama, putih tulang hangat)
+--paper-2:   #EAE5DA   (blok latar sekunder, sangat jarang dipakai)
+--ink:       #16140F   (teks utama, hampir hitam hangat)
+--ink-2:     #5C574D   (teks sekunder)
+--rule:      #D6D0C3   (garis pemisah 1px)
+--accent:    #C2410C   (oranye-bata "layar Sandeq" — SATU-SATUNYA warna aksen)
+--sea:       #1E3A4C   (biru laut tua — hanya untuk blok Sandeq Rush / footer)
+```
+Mode gelap opsional: tukar `--paper` ↔ `#14130F` dan `--ink` ↔ `#EDE9DF`, aksen tetap.
+
+**Tipografi (Google Fonts):**
+- Display/judul: **Fraunces** (serif berkarakter; pakai ukuran besar, `opsz` tinggi, weight 400–500, bukan bold tebal)
+- Body & UI: **Geist** atau **IBM Plex Sans**
+- Label kecil/nomor bagian: **IBM Plex Mono**, huruf kapital, `letter-spacing: .08em`, ukuran 12–13px
+
+**Skala tipe (desktop → mobile):**
+```
+Display  : clamp(3rem, 8vw, 7.5rem)  / line-height 0.95 / tracking -0.02em
+H2       : clamp(2rem, 4vw, 3.25rem) / 1.05
+H3       : 1.375rem / 1.3
+Body     : 1.0625rem / 1.65, maksimal 65 karakter per baris
+Label    : 0.8125rem mono uppercase
 ```
 
-**Tipografi:**
-- Heading: **Space Grotesk** (Google Fonts)
-- Body: **Inter**
-- Kode/label kecil: **JetBrains Mono**
+**Tata letak:**
+- Grid 12 kolom, max-width 1280px, gutter 24px; **asimetris** (mis. judul kolom 1–5, isi kolom 7–12).
+- Setiap section dibuka dengan label bernomor: `01 — Karya Terpilih`, `02 — Tentang`, dst., dengan garis 1px `--rule` di atasnya.
+- Spacing vertikal antar section besar (120–160px desktop, 80px mobile).
+- Gambar karya tampil **besar** (lebar penuh atau 2/3 kolom), rasio konsisten, tanpa bayangan.
 
 **Komponen dasar yang harus dibuat:**
-- `Header` (sticky, menu hamburger di mobile)
-- `Footer`
-- `Button` (primary, secondary, ghost)
-- `Card` (karya, layanan, game)
-- `Tag/Badge` (keahlian, kategori)
-- `Timeline` (pendidikan & pekerjaan)
-- `SectionTitle`
+- `Header` (sederhana: nama di kiri, 4–5 link teks di kanan, tidak transparan-blur; menu teks penuh layar di mobile)
+- `Footer` (blok `--sea` dengan email besar sebagai CTA)
+- `SectionLabel` (nomor + judul mono + garis)
+- `WorkRow` (satu karya per baris: nomor, judul serif, kategori, tahun, gambar besar)
+- `Link` (garis bawah tipis yang menebal saat hover — bukan tombol pil)
+- `Button` (hanya dipakai untuk aksi utama; kotak, radius 2px, latar `--ink`)
+- `Tag` (teks mono kecil dengan border 1px, tanpa warna isi)
+- `Timeline` (tahun di kolom kiri, isi di kanan, dipisah garis)
 - `SEO` (meta, Open Graph, Twitter card)
 
-**Aturan:**
-- Mobile-first. Uji di lebar 360px.
-- Gunakan radius yang konsisten (mis. `rounded-2xl`) dan spacing kelipatan 4.
-- Animasi halus saja (fade/slide saat scroll) dan hormati `prefers-reduced-motion`.
-- Kontras teks minimal memenuhi WCAG AA.
+**Aturan gerak:**
+- Maksimal 2 jenis animasi: teks/gambar muncul perlahan saat scroll (opacity + translate 12px, 600ms) dan gambar sedikit membesar saat hover (scale 1.02).
+- Tidak ada animasi latar, partikel, kursor kustom, atau efek mengetik.
+- Hormati `prefers-reduced-motion`.
+
+**Aturan umum:**
+- Mobile-first, uji di lebar 360px.
+- Radius kecil (0–4px) di seluruh situs.
+- Kontras teks minimal WCAG AA.
+
+### 3.1 DAFTAR LARANGAN (anti "AI slop") — WAJIB DIPATUHI
+- ❌ Gradien biru/ungu/teal, teks bergradien, efek glow/neon
+- ❌ Glassmorphism, `backdrop-blur` dekoratif
+- ❌ Latar partikel, neural network, grid futuristik, blob animasi
+- ❌ Inter, Space Grotesk, Poppins, Montserrat sebagai font judul
+- ❌ Grid 3–4 kartu identik dengan ikon di atasnya ("layanan saya")
+- ❌ Emoji di UI, ikon roket/bintang/kilat/sparkle, badge "✨ AI-powered"
+- ❌ Kata klise: *Unleash, Revolutionary, Transform, Cutting-edge, Passionate, Innovative solutions, Elevate*
+- ❌ Semua section berpola sama (judul tengah → subjudul → kartu)
+- ❌ Radius besar + bayangan di semua elemen, tombol pil berwarna-warni
+- ❌ Baris logo tools berwarna-warni (kalau perlu, tulis nama tools sebagai teks biasa)
+- ❌ Statistik palsu ("100+ projects", "99% satisfaction")
+- ❌ Gambar stok atau avatar AI sebagai foto profil — pakai foto asli
+
+**Referensi gaya** (cari dan simpan 2–3 screenshot ke `/docs/ref/`): siteinspire.com, minimal.gallery, godly.website. Kata kunci: *editorial portfolio, serif, designer portfolio*.
 
 ---
 
@@ -112,19 +150,14 @@
 
 ### 4.1 Beranda `/`
 
-1. **Hero**
-   - Headline: *"Hi, saya Alfandhy — AI Enthusiast yang menghidupkan ide lewat desain, game, dan teknologi."*
-   - Subjudul: *"Menjelajahi AI untuk kreativitas, pendidikan, dan karya digital."*
-   - Tombol: **Lihat Karya** (→ `/work`) dan **Tentang Saya** (→ `/about`)
-   - Visual: foto bergaya AI/futuristik, ditambah latar animasi ringan (partikel atau grid neural, canvas/CSS)
-2. **"Apa yang saya lakukan dengan AI"**, berisi 4 kartu:
-   - AI untuk Desain & Visual (generatif, microstock SMEGTA MEDIA)
-   - Prompt Engineering
-   - AI untuk Pendidikan (explainer, media ajar)
-   - AI untuk Game (aset Sandeq Rush)
-3. **Karya Unggulan:** Sandeq Rush sebagai kartu besar, ditambah 2–3 karya lain (ambil dari content collection dengan `featured: true`)
-4. **Tools yang saya gunakan:** baris logo atau nama tools (Claude, Higgsfield, MiniMax, Adobe, dll.)
-5. **CTA penutup:** *"Tertarik berkolaborasi?"* dengan tombol menuju `/contact`
+1. **Hero tipografi** (tanpa animasi latar)
+   - Label mono kecil: `AI ENTHUSIAST — POLEWALI MANDAR, SULAWESI BARAT`
+   - Display serif besar, 2–3 baris: *"Alfandhy. Saya memakai AI untuk mendesain, mengajar, dan membangun game."*
+   - Kolom kanan/bawah: foto asli (rasio 4:5, sedikit desaturasi) dan 2 baris teks singkat, ditambah link teks *Lihat karya →*
+2. **01 — Karya Terpilih:** 3–4 karya, **satu per baris** (`WorkRow`), Sandeq Rush paling atas. Ambil dari content collection `featured: true`.
+3. **02 — Cara saya bekerja dengan AI:** **satu paragraf esai** (60–100 kata, suara pribadi) di kolom kanan, dan daftar sederhana di kolom kiri: *Desain & microstock · Pendidikan · Game · Prompt engineering*. Bukan kartu.
+4. **03 — Sekarang:** 2–3 baris tentang apa yang sedang dikerjakan (mis. "Membangun Sandeq Rush untuk Android · Mengajar DKV & Mikroprosesor"). Memberi kesan hidup dan jujur.
+5. **Footer `--sea`:** kalimat *"Punya proyek atau ingin berkolaborasi?"* dan alamat email dalam ukuran besar sebagai link.
 
 ### 4.2 About `/about`
 
@@ -337,6 +370,12 @@ Aturan:
    tunjukkan cara saya menguji hasilnya.
 8. Gunakan placeholder yang jelas ([FOTO PROFIL], [LINK INSTAGRAM])
    untuk aset yang belum saya berikan.
+9. Patuhi DAFTAR LARANGAN di bagian 3.1 tanpa pengecualian. Sebelum
+   menyerahkan hasil, periksa sendiri setiap poin larangan itu dan
+   laporkan bahwa semuanya sudah dicek.
+10. Kerjakan Beranda dulu sampai saya setujui gayanya, baru halaman lain
+    mengikuti gaya yang sama. Jika ada prototype-beranda.html di /docs,
+    jadikan itu acuan visual utama.
 
 Mulai dari Fase 0 dan Fase 1.
 ```

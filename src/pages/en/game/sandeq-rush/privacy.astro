@@ -1,0 +1,84 @@
+---
+// Halaman Kebijakan Privasi Khusus Game Sandeq Rush (EN)
+// Official Game Privacy Policy for Google Play Console URL
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SectionLabel from '../../../../components/SectionLabel.astro';
+import Link from '../../../../components/Link.astro';
+import { SITE } from '../../../../data/site';
+
+const gameTitle = 'Sandeq Rush';
+const effectiveDate = 'October 11, 2026';
+---
+
+<BaseLayout
+  lang="en"
+  title={`Privacy Policy: ${gameTitle} — Alfandhy`}
+  description={`Official Privacy Policy for the Android mobile game ${gameTitle} developed by Alfandhy.`}
+>
+  <main class="py-16 sm:py-24">
+    <div class="wrap max-w-3xl">
+      
+      <div class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2">
+        <Link href="/en/game/sandeq-rush" class="hover:text-accent">← Return to {gameTitle}</Link>
+        <span>/</span>
+        <span class="text-accent font-semibold">Game Privacy Policy</span>
+      </div>
+
+      <SectionLabel number="GAME-POL" title="Mobile Game Privacy Compliance" />
+
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
+        Privacy Policy: {gameTitle}
+      </h1>
+      <p class="font-mono text-xs text-ink-2 mb-12">Effective date: {effectiveDate} · Developer: Alfandhy, S.T.</p>
+
+      <div class="space-y-10 text-base leading-relaxed text-ink/90 font-sans">
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Introduction</h2>
+          <p class="text-ink-2">
+            This Privacy Policy governs the manner in which the mobile application <strong>{gameTitle}</strong> (developed by Alfandhy) handles user data when downloaded, installed, or played via the Google Play Store. We are committed to safeguarding user privacy, particularly for children and families.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Data Collection &amp; Storage</h2>
+          <p class="text-ink-2 mb-3">
+            <strong>{gameTitle}</strong> is built as an offline-friendly arcade game with zero compulsory user registration. In summary:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-ink-2">
+            <li><strong>Local Device Storage:</strong> Game progress, unlocked stages, and custom boat attributes are stored locally on your device's internal storage (SQLite / Local Cache).</li>
+            <li><strong>Non-Personal System Telemetry:</strong> Standard distribution framework services (Google Play Services) may process anonymous diagnostic crash data and OS version details purely to ensure build stability across diverse hardware.</li>
+          </ul>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Children's Privacy</h2>
+          <p class="text-ink-2">
+            {gameTitle} complies with family-friendly standards and does not knowingly collect or solicit Personally Identifiable Information from children under the age of 13 (or applicable local age threshold). All gameplay elements are accessible without providing personal data.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Device Permissions</h2>
+          <p class="text-ink-2">
+            The game requires no sensitive hardware permissions (such as GPS precise geolocation, camera access, microphone, or address book contacts).
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Developer Contact</h2>
+          <p class="text-ink-2">
+            If you have questions or feedback regarding privacy or data practices in {gameTitle}, please contact the developer at:
+          </p>
+          <p class="mt-3 font-mono text-sm">
+            Email: <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link>
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-16 border-t border-rule pt-8 flex items-center justify-between">
+        <Link href="/en/game/sandeq-rush" class="text-sm font-mono text-ink">← Sandeq Rush Game Overview</Link>
+        <Link href="/game/sandeq-rush/privacy" class="text-sm font-mono text-ink-2 hover:text-accent">Versi Bahasa Indonesia →</Link>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+// Link teks: garis bawah tipis yang menebal saat hover (bukan tombol pil).
+interface Props {
+  href: string;
+  id?: string;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, id, external = false, class: className = '' } = Astro.props;
+const ext = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a href={href} id={id} class:list={['link', className]} {...ext}><slot /></a>

@@ -11,21 +11,22 @@ interface Props {
   type?: 'website' | 'article';
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  lang?: 'id' | 'en';
 }
 
-const props = Astro.props;
+const { lang = 'id', ...props } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang={lang} class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0B0F1A" />
+    <meta name="theme-color" content="#14130F" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -34,52 +35,38 @@ const props = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap"
     />
 
     <SEO {...props} />
   </head>
   <body class="flex min-h-dvh flex-col">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2 focus:text-bg"
-      >Lewati ke konten</a
-    >
-    <Header />
-    <main id="main" class="flex-1 pt-16">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
+      {lang === 'en' ? 'Skip to content' : 'Lewati ke konten'}
+    </a>
+    <Header lang={lang} />
+    <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
 
     <script>
-      // Reveal saat scroll
-      const els = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
+      // Satu-satunya animasi berbasis JS: muncul perlahan saat scroll.
+      const els = document.querySelectorAll('.r');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach((e) => e.classList.add('in'));
+      } else {
         const io = new IntersectionObserver(
-          (entries) => {
+          (entries) =>
             entries.forEach((e) => {
               if (e.isIntersecting) {
-                e.target.classList.add('is-visible');
+                e.target.classList.add('in');
                 io.unobserve(e.target);
               }
-            });
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+            }),
+          { threshold: 0.12 },
         );
-        els.forEach((el) => io.observe(el));
-      } else {
-        els.forEach((el) => el.classList.add('is-visible'));
-      }
-
-      // Spotlight kartu mengikuti kursor (hanya perangkat dengan hover)
-      if (window.matchMedia('(hover: hover)').matches) {
-        document.querySelectorAll<HTMLElement>('.card').forEach((card) => {
-          card.addEventListener('pointermove', (e) => {
-            const r = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-            card.style.setProperty('--my', `${e.clientY - r.top}px`);
-          });
-        });
+        els.forEach((e) => io.observe(e));
       }
     </script>
   </body>

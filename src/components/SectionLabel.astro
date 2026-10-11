@@ -1,0 +1,15 @@
+---
+// Pembuka section: "01 — Karya Terpilih" + garis 1px di atas. Slot kanan opsional.
+interface Props {
+  num: string;
+  title: string;
+  class?: string;
+}
+
+const { num, title, class: className = '' } = Astro.props;
+---
+
+<div class:list={['r mb-9 flex items-baseline justify-between gap-4 border-t border-ink pt-4 sm:mb-14', className]}>
+  <h2 class="label">{num} — {title}</h2>
+  <slot />
+</div>

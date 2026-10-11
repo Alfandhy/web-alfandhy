@@ -1,120 +1,148 @@
 @import "tailwindcss";
 
 /* ============================================================
-   DESIGN TOKENS — sesuai PLAN bagian 3
-   Tailwind v4: token didefinisikan via @theme (pengganti tailwind.config.mjs)
-   Hasilnya: bg-bg, bg-surface, border-border, text-text, text-muted,
-   text-accent, text-accent-2, text-warm, font-heading, font-body, font-mono
+   DESIGN SYSTEM — "Editorial + Aksen Mandar" (PLAN bagian 3)
+   Tailwind v4: token via @theme (pengganti tailwind.config.mjs).
+   Utilitas yang dihasilkan: bg-paper, text-ink, text-ink-2,
+   border-rule, text-accent, bg-sea, font-serif, font-sans, font-mono
    ============================================================ */
 @theme {
-  --color-bg: #0b0f1a;
-  --color-surface: #141a2a;
-  --color-surface-2: #1a2236;
-  --color-border: #232b40;
-  --color-text: #e8ecf4;
-  --color-muted: #8a93a8;
-  --color-accent: #4f8cff;
-  --color-accent-2: #22d3c5;
-  --color-warm: #ffb547;
+  --color-paper: #14130f;
+  --color-paper-2: #1f1d18;
+  --color-ink: #f4f1ea;
+  --color-ink-2: #a39b8b;
+  --color-rule: #363229;
+  --color-accent: #ea580c; /* Disesuaikan sedikit lebih terang untuk background gelap */
+  --color-sea: #162734; /* Lebih gelap untuk harmoni dengan background hitam */
+  /* Teks di atas blok --sea */
+  --color-sea-ink: #f4f1ea;
+  --color-sea-muted: #849cae;
+  --color-sea-accent: #f4a06b;
 
-  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  --radius-sm: 2px;
+  --container-site: 1280px;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-bg text-text font-body antialiased;
-    min-height: 100dvh;
+    background-color: var(--color-paper);
+    background-image:
+      linear-gradient(to right, rgba(244, 241, 234, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 241, 234, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: center top;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-heading tracking-tight;
-    text-wrap: balance;
+  img {
+    display: block;
+    max-width: 100%;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-accent) 40%, transparent);
-    color: var(--color-text);
+    background: var(--color-accent);
+    color: var(--color-paper);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent-2);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 6px;
   }
 }
 
 @layer components {
-  .container-site {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  .wrap {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 24px;
   }
 
-  .text-gradient {
-    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Label mono kecil: nomor bagian, kategori */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
   }
 
-  /* Latar grid "neural" halus */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-border) 55%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-border) 55%, transparent) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  /* Display serif besar (hero) */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 7.2vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 144;
+  }
+  .display em {
+    font-style: italic;
+    color: var(--color-accent);
   }
 
-  /* Animasi muncul saat scroll (diaktifkan oleh script di BaseLayout) */
-  .reveal {
-    opacity: 0;
-    transform: translateY(16px);
+  .h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+
+  /* Link teks: garis bawah tipis, menebal saat hover */
+  .link {
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      border-width 0.2s,
+      color 0.2s;
   }
-  .reveal.is-visible {
+  .link:hover {
+    border-bottom-width: 2px;
+    color: var(--color-accent);
+  }
+
+  /* Animasi 1 dari 2: muncul perlahan saat scroll */
+  .r {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .r.in {
+    opacity: 1;
+    transform: none;
+  }
+  /* Tanpa JS: konten tetap terlihat */
+  .no-js .r {
     opacity: 1;
     transform: none;
   }
 }
 
-/* Hormati preferensi pengguna untuk mengurangi animasi */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .r {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
+    animation-duration: 0.01ms !important;
   }
 }

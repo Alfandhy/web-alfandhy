@@ -26,3 +26,7 @@ pnpm-debug.log*
 # arsip website lama
 _arsip-web-lama/
 
+# raw press kit zip & extracted folder
+SandeqRush-PressKit/
+SandeqRush-PressKit.zip
+

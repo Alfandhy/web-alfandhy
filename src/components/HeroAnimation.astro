@@ -1,0 +1,265 @@
+---
+// Animasi Hero Vektor Generatif — "Kinetic Vector Geometry & Sandeq Coordinates"
+// Filosofi: Editorial, monoline presisi, tanpa glow/gradien berlebihan.
+// Merespons kursor mouse dengan fisika halus, ringan, dan pause saat tidak terlihat.
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'hero-anim-wrapper relative w-full overflow-hidden border border-rule/60 bg-paper-2/40 p-4 sm:p-5 select-none',
+    className,
+  ]}
+  id="hero-anim-box"
+>
+  <!-- Technical Header -->
+  <div class="mb-2 flex items-center justify-between font-mono text-[11px] tracking-wider text-ink-2/80 uppercase">
+    <div class="flex items-center gap-2">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
+      <span>03°25′S 119°20′E — MANDAR</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="hidden sm:inline-block text-ink-2/60">SYS: KINETIC_VECTOR</span>
+      <span id="hero-anim-coords" class="text-accent/90">X: 000 · Y: 000</span>
+    </div>
+  </div>
+
+  <!-- Canvas Container -->
+  <div class="relative h-44 w-full sm:h-52">
+    <canvas id="hero-kinetic-canvas" class="absolute inset-0 h-full w-full block"></canvas>
+    
+    <!-- Editorial watermark label inside canvas -->
+    <div class="pointer-events-none absolute bottom-1 left-1 font-mono text-[10px] text-ink-2/40">
+      FIG. 01 — GENERATIVE SAIL GEOMETRY
+    </div>
+    <div class="pointer-events-none absolute bottom-1 right-1 font-mono text-[10px] text-ink-2/40">
+      INTERACTIVE [HOVER/DRAG]
+    </div>
+  </div>
+</div>
+
+<script>
+  function initHeroCanvas() {
+    const container = document.getElementById('hero-anim-box');
+    const canvas = document.getElementById('hero-kinetic-canvas') as HTMLCanvasElement | null;
+    const coordsEl = document.getElementById('hero-anim-coords');
+    if (!container || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let isHovering = false;
+    let time = 0;
+    let animId = 0;
+    let isVisible = true;
+
+    function resize() {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      if (ctx) ctx.scale(dpr, dpr);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Track mouse over box
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      targetMouseX = (x / rect.width - 0.5) * 2;
+      targetMouseY = (y / rect.height - 0.5) * 2;
+      isHovering = true;
+      if (coordsEl) {
+        coordsEl.textContent = `X: ${Math.round(x).toString().padStart(3, '0')} · Y: ${Math.round(y).toString().padStart(3, '0')}`;
+      }
+    });
+
+    container.addEventListener('mouseleave', () => {
+      targetMouseX = 0;
+      targetMouseY = 0;
+      isHovering = false;
+    });
+
+    // Pause when off-screen
+    const observer = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+      if (isVisible && !animId) {
+        loop();
+      }
+    }, { threshold: 0.1 });
+    observer.observe(container);
+
+    function draw() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      // Smooth mouse damping
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+      time += 0.015;
+
+      const centerX = width * 0.5;
+      const centerY = height * 0.5;
+
+      // Subtle background grid points
+      const gridSpacing = 28;
+      ctx.fillStyle = 'rgba(244, 241, 234, 0.07)';
+      for (let x = gridSpacing; x < width; x += gridSpacing) {
+        for (let y = gridSpacing; y < height; y += gridSpacing) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Draw Horizon Coordinate line
+      ctx.strokeStyle = 'rgba(234, 88, 12, 0.25)'; // Accent subtle
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 6]);
+      ctx.beginPath();
+      ctx.moveTo(10, centerY + mouseY * 15);
+      ctx.lineTo(width - 10, centerY + mouseY * 15);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 1. Kinetic Wave Field (Maritime Mandar sea ripple lines)
+      const waveCount = 5;
+      for (let w = 0; w < waveCount; w++) {
+        const offset = w * 0.35;
+        const progress = w / (waveCount - 1);
+        ctx.strokeStyle = `rgba(244, 241, 234, ${0.12 + progress * 0.25})`;
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        const startY = height * 0.72 + w * 6;
+        for (let x = 0; x <= width; x += 14) {
+          const waveHeight = 9 + w * 2.5;
+          const y = startY + Math.sin(x * 0.02 + time * 1.5 + offset) * waveHeight 
+                   + Math.cos(x * 0.035 - time * 0.8) * 4
+                   + mouseY * (w * 4);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // 2. Kinetic Triangular Sail Structure (Sandeq Geometry Wireframe)
+      const sailNodes = 14;
+      const sailApexX = centerX + mouseX * 35;
+      const sailApexY = height * 0.16 + mouseY * 15;
+      const sailBaseLeftX = centerX - Math.min(width * 0.32, 130) + mouseX * 10;
+      const sailBaseLeftY = height * 0.78 + Math.sin(time) * 4;
+      const sailBaseRightX = centerX + Math.min(width * 0.32, 130) + mouseX * 10;
+      const sailBaseRightY = height * 0.78 + Math.cos(time) * 4;
+
+      // Outer triangular frame
+      ctx.strokeStyle = 'rgba(244, 241, 234, 0.65)';
+      ctx.lineWidth = 1.25;
+      ctx.beginPath();
+      ctx.moveTo(sailApexX, sailApexY);
+      ctx.lineTo(sailBaseLeftX, sailBaseLeftY);
+      ctx.lineTo(sailBaseRightX, sailBaseRightY);
+      ctx.closePath();
+      ctx.stroke();
+
+      // Inner generative parametric ribs (lattice curves)
+      for (let i = 1; i <= sailNodes; i++) {
+        const t = i / (sailNodes + 1);
+        const lx = sailApexX + (sailBaseLeftX - sailApexX) * t;
+        const ly = sailApexY + (sailBaseLeftY - sailApexY) * t;
+        const rx = sailApexX + (sailBaseRightX - sailApexX) * t;
+        const ry = sailApexY + (sailBaseRightY - sailApexY) * t;
+
+        // Dynamic harmonic bow in the rib
+        const bowAmp = Math.sin(t * Math.PI) * (18 + mouseX * 15);
+        const midX = (lx + rx) * 0.5 + Math.sin(time * 2 + t * 3) * 6;
+        const midY = (ly + ry) * 0.5 + bowAmp;
+
+        ctx.strokeStyle = i % 3 === 0 ? 'rgba(234, 88, 12, 0.7)' : 'rgba(244, 241, 234, 0.22)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(lx, ly);
+        ctx.quadraticCurveTo(midX, midY, rx, ry);
+        ctx.stroke();
+
+        // Cross-hatch node points
+        if (i % 2 === 0) {
+          ctx.fillStyle = i === 6 ? '#ea580c' : 'rgba(244, 241, 234, 0.8)';
+          ctx.beginPath();
+          ctx.arc(midX, midY, i === 6 ? 2.5 : 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // 3. Focal Vector Target (representing AI precision & cursor lock)
+      const targetX = centerX + mouseX * (width * 0.38);
+      const targetY = centerY + mouseY * (height * 0.35);
+
+      ctx.strokeStyle = 'rgba(234, 88, 12, 0.85)'; // Orange accent
+      ctx.lineWidth = 1;
+      // Crosshair
+      const chSize = 7;
+      ctx.beginPath();
+      ctx.moveTo(targetX - chSize, targetY);
+      ctx.lineTo(targetX + chSize, targetY);
+      ctx.moveTo(targetX, targetY - chSize);
+      ctx.lineTo(targetX, targetY + chSize);
+      ctx.stroke();
+
+      // Outer rotating target brackets
+      ctx.save();
+      ctx.translate(targetX, targetY);
+      ctx.rotate(time * 0.8);
+      ctx.strokeStyle = 'rgba(244, 241, 234, 0.45)';
+      ctx.beginPath();
+      ctx.arc(0, 0, 16, 0, Math.PI * 0.45);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 0, 16, Math.PI, Math.PI * 1.45);
+      ctx.stroke();
+      ctx.restore();
+
+      // Subtle dynamic ray between apex and target
+      ctx.strokeStyle = 'rgba(234, 88, 12, 0.3)';
+      ctx.setLineDash([2, 4]);
+      ctx.beginPath();
+      ctx.moveTo(sailApexX, sailApexY);
+      ctx.lineTo(targetX, targetY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function loop() {
+      if (!isVisible) {
+        animId = 0;
+        return;
+      }
+      draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    loop();
+  }
+
+  // Init on page load and astro page transitions
+  initHeroCanvas();
+  document.addEventListener('astro:page-load', initHeroCanvas);
+</script>

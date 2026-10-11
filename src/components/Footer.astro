@@ -1,46 +1,220 @@
 ---
-import { NAV, SITE, SOCIALS } from '../data/site';
+import { CONTACT, SOCIALS, safeHref } from '../data/site';
+import { DICT, type Lang } from '../data/i18n';
 
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'id' } = Astro.props;
+const t = DICT[lang].contact;
 const year = new Date().getFullYear();
-// Placeholder seperti "[LINK INSTAGRAM]" belum diisi → arahkan ke "#"
-const safeHref = (href: string) => (href.startsWith('[') ? '#' : href);
+const isEn = lang === 'en';
+const privacyHref = isEn ? '/en/privacy' : '/privacy';
 ---
 
-<footer class="relative mt-24 border-t border-border bg-surface/40">
-  <div class="container-site grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
-    <div>
-      <a href="/" class="font-heading text-xl font-bold">alfandhy<span class="text-accent-2">.</span></a>
-      <p class="mt-3 max-w-sm text-sm leading-relaxed text-muted">{SITE.tagline}</p>
+<footer
+  id="kontak"
+  class="relative overflow-hidden bg-sea pt-20 pb-8 text-sea-ink sm:pt-[110px] sm:pb-10"
+  style="background-image: linear-gradient(to right, rgba(244, 241, 234, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(244, 241, 234, 0.04) 1px, transparent 1px); background-size: 48px 48px;"
+>
+  <!-- Subtle decorative ambient watermark -->
+  <div class="pointer-events-none absolute -right-16 -top-16 h-80 w-80 rounded-full border border-sea-ink/10 opacity-40"></div>
+  <div class="pointer-events-none absolute -right-8 -top-8 h-64 w-64 rounded-full border border-dashed border-sea-accent/20 opacity-30"></div>
+
+  <div class="wrap relative">
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      
+      <!-- KOLOM KIRI: Headline, pesan & email CTA -->
+      <div class="lg:col-span-7">
+        <p class="label !text-sea-accent flex items-center gap-2">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-sea-accent animate-pulse"></span>
+          {t.sectionNum} — {t.sectionTitle}
+        </p>
+
+        <h2 class="mt-6 mb-6 font-serif text-[clamp(2.5rem,5.5vw,4.75rem)] leading-[1.05] font-normal tracking-[-0.02em]">
+          {t.headingPre}<em class="italic text-sea-accent font-light">{t.headingEmp}</em>
+        </h2>
+
+        <p class="text-base leading-relaxed text-sea-muted max-w-xl mb-8">
+          {t.desc}
+        </p>
+
+        <!-- Interactive Email Action Box -->
+        <div class="inline-flex flex-wrap items-center gap-3 border border-sea-ink/25 bg-[#0e1c26]/90 p-2 sm:p-2.5">
+          <a
+            href={`mailto:${CONTACT.email}`}
+            id="footer-email"
+            class="px-3 py-1 font-serif text-[clamp(1.25rem,2.5vw,1.75rem)] text-sea-ink italic transition-colors hover:text-sea-accent"
+          >
+            {CONTACT.email}
+          </a>
+
+          <button
+            id="copy-email-btn"
+            type="button"
+            class="group inline-flex items-center gap-1.5 border border-sea-ink/30 bg-sea-ink/10 px-3 py-1.5 font-mono text-xs text-sea-ink transition-all hover:border-sea-accent hover:bg-sea-accent hover:text-white cursor-pointer"
+            title="Salin alamat email"
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copy-btn-text">{t.salinBtn}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: Creative Dispatch & Live Availability Card -->
+      <div class="lg:col-span-5">
+        <div class="border border-sea-ink/25 bg-[#0e1c26]/90 p-6 sm:p-7 backdrop-blur-sm">
+          
+          <!-- Header Status & Live Clock -->
+          <div class="flex items-center justify-between border-b border-sea-ink/15 pb-4 font-mono text-xs">
+            <div class="flex items-center gap-2 text-sea-ink">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+              </span>
+              <span>{t.cardStatus}</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-sea-accent">
+              <span class="text-sea-muted">WITA</span>
+              <span id="footer-live-clock" class="font-semibold tracking-wider">--:--:--</span>
+            </div>
+          </div>
+
+          <!-- Area Kolaborasi / Minat -->
+          <div class="py-5">
+            <p class="font-mono text-[11px] uppercase tracking-wider text-sea-muted mb-3.5">
+              {t.cardFocusTitle}
+            </p>
+            <div class="space-y-2 font-mono text-xs text-sea-ink/90">
+              {
+                t.focusItems.map((item) => (
+                  <div class="flex items-start gap-2.5 border border-sea-ink/15 bg-sea-ink/5 p-2.5">
+                    <span class="text-sea-accent">{item.num}</span>
+                    <span>{item.text}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Footer Card Stamp -->
+          <div class="flex items-center justify-between border-t border-sea-ink/15 pt-4 font-mono text-[11px] text-sea-muted">
+            <span class="flex items-center gap-1.5">
+              <span class="h-1.5 w-1.5 rounded-full bg-sea-ink/40"></span>
+              {t.location}
+            </span>
+            <span>03°25′S · 119°20′E</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <nav aria-label="Navigasi footer">
-      <p class="font-mono text-xs uppercase tracking-widest text-muted">Jelajahi</p>
-      <ul class="mt-4 grid grid-cols-2 gap-2 text-sm">
-        {NAV.map((item) => (
-          <li><a href={item.href} class="text-text/80 transition-colors hover:text-accent-2">{item.label}</a></li>
-        ))}
-        <li><a href="/game/sandeqrush/privacy" class="text-text/80 transition-colors hover:text-accent-2">Privacy</a></li>
-      </ul>
-    </nav>
-
-    <div>
-      <p class="font-mono text-xs uppercase tracking-widest text-muted">Sosial</p>
-      <ul class="mt-4 flex flex-col gap-2 text-sm">
-        {SOCIALS.map((s) => (
-          <li>
-            <a href={safeHref(s.href)} target="_blank" rel="noopener noreferrer" class="text-text/80 transition-colors hover:text-accent-2">
-              {s.label} <span aria-hidden="true">↗</span>
+    <!-- BARIS BAWAH: Copyright, Social Icons & Privacy -->
+    <div class="mt-14 flex flex-col justify-between gap-6 border-t border-sea-ink/20 pt-6 text-sm text-sea-muted sm:mt-20 md:flex-row md:items-center">
+      <span class="font-mono text-xs">© {year} Alfandhy — Polewali Mandar, {isEn ? 'West Sulawesi' : 'Sulawesi Barat'}</span>
+      <nav aria-label="Sosial dan tautan">
+        <ul class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+          {
+            SOCIALS.map((s) => (
+              <li>
+                <a
+                  href={safeHref(s.href)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group inline-flex items-center gap-2 border border-sea-ink/30 bg-[#0e1c26] px-3 py-1.5 font-mono text-xs text-sea-ink transition-all hover:border-sea-accent hover:bg-sea-accent/10 hover:text-sea-accent"
+                  aria-label={s.label}
+                  title={`Kunjungi ${s.label}`}
+                >
+                  {s.id === 'youtube' && (
+                    <svg class="h-3.5 w-3.5 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="4"></rect>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                  )}
+                  {s.id === 'behance' && (
+                    <svg class="h-3.5 w-3.5 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 7h4.5a2 2 0 0 1 0 4H3z" />
+                      <path d="M3 11h5a2.2 2.2 0 0 1 0 4.4H3z" />
+                      <line x1="14.5" y1="8" x2="19.5" y2="8" />
+                      <path d="M19.5 13.5H14a2.5 2.5 0 1 0 4.5 1.5" />
+                    </svg>
+                  )}
+                  {s.id === 'linkedin' && (
+                    <svg class="h-3.5 w-3.5 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="4"></rect>
+                      <line x1="7" y1="10" x2="7" y2="16"></line>
+                      <circle cx="7" cy="7" r="0.8"></circle>
+                      <path d="M11 16v-3.5a2 2 0 0 1 4 0V16"></path>
+                      <line x1="11" y1="10" x2="11" y2="16"></line>
+                    </svg>
+                  )}
+                  <span>{s.label}</span>
+                </a>
+              </li>
+            ))
+          }
+          <li class="ml-1 sm:ml-2">
+            <a href={privacyHref} class="font-mono text-xs text-sea-muted transition-colors hover:text-white underline underline-offset-4">
+              {t.privacyLink}
             </a>
           </li>
-        ))}
-      </ul>
-    </div>
-  </div>
-
-  <div class="border-t border-border">
-    <div class="container-site flex flex-col gap-2 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-      <p>© {year} {SITE.fullName}</p>
-      <p>Made with AI &amp; <span aria-label="cinta">❤️</span> in Polewali Mandar</p>
+        </ul>
+      </nav>
     </div>
   </div>
 </footer>
+
+<script>
+  function setupFooterInteractive() {
+    // 1. Live Digital Clock in Polewali Mandar (WITA / UTC+8)
+    const clockEl = document.getElementById('footer-live-clock');
+    function updateClock() {
+      if (!clockEl) return;
+      const now = new Date();
+      const timeStr = new Intl.DateTimeFormat('id-ID', {
+        timeZone: 'Asia/Makassar',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(now);
+      clockEl.textContent = timeStr.replace(/\./g, ':');
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 2. Copy Email Button
+    const copyBtn = document.getElementById('copy-email-btn');
+    const copyText = document.getElementById('copy-btn-text');
+    const emailLink = document.getElementById('footer-email');
+
+    if (copyBtn && copyText && emailLink) {
+      const originalText = copyText.textContent || 'Salin';
+      const copiedText = isEn ? 'Copied!' : 'Tersalin!';
+      copyBtn.addEventListener('click', async () => {
+        const email = emailLink.textContent?.trim() || 'halo@alfandhy.my.id';
+        try {
+          await navigator.clipboard.writeText(email);
+          copyText.textContent = copiedText;
+          copyBtn.classList.add('!bg-emerald-600', '!border-emerald-600', '!text-white');
+          setTimeout(() => {
+            copyText.textContent = originalText;
+            copyBtn.classList.remove('!bg-emerald-600', '!border-emerald-600', '!text-white');
+          }, 2000);
+        } catch {
+          // Fallback
+          copyText.textContent = copiedText;
+          setTimeout(() => (copyText.textContent = originalText), 2000);
+        }
+      });
+    }
+  }
+
+  setupFooterInteractive();
+  document.addEventListener('astro:page-load', setupFooterInteractive);
+</script>
