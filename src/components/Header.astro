@@ -1,0 +1,112 @@
+---
+import { NAV } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-colors duration-300 data-[scrolled=true]:border-border data-[scrolled=true]:bg-bg/80 data-[scrolled=true]:backdrop-blur-xl"
+>
+  <div class="container-site flex h-16 items-center justify-between">
+    <a href="/" id="logo-link" class="group flex items-center gap-2 font-heading text-lg font-bold" aria-label="Alfandhy — Beranda">
+      <span
+        class="grid size-8 place-items-center rounded-xl bg-gradient-to-br from-accent to-accent-2 font-mono text-sm text-bg transition-transform duration-300 group-hover:rotate-6"
+        aria-hidden="true">A</span
+      >
+      <span>alfandhy<span class="text-accent-2">.</span></span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav aria-label="Navigasi utama" class="hidden md:block">
+      <ul class="flex items-center gap-1">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                id={`nav-${item.label.toLowerCase()}`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="relative rounded-xl px-3 py-2 text-sm text-muted transition-colors hover:text-text aria-[current=page]:text-text"
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span class="absolute inset-x-3 -bottom-0.5 h-px bg-gradient-to-r from-accent to-accent-2" />
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Mobile toggle -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="grid size-11 place-items-center rounded-xl border border-border text-text md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Buka menu"
+    >
+      <svg class="icon-open size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h10"></path>
+      </svg>
+      <svg class="icon-close hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="pointer-events-none fixed inset-x-0 top-16 bottom-0 bg-bg/95 opacity-0 backdrop-blur-xl transition-opacity duration-300 data-[open=true]:pointer-events-auto data-[open=true]:opacity-100 md:hidden"
+  >
+    <nav aria-label="Navigasi mobile" class="container-site pt-6">
+      <ul class="flex flex-col">
+        {
+          NAV.map((item, i) => (
+            <li class="border-b border-border">
+              <a
+                href={item.href}
+                id={`mnav-${item.label.toLowerCase()}`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="flex items-center justify-between py-4 font-heading text-2xl font-semibold text-muted transition-colors aria-[current=page]:text-text"
+              >
+                {item.label}
+                <span class="font-mono text-xs text-accent-2">0{i + 1}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+
+  const onScroll = () => header.setAttribute('data-scrolled', String(window.scrollY > 12));
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    menu.setAttribute('data-open', String(open));
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+    toggle.querySelector('.icon-open')!.classList.toggle('hidden', open);
+    toggle.querySelector('.icon-close')!.classList.toggle('hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) header.setAttribute('data-scrolled', 'true');
+    else onScroll();
+  };
+
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+</script>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'warm';
+  size?: 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
+  id?: string;
+  external?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, variant = 'primary', size = 'md', type = 'button', id, external = false, class: className = '', ...rest } = Astro.props;
+
+const base =
+  'group inline-flex items-center justify-center gap-2 rounded-2xl font-heading font-semibold transition-all duration-300 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50';
+
+const sizes = {
+  md: 'h-11 px-5 text-sm',
+  lg: 'h-13 px-7 text-base',
+};
+
+const variants = {
+  primary:
+    'bg-gradient-to-r from-accent to-accent-2 text-bg shadow-[0_8px_30px_-8px] shadow-accent/50 hover:shadow-[0_12px_40px_-6px] hover:shadow-accent-2/60 hover:-translate-y-0.5',
+  secondary: 'border border-border bg-surface text-text hover:border-accent/60 hover:bg-surface-2 hover:-translate-y-0.5',
+  ghost: 'text-text hover:text-accent-2 px-2',
+  warm: 'bg-warm text-bg shadow-[0_8px_30px_-8px] shadow-warm/60 hover:-translate-y-0.5 hover:brightness-110',
+};
+
+const classes = [base, sizes[size], variants[variant], className].join(' ');
+const linkAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+{
+  href ? (
+    <a href={href} id={id} class={classes} {...linkAttrs} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} id={id} class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}

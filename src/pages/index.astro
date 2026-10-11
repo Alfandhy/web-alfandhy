@@ -1,0 +1,63 @@
+---
+// Beranda SEMENTARA (Fase 1) — untuk menguji fondasi & komponen.
+// Akan diganti total di Fase 2 sesuai PLAN 4.1.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Tag from '../components/Tag.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Timeline from '../components/Timeline.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout description={SITE.description}>
+  <section class="relative overflow-hidden">
+    <div class="bg-grid absolute inset-0" aria-hidden="true"></div>
+    <div
+      class="absolute -top-40 left-1/2 size-[520px] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-site relative py-24 sm:py-32">
+      <Tag variant="accent" class="animate-fade-up">
+        <span class="size-1.5 animate-pulse rounded-full bg-accent-2"></span> Fase 1 · Fondasi
+      </Tag>
+      <h1 class="mt-6 max-w-3xl animate-fade-up font-heading text-4xl font-bold leading-[1.05] sm:text-6xl">
+        Website baru <span class="text-gradient">sedang dibangun.</span>
+      </h1>
+      <p class="mt-5 max-w-xl animate-fade-up text-lg text-muted">{SITE.tagline}</p>
+      <div class="mt-8 flex animate-fade-up flex-wrap gap-3">
+        <Button href="/work" id="btn-work">Lihat Karya <span aria-hidden="true">→</span></Button>
+        <Button href="/about" variant="secondary" id="btn-about">Tentang Saya</Button>
+        <Button href="/game/sandeqrush" variant="warm" id="btn-sandeq">Sandeq Rush</Button>
+        <Button href="/contact" variant="ghost" id="btn-contact">Kontak</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-site py-16">
+    <SectionTitle eyebrow="Komponen" title='Uji <span class="text-gradient">Card &amp; Tag</span>' description="Pratinjau komponen dasar dari design system." />
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Card eyebrow="AI" title="AI untuk Desain" description="Contoh kartu layanan dengan efek spotlight." href="#" class="reveal" />
+      <Card eyebrow="Game" badge="Coming soon" title="Sandeq Rush" description="Contoh kartu dengan glow hangat." glow="warm" href="#" class="reveal" />
+      <Card eyebrow="Edu" title="Media Ajar" description="Kartu tanpa link." class="reveal">
+        <div class="flex flex-wrap gap-2">
+          <Tag>Prompt</Tag><Tag variant="accent">AI</Tag><Tag variant="warm">Game</Tag>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <section class="container-site py-16">
+    <SectionTitle eyebrow="Komponen" title="Uji Timeline" />
+    <div class="mt-10 max-w-2xl">
+      <Timeline
+        items={[
+          { period: 'Sekarang', title: 'Guru', org: 'SMK Negeri Tapango', tags: ['Mikroprosesor', 'DKV', 'Informatika'] },
+          { period: '[TAHUN]', title: 'Founder', org: 'SMEGTA MEDIA', description: 'Kontributor Adobe Stock & ekstrakurikuler.' },
+          { period: '[TAHUN]', title: 'S1 Informatika (S.T.)', org: '[NAMA KAMPUS]' },
+        ]}
+      />
+    </div>
+  </section>
+</BaseLayout>
