@@ -54,8 +54,8 @@
 /work                          → Hub karya (filter: Design / Stock / AI)
 /work/[slug]                   → Detail studi kasus satu karya
 /game                          → Daftar game
-/game/sandeqrush               → Landing page Sandeq Rush
-/game/sandeqrush/privacy       → Privacy Policy Sandeq Rush (WAJIB untuk Play Store)
+/game/sandeq-rush               → Landing page Sandeq Rush
+/game/sandeq-rush/privacy       → Privacy Policy Sandeq Rush (WAJIB untuk Play Store)
 /edu                           → Materi & media ajar (explainer, modul)
 /blog                          → Devlog & artikel (fase akhir)
 /blog/[slug]                   → Detail artikel
@@ -200,7 +200,7 @@ summary: string
 
 - Kartu per game. Saat ini isinya Sandeq Rush, sisanya diberi label "Coming soon".
 
-### 4.5 Landing Page Sandeq Rush `/game/sandeqrush`
+### 4.5 Landing Page Sandeq Rush `/game/sandeq-rush`
 
 > **Penting:** halaman ini dibuka dari tombol di dalam game, jadi **wajib optimal di HP** dan cepat dimuat.
 
@@ -216,10 +216,10 @@ Gunakan tema khusus yang lebih cerah dan kartun, menyesuaikan gaya visual game (
 **Tracking:** URL dari game menggunakan `?src=game`. Pastikan analytics mencatat parameter ini, termasuk event klik tombol Play Store.
 
 **Kode tombol di dalam game (referensi):**
-- Godot: `OS.shell_open("https://alfandhy.my.id/game/sandeqrush?src=game")`
-- Unity: `Application.OpenURL("https://alfandhy.my.id/game/sandeqrush?src=game")`
+- Godot: `OS.shell_open("https://alfandhy.my.id/game/sandeq-rush?src=game")`
+- Unity: `Application.OpenURL("https://alfandhy.my.id/game/sandeq-rush?src=game")`
 
-### 4.6 Privacy Policy `/game/sandeqrush/privacy`
+### 4.6 Privacy Policy `/game/sandeq-rush/privacy`
 
 - Bahasa Indonesia dan Inggris
 - Isi: data yang dikumpulkan (sesuaikan dengan SDK yang dipakai: iklan, analytics), tujuan penggunaan, pihak ketiga, privasi anak, kontak, dan tanggal berlaku
@@ -328,7 +328,7 @@ alfandhy-web/
 - [ ] Landing page sesuai 4.5
 - [ ] Privacy Policy sesuai 4.6
 - [ ] Pasang analytics + event klik "Download"
-- [ ] Uji akses `.../game/sandeqrush?src=game` dari HP Android
+- [ ] Uji akses `.../game/sandeq-rush?src=game` dari HP Android
 
 **Selesai bila:** halaman cepat di HP (Lighthouse mobile ≥ 90) dan URL privacy siap diisi di Play Console.
 

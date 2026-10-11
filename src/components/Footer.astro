@@ -11,6 +11,15 @@ const t = DICT[lang].contact;
 const year = new Date().getFullYear();
 const isEn = lang === 'en';
 const privacyHref = isEn ? '/en/privacy' : '/privacy';
+
+// Waktu awal di zona WITA (Asia/Makassar) untuk server-rendering (mencegah teks rusak --:--:-- saat JS nonaktif / sebelum hydrate)
+const initialWitaTime = new Intl.DateTimeFormat('id-ID', {
+  timeZone: 'Asia/Makassar',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+}).format(new Date()).replace(/\./g, ':');
 ---
 
 <footer
@@ -80,7 +89,7 @@ const privacyHref = isEn ? '/en/privacy' : '/privacy';
             </div>
             <div class="flex items-center gap-1.5 text-sea-accent">
               <span class="text-sea-muted">WITA</span>
-              <span id="footer-live-clock" class="font-semibold tracking-wider">--:--:--</span>
+              <span id="footer-live-clock" class="font-semibold tracking-wider">{initialWitaTime}</span>
             </div>
           </div>
 
@@ -195,7 +204,8 @@ const privacyHref = isEn ? '/en/privacy' : '/privacy';
 
     if (copyBtn && copyText && emailLink) {
       const originalText = copyText.textContent || 'Salin';
-      const copiedText = isEn ? 'Copied!' : 'Tersalin!';
+      const isEnglish = document.documentElement.lang === 'en';
+      const copiedText = isEnglish ? 'Copied!' : 'Tersalin!';
       copyBtn.addEventListener('click', async () => {
         const email = emailLink.textContent?.trim() || 'halo@alfandhy.my.id';
         try {

@@ -1,73 +1,135 @@
 ---
-// Halaman Kebijakan Privasi Versi Bahasa Inggris — Privacy Policy
+// Website Privacy Policy (English Version) — alfandhy.my.id/en/privacy
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Link from '../../components/Link.astro';
 import { SITE } from '../../data/site';
 
-const lastUpdated = 'October 11, 2026';
+const effectiveDate = 'October 11, 2026';
 ---
 
 <BaseLayout
   lang="en"
-  title={`Privacy Policy — ${SITE.name}`}
-  description="General privacy policy for the personal portfolio website alfandhy.my.id."
+  title={`Website Privacy Policy — ${SITE.name}`}
+  description="Official Privacy Policy for the personal portfolio and creative archives at alfandhy.my.id."
 >
   <main class="py-16 sm:py-24">
     <div class="wrap max-w-3xl">
-      <SectionLabel number="00" title="Legal Information" />
+      
+      <nav class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2" aria-label="Breadcrumb">
+        <Link href="/en" class="hover:text-accent">← Return to Homepage</Link>
+        <span aria-hidden="true">/</span>
+        <span class="text-accent font-semibold">Website Privacy Policy</span>
+      </nav>
 
-      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
-        Privacy Policy
+      <SectionLabel number="00" title="Legal &amp; Privacy Notice" />
+
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
+        Website Privacy Policy
       </h1>
-      <p class="font-mono text-xs text-ink-2 mb-12">Last updated: {lastUpdated}</p>
+      
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-ink-2 mb-12 pb-6 border-b border-rule">
+        <span>Effective date: <strong class="text-ink font-medium">{effectiveDate}</strong></span>
+        <span>·</span>
+        <span>Operator: <strong class="text-ink font-medium">Alfandhy</strong></span>
+        <span>·</span>
+        <span class="text-accent">Zero Tracking &amp; No Ad Cookies</span>
+      </div>
 
       <div class="space-y-10 text-base leading-relaxed text-ink/90 font-sans">
+        
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Scope</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Scope of This Policy</h2>
           <p class="text-ink-2">
-            This Privacy Policy applies exclusively to the personal portfolio website <strong>alfandhy.my.id</strong>. 
-            This website serves to showcase graphic design work, AI workflow explorations, educational materials, and creative ventures by Alfandhy.
+            This Privacy Policy applies solely to the personal portfolio website hosted at <strong>alfandhy.my.id</strong> (including its English localization under <code>/en/</code>). The website functions as an archive of graphic design projects, artificial intelligence workflows, educational resources, and independent creative works by Alfandhy.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Visitor Information &amp; Analytics</h2>
-          <p class="text-ink-2">
-            This website does not require account registration or collect personally identifiable information without your knowledge. 
-            We may only analyze standard non-identifiable web telemetry (such as browser type, viewport resolution, and visited pages) solely to maintain performance and visual integrity.
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Hosting Infrastructure &amp; Technical Server Logs (Netlify)</h2>
+          <p class="text-ink-2 mb-3">
+            This website is hosted and distributed globally via <strong>Netlify</strong>. When you visit any page, Netlify edge servers automatically record standard HTTP transmission logs. This data includes:
+          </p>
+          <ul class="list-disc pl-6 space-y-1.5 text-ink-2">
+            <li>Browser IP address (masked or handled under infrastructure data protection rules)</li>
+            <li>Browser software and operating system version (user-agent header)</li>
+            <li>Requested URI paths and exact visit timestamps</li>
+            <li>HTTP response status codes (e.g., 200 OK, 404 Not Found)</li>
+          </ul>
+          <p class="text-ink-2 mt-3">
+            These logs are strictly used to diagnose network connectivity, prevent Denial of Service (DDoS) abuses, and maintain technical infrastructure integrity. They are never processed to personally identify individual visitors.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Standalone Applications &amp; Games</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Cookies &amp; Visitor Analytics</h2>
+          <div class="space-y-2 text-ink-2">
+            <p>
+              <strong>No Tracking Cookies:</strong> This website operates <strong>without third-party advertising cookies, cross-site tracking scripts, or behavioural trackers</strong>.
+            </p>
+            <p>
+              <strong>Analytics Status:</strong> Currently, alfandhy.my.id <strong>does not employ any third-party analytics services</strong>. If a privacy-first web telemetry service is integrated in the future, its designation will be transparently updated here: <code class="font-mono text-xs bg-paper-2 px-1.5 py-0.5 rounded text-ink">[ANALYTICS PROVIDER — Not yet active]</code>.
+            </p>
+          </div>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Distinct Policy for Games (Sandeq Rush)</h2>
+          <p class="text-ink-2 mb-3">
+            Standalone digital products such as the mobile Android game <strong>Sandeq Rush</strong> have their own dedicated privacy policies tailored to the Google Play Store environment.
+          </p>
           <p class="text-ink-2">
-            Distinct digital products such as standalone games (including <strong>Sandeq Rush</strong>) operate under dedicated privacy policies formulated in accordance with distribution platforms (e.g., Google Play Store). 
-            Specific privacy policies for those games are accessible directly on their designated pages within this site.
+            Sandeq Rush functions 100% offline with zero external data collection. You can inspect its dedicated policy here: 
+            <Link href="/en/game/sandeq-rush/privacy" class="text-accent underline font-mono text-sm ml-1">Sandeq Rush Game Privacy Policy →</Link>
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Direct Correspondence</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Direct Correspondence</h2>
           <p class="text-ink-2">
-            If you initiate contact via email or through the linked professional profiles, your contact information is utilized strictly to reply to your inquiry or discuss professional collaborations. We never share or sell contact details to third parties.
+            If you voluntarily initiate email correspondence or connect via the social profiles linked on this website, your submitted contact details (name, email address, and message contents) are used strictly to reply to your inquiry or discuss professional collaborations. Your contact details are never sold, rented, or distributed to third parties for marketing purposes.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Questions &amp; Contact</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">6. Children's Privacy</h2>
           <p class="text-ink-2">
-            If you have any questions regarding privacy on this website, please direct correspondence to:
-          </p>
-          <p class="mt-3">
-            <Link href="mailto:halo@alfandhy.my.id" class="text-ink font-mono text-sm underline">halo@alfandhy.my.id</Link>
+            This portfolio site is family-safe and suitable for general audiences. We do not knowingly solicit, collect, or retain personally identifiable information from children under the age of 13 (or applicable local age threshold).
           </p>
         </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">7. User Rights</h2>
+          <p class="text-ink-2 mb-3">
+            As a visitor, you maintain full rights regarding your personal information:
+          </p>
+          <ul class="list-disc pl-6 space-y-1.5 text-ink-2">
+            <li>The right to know what technical information is processed during website interactions.</li>
+            <li>The right to request the deletion of any prior direct email communications you sent to us.</li>
+            <li>The right to ask questions regarding the privacy practices of this site.</li>
+          </ul>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">8. Contact Information</h2>
+          <p class="text-ink-2">
+            For inquiries or official correspondence concerning this website's privacy practices, please contact:
+          </p>
+          <div class="mt-4 p-4 bg-paper-2 rounded border border-rule font-mono text-sm space-y-1">
+            <p class="text-ink"><strong>Operator:</strong> Alfandhy</p>
+            <p class="text-ink"><strong>Location:</strong> Polewali Mandar, West Sulawesi, Indonesia</p>
+            <p class="text-ink"><strong>Email:</strong> <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link></p>
+            <p class="text-ink"><strong>Official Site:</strong> <Link href="https://alfandhy.my.id" class="text-accent underline">https://alfandhy.my.id</Link></p>
+          </div>
+        </section>
+
       </div>
 
-      <div class="mt-16 border-t border-rule pt-8">
-        <Link href="/en" class="text-sm font-mono text-ink">← Return to Homepage</Link>
-      </div>
+      <nav class="mt-16 border-t border-rule pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-sm" aria-label="Language and Navigation">
+        <Link href="/en" class="text-ink hover:text-accent">← Return to Homepage</Link>
+        <Link href="/privacy" class="text-ink-2 hover:text-accent">Versi Bahasa Indonesia (Kebijakan Privasi Situs) →</Link>
+      </nav>
+
     </div>
   </main>
 </BaseLayout>

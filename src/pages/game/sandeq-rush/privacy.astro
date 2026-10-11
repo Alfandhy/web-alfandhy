@@ -1,89 +1,155 @@
 ---
-// Halaman Kebijakan Privasi Khusus Game Sandeq Rush (ID)
-// URL ini digunakan untuk Google Play Console
+// Halaman Kebijakan Privasi Resmi Game Sandeq Rush (Bahasa Indonesia)
+// URL Publik dan Permanen untuk Google Play Console: https://alfandhy.my.id/game/sandeq-rush/privacy
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SectionLabel from '../../../components/SectionLabel.astro';
 import Link from '../../../components/Link.astro';
-import { SITE } from '../../../data/site';
 
 const gameTitle = 'Sandeq Rush';
 const effectiveDate = '11 Oktober 2026';
 ---
 
 <BaseLayout
-  title={`Kebijakan Privasi Game ${gameTitle} — Alfandhy`}
-  description={`Kebijakan privasi resmi untuk game mobile Android ${gameTitle} oleh Alfandhy.`}
+  title={`Kebijakan Privasi ${gameTitle} — Alfandhy`}
+  description={`Kebijakan privasi resmi untuk game mobile Android ${gameTitle} yang dikembangkan oleh Alfandhy. Sepenuhnya offline, tanpa pelacak, tanpa iklan.`}
 >
   <main class="py-16 sm:py-24">
     <div class="wrap max-w-3xl">
       
-      <div class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2">
+      <nav class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2" aria-label="Breadcrumb">
         <Link href="/game/sandeq-rush" class="hover:text-accent">← Kembali ke {gameTitle}</Link>
-        <span>/</span>
-        <span class="text-accent font-semibold">Kebijakan Privasi Game</span>
-      </div>
+        <span aria-hidden="true">/</span>
+        <span class="text-accent font-semibold">Kebijakan Privasi</span>
+      </nav>
 
-      <SectionLabel number="GAME-POL" title="Kebijakan Privasi Aplikasi Mobile" />
+      <SectionLabel number="PRIVACY-APP" title="Kebijakan Privasi Aplikasi Mobile" />
 
-      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
         Kebijakan Privasi: {gameTitle}
       </h1>
-      <p class="font-mono text-xs text-ink-2 mb-12">Berlaku sejak: {effectiveDate} · Pengembang: Alfandhy, S.T.</p>
+      
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-ink-2 mb-12 pb-6 border-b border-rule">
+        <span>Berlaku sejak: <strong class="text-ink font-medium">{effectiveDate}</strong></span>
+        <span>·</span>
+        <span>Pengembang: <strong class="text-ink font-medium">Alfandhy</strong></span>
+        <span>·</span>
+        <span class="text-accent">Status: 100% Offline &amp; Tanpa Iklan</span>
+      </div>
 
       <div class="space-y-10 text-base leading-relaxed text-ink/90 font-sans">
+        
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Pendahuluan</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Ringkasan &amp; Komitmen Privasi</h2>
+          <p class="text-ink-2 mb-3">
+            Kebijakan Privasi ini berlaku untuk game mobile Android <strong>{gameTitle}</strong> yang dikembangkan oleh <strong>Alfandhy</strong> dan didistribusikan melalui Google Play Store.
+          </p>
           <p class="text-ink-2">
-            Kebijakan Privasi ini menjelaskan bagaimana game mobile <strong>{gameTitle}</strong> (dikembangkan oleh Alfandhy) menangani informasi pengguna saat Anda mengunduh, menginstal, atau memainkan game melalui Google Play Store. Kami berkomitmen menjaga privasi pemain kami, terutama pengguna usia anak dan keluarga.
+            Kami menghormati privasi Anda sepenuhnya. <strong>{gameTitle} dirancang sebagai permainan yang 100% offline</strong>. Game ini tidak memerlukan pendaftaran akun, tidak mengumpulkan data pribadi, tidak memuat iklan, dan tidak melacak aktivitas Anda di perangkat.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Informasi yang Dikumpulkan</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Izin Perangkat Android (Permissions)</h2>
           <p class="text-ink-2 mb-3">
-            Game <strong>{gameTitle}</strong> dirancang sebagai game arcade edukasi tanpa keharusan login akun pribadi. Secara umum:
+            Untuk menjaga kenyamanan dan keamanan pengguna, game ini hanya meminta <strong>satu izin perangkat</strong>:
           </p>
           <ul class="list-disc pl-6 space-y-2 text-ink-2">
-            <li><strong>Data Lokal Perangkat:</strong> Skor tertinggi, progres etape, dan konfigurasi perahu disimpan secara lokal pada penyimpanan internal perangkat Anda (Local Storage / SQLite).</li>
-            <li><strong>Telemetri Standar (Non-Pribadi):</strong> Layanan pihak ketiga (seperti Google Play Services) dapat mengumpulkan data teknis anonim seperti tipe perangkat keras, versi OS Android, dan laporan error (*crash logs*) untuk stabilitas gameplay.</li>
-          </ul>
-        </section>
-
-        <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Privasi Anak (Children's Privacy)</h2>
-          <p class="text-ink-2">
-            Game ini ramah keluarga dan tidak menargetkan pengumpulan data identifikasi pribadi (*Personally Identifiable Information*) dari anak-anak di bawah umur 13 tahun (atau batas usia yang berlaku di yurisdiksi Anda). Semua fitur permainan dapat dinikmati tanpa verifikasi identitas pribadi.
-          </p>
-        </section>
-
-        <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Layanan Pihak Ketiga &amp; Izin Perangkat</h2>
-          <p class="text-ink-2 mb-2">
-            Game ini dapat berinteraksi dengan:
-          </p>
-          <ul class="list-disc pl-6 space-y-1 text-ink-2">
-            <li><strong>Google Play Services:</strong> Untuk sinkronisasi prestasi (Achievements) dan papan peringkat jika fitur tersebut diaktifkan oleh pemain.</li>
+            <li>
+              <code class="font-mono text-xs bg-paper-2 text-ink px-1.5 py-0.5 rounded">android.permission.VIBRATE</code>: Digunakan semata-mata untuk memberikan efek getar taktil (<em>haptic feedback</em>) pada perangkat pemain saat terjadi benturan ombak atau rintangan selama balapan berlangsung.
+            </li>
           </ul>
           <p class="text-ink-2 mt-3">
-            Game tidak meminta izin akses lokasi presisi (GPS), kamera, atau buku kontak Anda.
+            Game ini <strong>TIDAK PERNAH</strong> meminta atau mengakses izin sensitif, termasuk namun tidak terbatas pada: lokasi geografis (GPS), kamera, mikrofon, daftar kontak, SMS, penyimpanan berkas eksternal, maupun identitas perangkat keras telepon.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Hubungi Pengembang</h2>
-          <p class="text-ink-2">
-            Jika ada pertanyaan mengenai kebijakan privasi atau permohonan data terkait game {gameTitle}, silakan hubungi pengembang melalui:
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Data yang Disimpan &amp; Penyimpanan Lokal</h2>
+          <p class="text-ink-2 mb-3">
+            Semua data permainan disimpan <strong>hanya secara lokal</strong> pada penyimpanan internal perangkat pemain. Data yang tersimpan meliputi:
           </p>
-          <p class="mt-3 font-mono text-sm">
-            Email: <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link>
+          <ul class="list-disc pl-6 space-y-2 text-ink-2">
+            <li><strong>Nama Pemain:</strong> Nama atau inisial yang Anda masukkan sendiri untuk kebutuhan papan rekor lokal.</li>
+            <li><strong>Catatan Waktu &amp; Skor:</strong> Catatan waktu terbaik pada setiap lintasan.</li>
+            <li><strong>Bintang &amp; Progres Karir:</strong> Bintang yang berhasil dikumpulkan serta status penyelesaian 5 etape perlombaan Sandeq.</li>
+            <li><strong>Papan Peringkat Lokal:</strong> Rekor skor lokal di dalam perangkat Anda sendiri.</li>
+            <li><strong>Preferensi Pengguna:</strong> Pengaturan volume musik dan efek suara permainan.</li>
+          </ul>
+          <p class="text-ink-2 mt-3 font-medium">
+            Penting: Data-data tersebut di atas TIDAK PERNAH dikirim, disinkronkan, atau diunggah ke server mana pun, baik server pengembang maupun pihak ketiga.
           </p>
         </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Tanpa Iklan, Analitik, atau Layanan Online</h2>
+          <div class="space-y-2 text-ink-2">
+            <p>
+              <strong>Tidak Ada Iklan:</strong> {gameTitle} bebas sepenuhnya dari iklan (tidak ada banner, iklan interstitial, maupun video berhadiah).
+            </p>
+            <p>
+              <strong>Tidak Ada SDK Pelacak / Analitik:</strong> Kami tidak menyematkan pustaka pelacak (seperti Google Analytics, Firebase Analytics, Facebook SDK, atau sejenisnya).
+            </p>
+            <p>
+              <strong>Tidak Menggunakan Google Play Games Services:</strong> Game ini tidak memanfaatkan Google Play Games Services untuk penyimpanan cloud atau leaderboard daring. Semua fitur kompetisi berlangsung di tingkat lokal perangkat Anda.
+            </p>
+          </div>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Cara Menghapus Data</h2>
+          <p class="text-ink-2 mb-3">
+            Karena semua data hanya berada di perangkat Anda, Anda memegang kendali penuh atas data tersebut setiap saat. Anda dapat menghapus seluruh data dan progres game melalui langkah-langkah berikut:
+          </p>
+          <ol class="list-decimal pl-6 space-y-2 text-ink-2">
+            <li>Buka <strong>Pengaturan (Settings)</strong> di ponsel Android Anda.</li>
+            <li>Pilih menu <strong>Aplikasi (Apps)</strong> atau <strong>Kelola Aplikasi</strong>.</li>
+            <li>Cari dan pilih <strong>Sandeq Rush</strong>.</li>
+            <li>Pilih <strong>Penyimpanan &amp; Cache (Storage)</strong>, lalu ketuk <strong>Hapus Data / Hapus Penyimpanan (Clear Storage)</strong>.</li>
+            <li>Sebagai alternatif, melakukan <strong>Uninstall (Copot Pemasangan)</strong> game akan secara otomatis membersihkan seluruh data lokal dari perangkat Anda.</li>
+          </ol>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">6. Kebijakan Privasi Anak (Children's Privacy)</h2>
+          <p class="text-ink-2">
+            {gameTitle} adalah permainan ramah keluarga yang berakar pada edukasi budaya bahari Mandar. Kami <strong>tidak mengumpulkan data pribadi dari siapa pun</strong>, termasuk anak-anak di bawah umur 13 tahun (maupun batas usia yang ditentukan oleh yurisdiksi perlindungan anak seperti COPPA dan GDPR-K). Game dapat dimainkan sepenuhnya tanpa input data pribadi apa pun.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">7. Pihak Ketiga &amp; Platform Distribusi</h2>
+          <p class="text-ink-2">
+            Satu-satunya pihak ketiga yang terkait dengan penyediaan aplikasi ini adalah <strong>Google LLC</strong> selaku penyedia platform distribusi resmi <strong>Google Play Store</strong>. Pengunduhan dan pembaruan aplikasi tunduk pada ketentuan layanan dan kebijakan privasi Google Play Store.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">8. Perubahan pada Kebijakan Privasi</h2>
+          <p class="text-ink-2">
+            Jika di masa mendatang kami memutuskan untuk meluncurkan pembaruan game yang menyertakan fitur jaringan, multipemain daring, atau pengumpulan data teknis apa pun, kami berkomitmen untuk <strong>memperbarui halaman Kebijakan Privasi ini terlebih dahulu</strong> sebelum versi baru tersebut resmi dipublikasikan di Google Play Store.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">9. Kontak Pengembang</h2>
+          <p class="text-ink-2">
+            Apabila Anda memiliki pertanyaan, saran, atau masukan mengenai kebijakan privasi atau aplikasi {gameTitle}, silakan hubungi pengembang secara langsung:
+          </p>
+          <div class="mt-4 p-4 bg-paper-2 rounded border border-rule font-mono text-sm space-y-1">
+            <p class="text-ink"><strong>Pengembang:</strong> Alfandhy</p>
+            <p class="text-ink"><strong>Lokasi:</strong> Polewali Mandar, Sulawesi Barat, Indonesia</p>
+            <p class="text-ink"><strong>Email:</strong> <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link></p>
+            <p class="text-ink"><strong>Situs Web:</strong> <Link href="https://alfandhy.my.id" class="text-accent underline">https://alfandhy.my.id</Link></p>
+          </div>
+        </section>
+
       </div>
 
-      <div class="mt-16 border-t border-rule pt-8 flex items-center justify-between">
-        <Link href="/game/sandeq-rush" class="text-sm font-mono text-ink">← Halaman Game Sandeq Rush</Link>
-        <Link href="/en/game/sandeq-rush/privacy" class="text-sm font-mono text-ink-2 hover:text-accent">English Version →</Link>
-      </div>
+      <nav class="mt-16 border-t border-rule pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-sm" aria-label="Tautan Bahasa dan Navigasi">
+        <Link href="/game/sandeq-rush" class="text-ink hover:text-accent">← Kembali ke Halaman Sandeq Rush</Link>
+        <Link href="/en/game/sandeq-rush/privacy" class="text-ink-2 hover:text-accent">English Version (Privacy Policy) →</Link>
+      </nav>
+
     </div>
   </main>
 </BaseLayout>

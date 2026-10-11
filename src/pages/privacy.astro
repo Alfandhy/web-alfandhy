@@ -1,72 +1,134 @@
 ---
-// Halaman Kebijakan Privasi Umum Situs — alfandhy.my.id
+// Halaman Kebijakan Privasi Umum Situs — alfandhy.my.id (Bahasa Indonesia)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Link from '../components/Link.astro';
 import { SITE } from '../data/site';
 
-const lastUpdated = '11 Oktober 2026';
+const effectiveDate = '11 Oktober 2026';
 ---
 
 <BaseLayout
-  title={`Kebijakan Privasi — ${SITE.name}`}
-  description="Kebijakan privasi umum untuk situs web portofolio dan catatan personal alfandhy.my.id."
+  title={`Kebijakan Privasi Situs — ${SITE.name}`}
+  description="Kebijakan privasi resmi untuk situs web portofolio personal dan catatan karya alfandhy.my.id."
 >
   <main class="py-16 sm:py-24">
     <div class="wrap max-w-3xl">
-      <SectionLabel number="00" title="Informasi Legal" />
+      
+      <nav class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2" aria-label="Breadcrumb">
+        <Link href="/" class="hover:text-accent">← Kembali ke Beranda</Link>
+        <span aria-hidden="true">/</span>
+        <span class="text-accent font-semibold">Kebijakan Privasi Situs</span>
+      </nav>
 
-      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
-        Kebijakan Privasi
+      <SectionLabel number="00" title="Informasi Legal &amp; Privasi Situs" />
+
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
+        Kebijakan Privasi Situs Web
       </h1>
-      <p class="font-mono text-xs text-ink-2 mb-12">Pembaruan terakhir: {lastUpdated}</p>
+      
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-ink-2 mb-12 pb-6 border-b border-rule">
+        <span>Berlaku sejak: <strong class="text-ink font-medium">{effectiveDate}</strong></span>
+        <span>·</span>
+        <span>Pengelola: <strong class="text-ink font-medium">Alfandhy</strong></span>
+        <span>·</span>
+        <span class="text-accent">Bebas Pelacak &amp; Cookie Iklan</span>
+      </div>
 
       <div class="space-y-10 text-base leading-relaxed text-ink/90 font-sans">
+        
         <section class="border-t border-rule pt-6">
           <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Ruang Lingkup</h2>
           <p class="text-ink-2">
-            Kebijakan privasi ini berlaku secara eksklusif untuk situs web portofolio personal <strong>alfandhy.my.id</strong>. 
-            Situs ini dibuat untuk menampilkan karya desain, eksplorasi AI, materi edukasi, dan proyek kreatif milik Alfandhy.
+            Kebijakan Privasi ini berlaku khusus untuk situs web portofolio personal <strong>alfandhy.my.id</strong> (termasuk versi bahasa Inggris di bawah direktori <code>/en/</code>). Situs ini berfungsi sebagai wadah dokumentasi karya desain grafis, eksplorasi kecerdasan buatan (AI), materi pembelajaran edukatif, serta publikasi proyek mandiri milik Alfandhy.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Data Pengunjung & Analitik</h2>
-          <p class="text-ink-2">
-            Situs ini tidak mengharuskan pendaftaran akun dan tidak mengumpulkan informasi identitas pribadi (seperti nama atau alamat) secara rahasia. 
-            Kami hanya dapat memproses data teknis anonim standar web (seperti tipe peramban, resolusi layar, dan halaman yang dikunjungi) semata-mata untuk mengoptimalkan performa dan keterbacaan situs.
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Infrastruktur Hosting &amp; Log Server (Netlify)</h2>
+          <p class="text-ink-2 mb-3">
+            Situs web ini dihosting dan didistribusikan secara global menggunakan platform <strong>Netlify</strong>. Saat Anda mengakses situs ini, server Netlify secara otomatis mencatat berkas log teknis standar peramban. Informasi ini mencakup:
+          </p>
+          <ul class="list-disc pl-6 space-y-1.5 text-ink-2">
+            <li>Alamat IP peramban (diproses atau disamarkan sesuai kebijakan privasi penyedia infrastruktur)</li>
+            <li>Jenis peramban dan versi sistem operasi (<em>user-agent</em>)</li>
+            <li>Halaman atau berkas yang diminta serta stempel waktu kunjungan</li>
+            <li>Kode status respons HTTP (misalnya 200 OK, 404 Not Found)</li>
+          </ul>
+          <p class="text-ink-2 mt-3">
+            Data log tersebut murni digunakan untuk pemeliharaan keandalan sistem, perlindungan dari serangan penolakan layanan (DDoS), serta pemantauan integritas teknis situs, dan tidak digunakan untuk mengenali identitas pribadi Anda.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Kebijakan Privasi Aplikasi & Game</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Cookie &amp; Analitik Pengunjung</h2>
+          <div class="space-y-2 text-ink-2">
+            <p>
+              <strong>Bebas Cookie Pelacak:</strong> Situs ini <strong>tidak menggunakan cookie pihak ketiga, cookie periklanan, maupun teknologi pelacakan lintas situs</strong>.
+            </p>
+            <p>
+              <strong>Status Analitik:</strong> Saat ini situs web alfandhy.my.id <strong>belum memasang layanan analitik pihak ketiga</strong>. Apabila di masa mendatang kami mengaktifkan alat ukur statistik pengunjung yang menghargai privasi, penyedia layanan tersebut akan dicantumkan secara transparan di sini: <code class="font-mono text-xs bg-paper-2 px-1.5 py-0.5 rounded text-ink">[NAMA ANALYTICS — Belum diaktifkan]</code>.
+            </p>
+          </div>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Kebijakan Privasi Terpisah untuk Game (Sandeq Rush)</h2>
+          <p class="text-ink-2 mb-3">
+            Produk digital mandiri seperti aplikasi game mobile <strong>Sandeq Rush</strong> memiliki ketentuan pemrosesan data mandiri yang diatur khusus sesuai ekosistem Google Play Store.
+          </p>
           <p class="text-ink-2">
-            Produk digital terpisah seperti game (termasuk <strong>Sandeq Rush</strong>) memiliki kebijakan privasi dan pemrosesan data mandiri yang diatur khusus sesuai ketentuan platform distribusi (seperti Google Play Store). 
-            Tautan kebijakan privasi spesifik untuk game tersebut dapat diakses langsung melalui laman masing-masing game di situs ini.
+            Game Sandeq Rush beroperasi 100% offline tanpa pengumpulan data pribadi. Anda dapat membaca rincian lengkapnya pada dokumen terpisah: 
+            <Link href="/game/sandeq-rush/privacy" class="text-accent underline font-mono text-sm ml-1">Kebijakan Privasi Game Sandeq Rush →</Link>
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Komunikasi Langsung</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Komunikasi Langsung &amp; Formulir Kontak</h2>
           <p class="text-ink-2">
-            Jika Anda menghubungi kami melalui email atau tautan media sosial yang tertera pada situs, informasi kontak yang Anda kirimkan hanya akan digunakan untuk membalas komunikasi atau membicarakan kolaborasi profesional. Kami tidak akan membagikan atau menjual data kontak Anda ke pihak ketiga mana pun.
+            Jika Anda menghubungi kami secara sukarela melalui alamat surel (email) atau tautan media sosial yang tertera di situs ini, informasi yang Anda kirimkan (nama, alamat surel, dan isi pesan) hanya akan digunakan secara eksklusif untuk membalas komunikasi atau membicarakan kolaborasi. Informasi kontak Anda tidak akan pernah dijual, disewakan, atau dibagikan kepada pihak ketiga untuk kepentingan pemasaran.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Pertanyaan & Kontak</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">6. Perlindungan Privasi Anak-Anak</h2>
           <p class="text-ink-2">
-            Jika Anda memiliki pertanyaan terkait privasi pada situs ini, Anda dapat mengirimkan surat elektronik ke:
-          </p>
-          <p class="mt-3">
-            <Link href="mailto:halo@alfandhy.my.id" class="text-ink font-mono text-sm underline">halo@alfandhy.my.id</Link>
+            Situs ini memuat konten edukasi dan portofolio profesional yang aman untuk keluarga dan umum. Kami tidak secara sadar mengumpulkan, meminta, atau menyimpan data identitas pribadi apa pun dari anak-anak di bawah umur 13 tahun (atau batas usia relevan sesuai yurisdiksi Anda).
           </p>
         </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">7. Hak Pengguna</h2>
+          <p class="text-ink-2 mb-3">
+            Sebagai pengunjung situs, Anda berhak atas transparansi data pribadi Anda:
+          </p>
+          <ul class="list-disc pl-6 space-y-1.5 text-ink-2">
+            <li>Mengetahui informasi apa saja yang diproses saat mengunjungi situs ini.</li>
+            <li>Meminta penghapusan riwayat korespondensi email yang pernah Anda kirimkan kepada kami.</li>
+            <li>Menyampaikan pertanyaan atau keluhan mengenai kebijakan privasi situs ini.</li>
+          </ul>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">8. Kontak Pengelola Situs</h2>
+          <p class="text-ink-2">
+            Untuk pertanyaan atau komunikasi resmi terkait privasi situs web ini, silakan hubungi:
+          </p>
+          <div class="mt-4 p-4 bg-paper-2 rounded border border-rule font-mono text-sm space-y-1">
+            <p class="text-ink"><strong>Nama:</strong> Alfandhy</p>
+            <p class="text-ink"><strong>Lokasi:</strong> Polewali Mandar, Sulawesi Barat, Indonesia</p>
+            <p class="text-ink"><strong>Email:</strong> <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link></p>
+            <p class="text-ink"><strong>Domain Resmi:</strong> <Link href="https://alfandhy.my.id" class="text-accent underline">https://alfandhy.my.id</Link></p>
+          </div>
+        </section>
+
       </div>
 
-      <div class="mt-16 border-t border-rule pt-8">
-        <Link href="/" class="text-sm font-mono text-ink">← Kembali ke Beranda</Link>
-      </div>
+      <nav class="mt-16 border-t border-rule pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-sm" aria-label="Tautan Bahasa dan Navigasi">
+        <Link href="/" class="text-ink hover:text-accent">← Kembali ke Beranda</Link>
+        <Link href="/en/privacy" class="text-ink-2 hover:text-accent">English Version (Website Privacy Policy) →</Link>
+      </nav>
+
     </div>
   </main>
 </BaseLayout>

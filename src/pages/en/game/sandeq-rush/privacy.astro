@@ -1,10 +1,9 @@
 ---
-// Halaman Kebijakan Privasi Khusus Game Sandeq Rush (EN)
-// Official Game Privacy Policy for Google Play Console URL
+// Official Sandeq Rush Privacy Policy (English Version)
+// Public and Permanent URL for Google Play Console: https://alfandhy.my.id/en/game/sandeq-rush/privacy
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SectionLabel from '../../../../components/SectionLabel.astro';
 import Link from '../../../../components/Link.astro';
-import { SITE } from '../../../../data/site';
 
 const gameTitle = 'Sandeq Rush';
 const effectiveDate = 'October 11, 2026';
@@ -13,72 +12,145 @@ const effectiveDate = 'October 11, 2026';
 <BaseLayout
   lang="en"
   title={`Privacy Policy: ${gameTitle} — Alfandhy`}
-  description={`Official Privacy Policy for the Android mobile game ${gameTitle} developed by Alfandhy.`}
+  description={`Official Privacy Policy for the Android mobile game ${gameTitle} developed by Alfandhy. 100% offline, zero trackers, zero ads.`}
 >
   <main class="py-16 sm:py-24">
     <div class="wrap max-w-3xl">
       
-      <div class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2">
+      <nav class="mb-6 flex items-center gap-2 font-mono text-xs text-ink-2" aria-label="Breadcrumb">
         <Link href="/en/game/sandeq-rush" class="hover:text-accent">← Return to {gameTitle}</Link>
-        <span>/</span>
-        <span class="text-accent font-semibold">Game Privacy Policy</span>
-      </div>
+        <span aria-hidden="true">/</span>
+        <span class="text-accent font-semibold">Privacy Policy</span>
+      </nav>
 
-      <SectionLabel number="GAME-POL" title="Mobile Game Privacy Compliance" />
+      <SectionLabel number="PRIVACY-APP" title="Mobile Game Privacy Compliance" />
 
-      <h1 class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
+      <h1 class="font-serif text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink mt-8 mb-4">
         Privacy Policy: {gameTitle}
       </h1>
-      <p class="font-mono text-xs text-ink-2 mb-12">Effective date: {effectiveDate} · Developer: Alfandhy, S.T.</p>
+      
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-ink-2 mb-12 pb-6 border-b border-rule">
+        <span>Effective date: <strong class="text-ink font-medium">{effectiveDate}</strong></span>
+        <span>·</span>
+        <span>Developer: <strong class="text-ink font-medium">Alfandhy</strong></span>
+        <span>·</span>
+        <span class="text-accent">Status: 100% Offline &amp; Ad-Free</span>
+      </div>
 
       <div class="space-y-10 text-base leading-relaxed text-ink/90 font-sans">
+        
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Introduction</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">1. Overview &amp; Privacy Commitment</h2>
+          <p class="text-ink-2 mb-3">
+            This Privacy Policy applies to the Android mobile game <strong>{gameTitle}</strong>, created and maintained by independent developer <strong>Alfandhy</strong>, and distributed via Google Play.
+          </p>
           <p class="text-ink-2">
-            This Privacy Policy governs the manner in which the mobile application <strong>{gameTitle}</strong> (developed by Alfandhy) handles user data when downloaded, installed, or played via the Google Play Store. We are committed to safeguarding user privacy, particularly for children and families.
+            We value your personal privacy. <strong>{gameTitle} is built from the ground up as a 100% offline game</strong>. It requires no user account registration, collects no personally identifiable information (PII), displays no third-party advertisements, and performs no background telemetry or user tracking.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Data Collection &amp; Storage</h2>
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">2. Android Device Permissions</h2>
           <p class="text-ink-2 mb-3">
-            <strong>{gameTitle}</strong> is built as an offline-friendly arcade game with zero compulsory user registration. In summary:
+            To deliver an authentic racing experience while keeping device access minimal, the game requests only <strong>one single hardware permission</strong>:
           </p>
           <ul class="list-disc pl-6 space-y-2 text-ink-2">
-            <li><strong>Local Device Storage:</strong> Game progress, unlocked stages, and custom boat attributes are stored locally on your device's internal storage (SQLite / Local Cache).</li>
-            <li><strong>Non-Personal System Telemetry:</strong> Standard distribution framework services (Google Play Services) may process anonymous diagnostic crash data and OS version details purely to ensure build stability across diverse hardware.</li>
+            <li>
+              <code class="font-mono text-xs bg-paper-2 text-ink px-1.5 py-0.5 rounded">android.permission.VIBRATE</code>: Exclusively used to trigger tactile vibration (<em>haptic feedback</em>) during wave impacts, obstacles, and high-speed maneuvers on the water.
+            </li>
           </ul>
-        </section>
-
-        <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Children's Privacy</h2>
-          <p class="text-ink-2">
-            {gameTitle} complies with family-friendly standards and does not knowingly collect or solicit Personally Identifiable Information from children under the age of 13 (or applicable local age threshold). All gameplay elements are accessible without providing personal data.
+          <p class="text-ink-2 mt-3">
+            The game <strong>NEVER</strong> requests or accesses sensitive device permissions, including GPS precise location, camera, microphone, contacts, SMS, external storage files, or telephony identifiers.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Device Permissions</h2>
-          <p class="text-ink-2">
-            The game requires no sensitive hardware permissions (such as GPS precise geolocation, camera access, microphone, or address book contacts).
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">3. Data Stored &amp; Local Storage Only</h2>
+          <p class="text-ink-2 mb-3">
+            All gameplay information is stored <strong>strictly locally</strong> on your device's internal application sandbox. This data includes:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-ink-2">
+            <li><strong>Player Name:</strong> The nickname or initials you type yourself for local scoreboard records.</li>
+            <li><strong>Stage Lap Times &amp; Scores:</strong> Best recorded race times across nautical stages.</li>
+            <li><strong>Earned Stars &amp; Career Progress:</strong> Unlocked achievements and completion status of the 5 Sandeq race stages.</li>
+            <li><strong>Local Scoreboard:</strong> High scores saved on your own device.</li>
+            <li><strong>Audio Settings:</strong> Custom volume preferences for music and sound effects.</li>
+          </ul>
+          <p class="text-ink-2 mt-3 font-medium">
+            Important Notice: None of the above data is ever uploaded, transmitted, or synchronized to external servers, cloud databases, or third parties.
           </p>
         </section>
 
         <section class="border-t border-rule pt-6">
-          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. Developer Contact</h2>
-          <p class="text-ink-2">
-            If you have questions or feedback regarding privacy or data practices in {gameTitle}, please contact the developer at:
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">4. Zero Ads, Analytics, or Online Services</h2>
+          <div class="space-y-2 text-ink-2">
+            <p>
+              <strong>Ad-Free Experience:</strong> {gameTitle} contains no advertisements (no banner ads, interstitials, or rewarded promotional videos).
+            </p>
+            <p>
+              <strong>No Tracking SDKs:</strong> We do not embed third-party analytics libraries (such as Google Analytics, Firebase, Facebook SDK, or commercial telemetry frameworks).
+            </p>
+            <p>
+              <strong>No Google Play Games Services:</strong> The game does not integrate Google Play Games Services for cloud saves or online global leaderboards. All competitions are self-contained locally.
+            </p>
+          </div>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">5. How to Delete Your Data</h2>
+          <p class="text-ink-2 mb-3">
+            Because all gameplay data resides entirely on your device, you have complete autonomy over it at all times. You can wipe all saved progress and settings using either of the following methods:
           </p>
-          <p class="mt-3 font-mono text-sm">
-            Email: <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link>
+          <ol class="list-decimal pl-6 space-y-2 text-ink-2">
+            <li>Open Android <strong>Settings</strong> on your device.</li>
+            <li>Navigate to <strong>Apps</strong> or <strong>Manage Applications</strong>.</li>
+            <li>Select <strong>Sandeq Rush</strong> from the application list.</li>
+            <li>Tap <strong>Storage &amp; Cache</strong>, then select <strong>Clear Storage / Clear Data</strong>.</li>
+            <li>Alternatively, performing an <strong>Uninstall</strong> of the application will permanently purge all local records from your device.</li>
+          </ol>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">6. Children's Privacy (COPPA &amp; GDPR-K)</h2>
+          <p class="text-ink-2">
+            {gameTitle} is a family-friendly educational cultural game. We <strong>do not collect personal information from anyone</strong>, including children under the age of 13 (or relevant age threshold defined by regional privacy regulations such as COPPA or GDPR-K). The entire game experience is accessible without entering any personal data.
           </p>
         </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">7. Third-Party Distribution Platform</h2>
+          <p class="text-ink-2">
+            The only third party involved in delivering this application is <strong>Google LLC</strong> as the provider of the <strong>Google Play Store</strong>. Downloading, updating, or reviewing the application is subject to the Google Play Terms of Service and Privacy Policy.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">8. Changes to This Privacy Policy</h2>
+          <p class="text-ink-2">
+            Should we decide to introduce future features involving network services, online multiplayer, or telemetry in upcoming versions of the game, we will <strong>update this Privacy Policy prior to releasing such updates</strong> to the public on Google Play.
+          </p>
+        </section>
+
+        <section class="border-t border-rule pt-6">
+          <h2 class="font-serif text-2xl text-ink mb-3 font-normal">9. Developer Contact Information</h2>
+          <p class="text-ink-2">
+            If you have any questions, feedback, or inquiries concerning this Privacy Policy or {gameTitle}, please contact the developer:
+          </p>
+          <div class="mt-4 p-4 bg-paper-2 rounded border border-rule font-mono text-sm space-y-1">
+            <p class="text-ink"><strong>Developer:</strong> Alfandhy</p>
+            <p class="text-ink"><strong>Location:</strong> Polewali Mandar, West Sulawesi, Indonesia</p>
+            <p class="text-ink"><strong>Email:</strong> <Link href="mailto:halo@alfandhy.my.id" class="text-accent underline">halo@alfandhy.my.id</Link></p>
+            <p class="text-ink"><strong>Website:</strong> <Link href="https://alfandhy.my.id" class="text-accent underline">https://alfandhy.my.id</Link></p>
+          </div>
+        </section>
+
       </div>
 
-      <div class="mt-16 border-t border-rule pt-8 flex items-center justify-between">
-        <Link href="/en/game/sandeq-rush" class="text-sm font-mono text-ink">← Sandeq Rush Game Overview</Link>
-        <Link href="/game/sandeq-rush/privacy" class="text-sm font-mono text-ink-2 hover:text-accent">Versi Bahasa Indonesia →</Link>
-      </div>
+      <nav class="mt-16 border-t border-rule pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-sm" aria-label="Language & Navigation">
+        <Link href="/en/game/sandeq-rush" class="text-ink hover:text-accent">← Return to Sandeq Rush Game Overview</Link>
+        <Link href="/game/sandeq-rush/privacy" class="text-ink-2 hover:text-accent">Versi Bahasa Indonesia (Kebijakan Privasi) →</Link>
+      </nav>
+
     </div>
   </main>
 </BaseLayout>

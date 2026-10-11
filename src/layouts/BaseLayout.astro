@@ -23,8 +23,9 @@ const { lang = 'id', ...props } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#14130F" />
-    <meta name="generator" content={Astro.generator} />
-    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+    <script>
+      document.documentElement.classList.remove('no-js');
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

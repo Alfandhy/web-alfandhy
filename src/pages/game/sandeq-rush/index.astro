@@ -12,6 +12,20 @@ const engine = 'Godot Engine 4.6.3';
 const platform = 'Android 16 (API Level 36) · Google Play';
 const genre = 'Arcade Sailing Racing · Cultural Maritime Edu';
 
+// --- Konfigurasi Status Distribusi & Hak Cipta ---
+// Ubah isReleased ke true dan isi playStoreUrl jika game sudah tayang di Google Play Store
+const isReleased = false;
+const playStoreUrl: string | null = null; // Contoh: 'https://play.google.com/store/apps/details?id=id.sandeqrush.game'
+
+// Ubah showDjkiCertificate ke true setelah nomor dan tanggal sertifikat resmi terbit
+const showDjkiCertificate = false;
+const djkiData = {
+  nomorPencatatan: '[NOMOR PENCATATAN DJKI]',
+  tanggalSertifikat: '[TANGGAL SERTIFIKAT DJKI]',
+  pemegangHakCipta: 'Alfandhy, S.T.',
+  jenisCiptaan: 'Permainan Video (Video Game)',
+};
+
 const stages = [
   {
     num: '01',
@@ -26,7 +40,7 @@ const stages = [
     name: 'Pesisir Majene',
     distance: '1.100 meter',
     wind: 'Angin berbalik arah di tengah lintasan',
-    desc: 'Bersaing adu cepat melawan 3 perahu rival (Pambusuang, Tinambung, Majene) hingga kecepatan 32 knot di laut lepas.',
+    desc: 'Bersaing adu cepat melawan 3 perahu rival (Pambusuang, Tinambung, Majene) hingga kecepatan 30+ knot di perairan pesisir.',
     accent: 'bg-sky-500/10 border-sky-500/30 text-sky-400',
   },
   {
@@ -42,57 +56,57 @@ const stages = [
     name: 'Selat Makassar',
     distance: '1.400 meter',
     wind: 'Angin laut lepas berputar-putar',
-    desc: 'Ombak ganas dan hembusan angin yang berubah mendadak. Keseimbangan awak di cadik diuji maksimal agar perahu tidak terbalik.',
+    desc: 'Ombak laut lepas dan hembusan angin dinamis. Keseimbangan awak di cadik diuji maksimal agar perahu tidak terbalik.',
     accent: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
   },
   {
     num: '05',
     name: 'Pantai Losari (Makassar)',
-    distance: 'Etape Pamungkas',
+    distance: '1.300 meter',
     wind: 'Angin kencang garis finis',
-    desc: 'Garis finis legendaris lomba Sandeq tahunan Sulawesi Barat. Berlayar ratusan kilometer menuju pesisir ikonik Makassar.',
+    desc: 'Etape pamungkas terinspirasi garis finis lomba Sandeq Race tahunan Sulawesi Barat menuju pesisir ikonik Makassar.',
     accent: 'bg-accent/15 border-accent/40 text-accent',
   },
 ];
 
 const screenshots = [
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-3.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-menu-utama.png',
     title: 'Menu Utama & Profil Pelaut',
     caption: 'Tampilan antarmuka beranda dengan logo 3D, pilihan Karier Sandeq Race, Tutorial, dan Papan Skor.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-7.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-peta-etape.png',
     title: 'Peta 5 Etape Karier & Koleksi Bintang',
     caption: 'Pemilihan rute pelayaran dari Teluk Polewali hingga Pantai Losari dengan sistem klasemen waktu.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-13.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-tutorial.png',
     title: 'Tutorial Interaktif Berpemandu',
     caption: 'Panduan ramah pemula untuk mempelajari kontrol ganda slider Layar dan penyeimbang Awak di cadik.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-27.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-balapan-majene.png',
     title: 'Balapan Sengit 4 Armada di Majene',
     caption: 'Adu kencang bersama perahu tradisi rival di perairan Pesisir Majene dengan cipratan buih ombak dinamis.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-40.png',
-    title: 'Aksi Melaju di Puncak 32 Knot',
-    caption: 'Memaksimalkan tangkapan angin samping 23 knot untuk memimpin balapan di posisi terdepan.',
+    src: '/games/sandeq-rush/screenshots/screenshot-kecepatan-penuh.png',
+    title: 'Aksi Melaju di Kecepatan 30+ Knot',
+    caption: 'Memaksimalkan tangkapan angin samping untuk memimpin balapan di posisi terdepan.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-55.5.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-hasil-lomba.png',
     title: 'Podium Finis & Fakta Budaya Edukatif',
-    caption: 'Catatan waktu finis tercepat disertai kartu edukasi pengetahuan budaya maritim suku Mandar.',
+    caption: 'Catatan waktu finis terbaik disertai kartu edukasi pengetahuan budaya maritim suku Mandar.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-62.png',
-    title: 'Ensiklopedia Maritim Sandeq (12 Entri)',
+    src: '/games/sandeq-rush/screenshots/screenshot-ensiklopedia.png',
+    title: 'Ensiklopedia Maritim Sandeq',
     caption: 'Arsip literasi sejarah perahu Sandeq, anatomi cadik, teknik berlayar, dan tradisi Passandeq.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-32.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-menu-jeda.png',
     title: 'Menu Jeda & Safe-Area Android',
     caption: 'Desain responsif yang menjaga jarak dari kamera poni (notch) serta fitur auto-pause saat notifikasi.',
   },
@@ -134,7 +148,7 @@ const encyclopedias = [
   {
     term: 'Sombal (Layar Segitiga)',
     category: 'Anatomi',
-    text: 'Layar segitiga khas yang dipasang miring ke depan. Desain ini menangkap daya angkat aerodinamis mirip sayap pesawat untuk menghasilkan laju luar biasa.',
+    text: 'Layar segitiga khas yang dipasang miring ke depan. Desain ini menangkap daya angkat aerodinamis mirip sayap pesawat untuk menghasilkan laju yang bertenaga.',
   },
   {
     term: 'Palatto & Barat (Cadik)',
@@ -144,7 +158,7 @@ const encyclopedias = [
   {
     term: 'Passandeq & Pakkadacai',
     category: 'Awak Kapal',
-    text: 'Pelaut Mandar tangguh. Awak berdiri dan berpindah ke atas cadik yang terangkat untuk memanfaatkan bobot tubuh sebagai penyeimbang momen gaya angin.',
+    text: 'Pelaut Mandar yang piawai. Awak berdiri dan berpindah ke atas cadik yang terangkat untuk memanfaatkan bobot tubuh sebagai penyeimbang momen gaya angin.',
   },
   {
     term: 'Pindah Haluan (Tacking)',
@@ -152,23 +166,42 @@ const encyclopedias = [
     text: 'Manuver berlayar zig-zag ketika perahu harus menuju ke arah asal datangnya angin. Membutuhkan koordinasi cepat memindahkan layar dan awak perahu.',
   },
   {
-    term: 'Sandeq Race Tradisional',
+    term: 'Tradisi Lomba Sandeq Race',
     category: 'Warisan Budaya',
-    text: 'Perlombaan perahu layar tahunan terpanjang dan paling bergengsi di Indonesia, menempuh rute pesisir Sulawesi Barat melintasi Selat Makassar hingga Kota Makassar.',
+    text: 'Ajang pelayaran perahu layar tradisional di Sulawesi Barat yang menempuh etape pesisir Selat Makassar hingga pesisir Makassar.',
   },
 ];
+const videoGameLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: gameTitle,
+  description:
+    'Game balap arcade perahu layar tradisional Sandeq Mandar untuk Android dengan simulasi fisika arah angin, 5 etape balapan, dan ensiklopedia maritim edukatif.',
+  genre: ['Arcade Racing', 'Educational', 'Maritime Simulation'],
+  gamePlatform: ['Android'],
+  operatingSystem: 'Android 10 and above',
+  applicationCategory: 'Game',
+  author: {
+    '@type': 'Person',
+    name: 'Alfandhy',
+    url: 'https://alfandhy.my.id',
+  },
+  inLanguage: ['id', 'en'],
+  playMode: 'SinglePlayer',
+};
 ---
 
 <BaseLayout
+  jsonLd={videoGameLd}
   title={`${gameTitle} — Game Edukatif Balap Perahu Layar Sandeq Mandar`}
-  description="Sandeq Rush adalah game balap arcade perahu layar tradisional Sandeq Mandar untuk Android. Rasakan sensasi fisika angin selat Makassar hingga 32 knot, mode karier 5 etape, dan ensiklopedia maritim."
+  description="Sandeq Rush adalah game balap arcade perahu layar tradisional Sandeq Mandar untuk Android. Rasakan sensasi fisika angin selat Makassar hingga 30+ knot di dalam game, mode karier 5 etape (total 5.700 m), dan ensiklopedia maritim."
 >
   <main class="relative bg-paper text-ink overflow-hidden">
 
-    <!-- HERO SECTION WITH HIGH-CONTRAST OVERLAYS & CRISP TYPOGRAPHY -->
+    <!-- HERO SECTION -->
     <section class="relative min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-rule bg-[#07131b]">
       
-      <!-- Video Loop Background with Strong Contrast Backdrop Filter -->
+      <!-- Video Loop Background -->
       <div class="absolute inset-0 z-0 overflow-hidden">
         <video
           autoplay
@@ -180,7 +213,7 @@ const encyclopedias = [
         >
           <source src="/games/sandeq-rush/video/sandeq-rush-hero-loop.mp4" type="video/mp4" />
         </video>
-        <!-- Dark Deep-Sea Gradient Overlays to protect text contrast -->
+        <!-- Dark Deep-Sea Gradient Overlays -->
         <div class="absolute inset-0 bg-[#07131b]/80 backdrop-blur-[2px]"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#07131b] via-[#07131b]/70 to-[#07131b]/95"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#07131b] via-[#07131b]/50 to-[#07131b]"></div>
@@ -245,16 +278,36 @@ const encyclopedias = [
                 Arcade Racing · Fisika Angin Mandar · Literasi Maritim
               </p>
               <h1 class="font-serif text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.08] font-normal tracking-[-0.02em] text-white drop-shadow-md">
-                Kemudikan Perahu Bercadik Tercepat dari Pesisir Mandar.
+                Kemudikan Perahu Bercadik Tradisional dari Pesisir Mandar.
               </h1>
             </div>
 
             <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-normal drop-shadow">
-              Tembus ombak Selat Makassar dalam kecepatan lebih dari 30 knot! Rasakan sensasi pelayaran tradisional suku Mandar dengan simulasi fisika arah angin sungguhan, manuver pindah haluan (tacking), dan keseimbangan awak di cadik.
+              Tembus ombak Selat Makassar dengan kecepatan hingga 30+ knot di dalam game! Rasakan pelayaran tradisional suku Mandar dengan simulasi fisika arah angin, manuver pindah haluan (tacking), dan keseimbangan awak di cadik.
             </p>
 
-            <!-- CTA Buttons with Bright High-Contrast Styling -->
+            <!-- CTA Buttons & Status Badge -->
             <div class="flex flex-wrap items-center gap-3 pt-2">
+              {
+                isReleased && playStoreUrl ? (
+                  <a
+                    href={playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2.5 border border-emerald-500 bg-emerald-600 px-6 py-3.5 font-mono text-xs font-bold text-white transition-all hover:bg-emerald-500 shadow-xl shadow-emerald-950/40"
+                  >
+                    <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M3.6 1.9c-.3.3-.5.8-.5 1.4v17.4c0 .6.2 1.1.5 1.4l.1.1 9.8-9.8v-.2L3.7 1.8l-.1.1zM17.1 15.7l-3.6-3.6v-.2l3.6-3.6.1.1 4.3 2.5c1.2.7 1.2 1.8 0 2.5l-4.4 2.3zM13.5 12.1L3.7 21.9c.4.4 1 .4 1.6.1l11.8-6.7-3.6-3.2zM13.5 11.9l3.6-3.2L5.3 2c-.6-.3-1.2-.3-1.6.1l9.8 9.8z"/>
+                    </svg>
+                    Download di Google Play →
+                  </a>
+                ) : (
+                  <div class="inline-flex items-center gap-2.5 border border-amber-400/50 bg-amber-400/15 px-6 py-3.5 font-mono text-xs font-bold text-amber-300">
+                    <span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    Segera Hadir di Google Play
+                  </div>
+                )
+              }
               <a
                 href="#gameplay-video"
                 class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3.5 font-mono text-xs font-bold text-white transition-all hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-900/40"
@@ -278,9 +331,19 @@ const encyclopedias = [
               </a>
             </div>
 
+            <!-- Hak Cipta DJKI (Tampil otomatis jika diaktifkan) -->
+            {
+              showDjkiCertificate && (
+                <div class="p-3 border border-amber-500/30 bg-amber-500/10 rounded font-mono text-xs text-amber-200 flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">✓ HKI DJKI:</span>
+                  <span>Tercatat di DJKI Kemenkumham No. {djkiData.nomorPencatatan} ({djkiData.tanggalSertifikat})</span>
+                </div>
+              )
+            }
+
             <!-- Quick Specs Row -->
             <div class="pt-4 flex flex-wrap gap-4 border-t border-white/15 font-mono text-xs text-slate-300">
-              <div><strong class="text-white">Target Rilis:</strong> Google Play Store 2026</div>
+              <div><strong class="text-white">Status Rilis:</strong> Segera Hadir di Google Play (2026)</div>
               <div class="text-slate-600">•</div>
               <div><strong class="text-white">Engine:</strong> Godot 4.6.3</div>
               <div class="text-slate-600">•</div>
@@ -305,13 +368,13 @@ const encyclopedias = [
               <!-- Animated Poster Graphic -->
               <div class="relative my-4 aspect-[16/10] overflow-hidden rounded-lg border border-white/20 bg-black group">
                 <img
-                  src="/games/sandeq-rush/screenshots/screenshot-40.png"
+                  src="/games/sandeq-rush/screenshots/screenshot-kecepatan-penuh.png"
                   alt="Aksi Balap Sandeq Rush"
                   class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-4">
                   <div class="font-mono text-xs text-white">
-                    <span class="text-amber-400 font-bold">POSISI 1/4 · 32 KNOT</span>
+                    <span class="text-amber-400 font-bold">POSISI 1/4 · 30+ KNOT</span>
                     <p class="text-slate-200 text-xs mt-0.5">Memimpin perlombaan di etape Pesisir Majene</p>
                   </div>
                 </div>
@@ -320,12 +383,12 @@ const encyclopedias = [
               <!-- Quick Metric Stats -->
               <div class="grid grid-cols-3 gap-2 text-center font-mono text-xs">
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
-                  <span class="block text-[10px] text-slate-400 uppercase">Kecepatan Max</span>
-                  <span class="text-sm font-bold text-amber-400">32+ Knot</span>
+                  <span class="block text-[10px] text-slate-400 uppercase">Kecepatan Game</span>
+                  <span class="text-sm font-bold text-amber-400">30+ Knot</span>
                 </div>
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
-                  <span class="block text-[10px] text-slate-400 uppercase">Etape Balapan</span>
-                  <span class="text-sm font-bold text-white">5 Jalur</span>
+                  <span class="block text-[10px] text-slate-400 uppercase">Jalur Etape</span>
+                  <span class="text-sm font-bold text-white">5 (5.700 m)</span>
                 </div>
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
                   <span class="block text-[10px] text-slate-400 uppercase">Ensiklopedia</span>
@@ -373,7 +436,7 @@ const encyclopedias = [
             </div>
           </div>
 
-          <!-- Video Element -->
+          <!-- Video Element (Tanpa teks cadangan mentah yang bocor) -->
           <div class="relative aspect-video w-full bg-black">
             <video
               controls
@@ -382,14 +445,13 @@ const encyclopedias = [
               class="h-full w-full object-contain"
             >
               <source src="/games/sandeq-rush/video/sandeq-rush-gameplay.mp4" type="video/mp4" />
-              Browser Anda tidak mendukung pemutar video HTML5.
             </video>
           </div>
 
           <!-- Video Footer Caption -->
           <div class="border-t border-white/15 bg-[#0f212c] p-4 text-xs font-mono text-slate-300 flex flex-wrap justify-between items-center gap-3">
-            <span>Video Gameplay Resmi Versi 0.3.1 (Uji Coba Godot 4 & Mekanik Angin)</span>
-            <span class="text-amber-400 font-semibold">Dibuat oleh Alfandhy, S.T. — Polewali Mandar</span>
+            <span>Video Gameplay Versi 0.3.1 (Godot Engine &amp; Mekanik Angin)</span>
+            <span class="text-amber-400 font-semibold">Pengembang: Alfandhy, S.T. — Polewali Mandar</span>
           </div>
 
         </div>
@@ -404,10 +466,10 @@ const encyclopedias = [
         <div class="max-w-3xl mb-12">
           <SectionLabel num="02" title="Mekanik & Fisika Permainan" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            Bukan Sekadar Game Balap: Menghidupkan Hukum Fisika Maritim
+            Menghidupkan Hukum Fisika Maritim Tradisional
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            Perahu Sandeq dikenal ilmuwan maritim dunia sebagai salah satu perahu layar tradisional tercepat di muka bumi karena rancang bangun lambungnya yang hidrodinamis dan layar segitiganya. Sandeq Rush menerjemahkan prinsip sains tersebut ke dalam mekanik permainan yang adiktif.
+            Perahu Sandeq dirancang dengan lambung ramping hidrodinamis dan layar segitiga yang efisien menangkap angin [SUMBER]. Sandeq Rush menerjemahkan prinsip sains maritim tersebut ke dalam mekanik permainan arcade yang seru dan edukatif.
           </p>
         </div>
 
@@ -422,7 +484,7 @@ const encyclopedias = [
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameter: Sudut Serang & Gaya Dorong (Lift)
+              Parameter: Sudut Serang &amp; Gaya Dorong (Lift)
             </div>
           </div>
 
@@ -435,7 +497,7 @@ const encyclopedias = [
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameter: Momen Torsi & Gaya Gravitasi Awak
+              Parameter: Momen Torsi &amp; Gaya Gravitasi Awak
             </div>
           </div>
 
@@ -448,7 +510,7 @@ const encyclopedias = [
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameter: Tacking Angle & Kecepatan Putar
+              Parameter: Tacking Angle &amp; Kecepatan Putar
             </div>
           </div>
 
@@ -461,7 +523,7 @@ const encyclopedias = [
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameter: Touch Slider & Input Haptics
+              Parameter: Touch Slider &amp; Input Haptics
             </div>
           </div>
 
@@ -478,14 +540,14 @@ const encyclopedias = [
           <div class="max-w-2xl">
             <SectionLabel num="03" title="Mode Karier 'Sandeq Race'" />
             <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-              5 Etape Legendaris Pesisir Sulawesi Barat
+              5 Etape Pesisir Sulawesi Barat
             </h2>
             <p class="text-base text-ink-2 leading-relaxed">
-              Taklukkan rute kejuaraan etape demi etape. Kumpulkan 3 bintang di setiap garis finis untuk membuka ensiklopedia budaya maritim Mandar yang terkunci.
+              Taklukkan rute kejuaraan etape demi etape. Kumpulkan 3 bintang di setiap garis finis untuk membuka entri ensiklopedia budaya maritim Mandar yang terkunci di dalam game.
             </p>
           </div>
           <div class="font-mono text-xs text-ink-2 border border-rule bg-paper p-3">
-            Total Jarak Lomba: <span class="font-bold text-ink">4.400+ meter virtual</span>
+            Total Jarak Lomba Game: <span class="font-bold text-ink">5.700 meter</span>
           </div>
         </div>
 
@@ -534,7 +596,7 @@ const encyclopedias = [
         <div class="max-w-3xl mb-12">
           <SectionLabel num="04" title="Galeri Tangkapan Layar" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            Tangkapan Layar Resolusi Tinggi
+            Tangkapan Layar Permainan
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
             Klik gambar mana saja untuk memperbesar tampilan tangkapan layar dalam resolusi penuh.
@@ -684,7 +746,7 @@ const encyclopedias = [
             Ensiklopedia Sandeq Terintegrasi
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            Di dalam game, pemain dapat membuka 12 kartu ensiklopedia yang mengupas tuntas kearifan lokal bahari Mandar. Game ini dirancang agar tidak hanya menghibur, tetapi juga menjadi instrumen edukasi vokasi dan pelestarian budaya maritim nusantara.
+            Di bawah ini ditampilkan <strong>6 dari 12 entri ensiklopedia</strong>, sisanya dapat dibuka langsung oleh pemain di dalam game saat menyelesaikan etape balapan. Dirancang untuk menghibur sekaligus menjadi sarana edukasi pelestarian budaya bahari nusantara.
           </p>
         </div>
 
@@ -718,7 +780,7 @@ const encyclopedias = [
               KEPATUHAN &amp; KEAMANAN DATA
             </div>
             <h2 class="font-serif text-[clamp(2.25rem,4.5vw,3.75rem)] leading-tight font-normal text-white">
-              Siap Rilis untuk Google Play Store (Target Android 16)
+              Segera Hadir di Google Play Store (Target Android 16)
             </h2>
             <p class="text-slate-200 leading-relaxed text-base">
               Sandeq Rush dibangun mematuhi standar rilis aplikasi Google Play terbaru dengan target Android API level 36. Game ini mengusung prinsip privasi mandiri tanpa pelacakan data, tanpa iklan intrusif pihak ketiga, dan sepenuhnya aman untuk pemain segala usia serta siswa sekolah.
@@ -729,13 +791,13 @@ const encyclopedias = [
                 href="/game/sandeq-rush/privacy"
                 class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3 font-mono text-xs font-bold text-white hover:bg-orange-500 transition-colors shadow-lg shadow-orange-950/40"
               >
-                Baca Kebijakan Privasi Lengkap (ID) →
+                Baca Kebijakan Privasi Game (ID) →
               </Link>
               <Link
                 href="/en/game/sandeq-rush/privacy"
                 class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3 font-mono text-xs font-medium text-white hover:border-white hover:bg-white/20 transition-colors"
               >
-                English Privacy Policy ↗
+                English Game Privacy Policy ↗
               </Link>
             </div>
           </div>

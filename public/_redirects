@@ -1,0 +1,10 @@
+# 301 Permanent Redirects for Sandeq Rush Canonical URLs
+/game/sandeqrush           /game/sandeq-rush           301!
+/game/sandeqrush/          /game/sandeq-rush           301!
+/game/sandeqrush/privacy   /game/sandeq-rush/privacy   301!
+/game/sandeqrush/privacy/  /game/sandeq-rush/privacy   301!
+
+/en/game/sandeqrush        /en/game/sandeq-rush        301!
+/en/game/sandeqrush/       /en/game/sandeq-rush        301!
+/en/game/sandeqrush/privacy /en/game/sandeq-rush/privacy 301!
+/en/game/sandeqrush/privacy/ /en/game/sandeq-rush/privacy 301!

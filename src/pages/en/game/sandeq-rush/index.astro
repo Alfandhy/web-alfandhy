@@ -12,13 +12,27 @@ const engine = 'Godot Engine 4.6.3';
 const platform = 'Android 16 (API Level 36) · Google Play';
 const genre = 'Arcade Sailing Racing · Cultural Maritime Edu';
 
+// --- Release Status & Copyright Configuration ---
+// Switch isReleased to true and provide playStoreUrl once live on the Google Play Store
+const isReleased = false;
+const playStoreUrl: string | null = null; // e.g. 'https://play.google.com/store/apps/details?id=id.sandeqrush.game'
+
+// Switch showDjkiCertificate to true once official registration certificate numbers are issued
+const showDjkiCertificate = false;
+const djkiData = {
+  nomorPencatatan: '[NOMOR PENCATATAN DJKI]',
+  tanggalSertifikat: '[TANGGAL SERTIFIKAT DJKI]',
+  pemegangHakCipta: 'Alfandhy, S.T.',
+  jenisCiptaan: 'Video Game',
+};
+
 const stages = [
   {
     num: '01',
     name: 'Polewali Bay',
     distance: '900 meters',
     wind: 'Left crosswind (13 knots)',
-    desc: 'Warm-up stage in tranquil bay waters. Master dual-touch sliders for sail trim and crew ballast balancing.',
+    desc: 'Warm-up stage in tranquil bay waters. Master dual-touch sliders for sail trim and outrigger crew ballast balancing.',
     accent: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
   },
   {
@@ -26,7 +40,7 @@ const stages = [
     name: 'Majene Coastal Waters',
     distance: '1,100 meters',
     wind: 'Wind reversal halfway through the course',
-    desc: 'Intense 4-boat sprint against traditional rival crews (Pambusuang, Tinambung, Majene) pushing past 30+ knots.',
+    desc: 'Sprint against 3 traditional rival boats (Pambusuang, Tinambung, Majene) reaching speeds up to 30+ knots in coastal seas.',
     accent: 'bg-sky-500/10 border-sky-500/30 text-sky-400',
   },
   {
@@ -42,134 +56,153 @@ const stages = [
     name: 'Makassar Strait',
     distance: '1,400 meters',
     wind: 'Open ocean swells & shifting gale gusts',
-    desc: 'High-stake rolling waves and turbulent wind gusts. Extreme crew balancing required to avoid sudden capsizing.',
+    desc: 'Open water swells and dynamic wind gusts. Intense crew balancing required on outriggers to prevent capsizing.',
     accent: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
   },
   {
     num: '05',
     name: 'Losari Beach (Makassar)',
-    distance: 'Championship Finale',
+    distance: '1,300 meters',
     wind: 'Heavy finishing gusts',
-    desc: 'The iconic finish line of the annual West Sulawesi Sandeq Race, celebrating hundreds of nautical miles conquered.',
+    desc: 'Grand finale course inspired by the finish line of the annual West Sulawesi Sandeq Race toward iconic Makassar.',
     accent: 'bg-accent/15 border-accent/40 text-accent',
   },
 ];
 
 const screenshots = [
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-3.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-menu-utama.png',
     title: 'Main Menu & Sailor Profile',
     caption: 'Hero interface featuring 3D logo, Sandeq Race Career, interactive tutorial, and local leaderboards.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-7.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-peta-etape.png',
     title: '5 Career Stages & Star Tracker',
     caption: 'Championship map tracing Polewali Bay to Losari Beach with stage best times and star progression.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-13.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-tutorial.png',
     title: 'Guided Interactive Tutorial',
     caption: 'Beginner-friendly step-by-step guidance teaching sail tension and outrigger ballast controls.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-27.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-balapan-majene.png',
     title: 'Intense 4-Boat Fleet Racing in Majene',
     caption: 'High-octane competition with dynamic wave spray particles and real-time boat telemetry.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-40.png',
-    title: 'Peak 32-Knot Velocity Action',
-    caption: 'Harnessing a 23-knot crosswind gust with perfect crew trim to claim the 1st position.',
+    src: '/games/sandeq-rush/screenshots/screenshot-kecepatan-penuh.png',
+    title: 'Velocity Action at 30+ Knots',
+    caption: 'Harnessing crosswind gusts with optimal sail trim to secure the lead.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-55.5.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-hasil-lomba.png',
     title: 'Victory Podium & Maritime Fact Cards',
     caption: 'Race results celebration combined with educational cards highlighting Mandar maritime heritage.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-62.png',
-    title: 'Sandeq Maritime Encyclopedia (12 Entries)',
+    src: '/games/sandeq-rush/screenshots/screenshot-ensiklopedia.png',
+    title: 'Sandeq Maritime Encyclopedia',
     caption: 'Integrated cultural knowledge base detailing Sandeq naval anatomy, tacking science, and traditions.',
   },
   {
-    src: '/games/sandeq-rush/screenshots/screenshot-32.png',
+    src: '/games/sandeq-rush/screenshots/screenshot-menu-jeda.png',
     title: 'Pause Overlay & Android Safe Area',
-    caption: 'Adaptive layout respecting camera notches with automatic race pausing during phone calls.',
+    caption: 'Adaptive layout respecting camera notches with automatic race pausing during interruptions.',
   },
 ];
 
 const boats = [
   {
     src: '/games/sandeq-rush/game-assets/perahu/boat_player.png',
-    name: "Player's Sandeq (Red & White)",
-    role: 'Flagship Player Vessel',
-    desc: 'Triangular racing sail with signature checkerboard pattern and balanced bamboo outriggers.',
+    name: 'Player Boat (Red & White)',
+    role: 'Primary Player Craft',
+    desc: 'Iconic triangular sail pattern with responsive dual-bamboo outriggers.',
   },
   {
     src: '/games/sandeq-rush/game-assets/perahu/rival_blue.png',
     name: 'Passandeq Pambusuang (Blue)',
     role: 'Rival Fleet 01',
-    desc: 'Renowned for exceptional wave stability when navigating deep rough coastal chop.',
+    desc: 'Renowned for stability when cutting across the heavy swells of Majene.',
   },
   {
     src: '/games/sandeq-rush/game-assets/perahu/rival_yellow.png',
     name: 'Layar Tinambung (Yellow-Black)',
     role: 'Rival Fleet 02',
-    desc: 'Optimized for fierce downwind bursts and rapid acceleration out of turning points.',
+    desc: 'Engineered for rapid acceleration under direct tailwinds.',
   },
   {
     src: '/games/sandeq-rush/game-assets/perahu/rival_green.png',
     name: 'Angin Majene (Green)',
     role: 'Rival Fleet 03',
-    desc: 'Master of tactical zig-zag tacking maneuvers when cutting directly into oncoming wind.',
+    desc: 'Specialized in sharp zig-zag tacking against challenging headwinds.',
   },
 ];
 
 const encyclopedias = [
   {
-    term: 'Sandeq Sailboat',
+    term: 'Sandeq',
     category: 'Vessel',
-    text: 'Derived from the Mandar word for "sharp", referring to its razor-thin hull design engineered to slice through ocean swells with minimum hydrodynamic friction.',
+    text: 'Originating from the Mandar word for "sharp", referring to the ultra-slender hull designed to slice water with minimal hydrodynamic drag.',
   },
   {
     term: 'Sombal (Triangular Sail)',
-    category: 'Anatomy',
-    text: 'A forward-raked triangular sail generating aerodynamic lift comparable to modern aircraft wings, producing remarkable speeds without motor propulsion.',
+    category: 'Rigging',
+    text: 'Forward-raked lateen triangular sail capturing aerodynamic lift similar to aircraft wings, generating powerful forward momentum.',
   },
   {
-    term: 'Palatto & Outriggers',
+    term: 'Palatto & Barat (Outriggers)',
     category: 'Stability',
-    text: 'Bamboo stabilizers extended on both sides of the hull. They provide critical counter-balance against intense wind pressure and prevent capsizing.',
+    text: 'Twin bamboo outriggers mounted on both flanks, providing equilibrium when heeled by strong sea gusts.',
   },
   {
-    term: 'Passandeq & Crew Ballast',
-    category: 'Seafarers',
-    text: 'Skilled Mandar navigators who leap onto elevated outriggers (pallayarang), using their own body weight to offset powerful tipping moments.',
+    term: 'Passandeq & Pakkadacai',
+    category: 'Crew',
+    text: 'Skilled Mandar mariners who hike out onto elevated outriggers, using body weight as dynamic ballast to counterbalance wind forces.',
   },
   {
-    term: 'Tacking (Zig-zag Navigation)',
+    term: 'Tacking Maneuver',
     category: 'Navigation',
-    text: 'A sailing technique required when heading toward the wind direction, alternating course angles in a rapid zig-zag pattern.',
+    text: 'Zig-zag sailing technique required when heading upwind, requiring coordinated sail trim and crew shifting.',
   },
   {
-    term: 'Traditional Sandeq Race',
-    category: 'Cultural Heritage',
-    text: 'One of the longest and most revered traditional sailing regattas in Indonesia, racing hundreds of kilometers across the Makassar Strait.',
+    term: 'Sandeq Race Heritage',
+    category: 'Cultural Tradition',
+    text: 'Annual traditional outrigger sailing challenge traversing West Sulawesi coastal waters across the Makassar Strait.',
   },
 ];
+const videoGameLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: gameTitle,
+  description:
+    'An arcade sailing mobile game for Android featuring traditional Mandar outrigger boats, dynamic wind simulation, 5 championship stages, and an educational maritime encyclopedia.',
+  genre: ['Arcade Racing', 'Educational', 'Maritime Simulation'],
+  gamePlatform: ['Android'],
+  operatingSystem: 'Android 10 and above',
+  applicationCategory: 'Game',
+  author: {
+    '@type': 'Person',
+    name: 'Alfandhy',
+    url: 'https://alfandhy.my.id',
+  },
+  inLanguage: ['en', 'id'],
+  playMode: 'SinglePlayer',
+};
 ---
 
 <BaseLayout
+  jsonLd={videoGameLd}
   lang="en"
-  title={`${gameTitle} — Traditional Mandar Sailing Racing Game for Android`}
-  description="Sandeq Rush is an arcade sailing racing game celebrating the world-famous traditional outrigger sailboat of the Mandar culture. Experience authentic wind physics up to 32 knots, 5 career stages, and maritime lore."
+  title={`${gameTitle} — Traditional Mandar Sailing Racing Game`}
+  description="Sandeq Rush is an arcade sailing mobile game for Android featuring traditional Mandar outrigger boats. Experience authentic wind physics up to 30+ knots in-game, 5 career stages (5,700 m total), and a maritime encyclopedia."
 >
   <main class="relative bg-paper text-ink overflow-hidden">
 
-    <!-- HERO SECTION WITH HIGH-CONTRAST OVERLAYS & CRISP TYPOGRAPHY -->
+    <!-- HERO SECTION -->
     <section class="relative min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-rule bg-[#07131b]">
       
-      <!-- Video Loop Background with Strong Contrast Backdrop Filter -->
+      <!-- Video Loop Background -->
       <div class="absolute inset-0 z-0 overflow-hidden">
         <video
           autoplay
@@ -181,7 +214,7 @@ const encyclopedias = [
         >
           <source src="/games/sandeq-rush/video/sandeq-rush-hero-loop.mp4" type="video/mp4" />
         </video>
-        <!-- Dark Deep-Sea Gradient Overlays to protect text contrast -->
+        <!-- Dark Deep-Sea Gradient Overlays -->
         <div class="absolute inset-0 bg-[#07131b]/80 backdrop-blur-[2px]"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#07131b] via-[#07131b]/70 to-[#07131b]/95"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#07131b] via-[#07131b]/50 to-[#07131b]"></div>
@@ -202,21 +235,21 @@ const encyclopedias = [
           <div class="flex items-center gap-3">
             <span class="inline-flex items-center gap-1.5 border border-amber-500/50 bg-amber-500/15 px-3 py-1 text-amber-300 text-xs font-mono font-medium tracking-wide">
               <span class="h-2 w-2 rounded-full bg-amber-400 animate-ping"></span>
-              FLAGSHIP GAME · GODOT 4
+              CORE PROJECT · GODOT 4
             </span>
             <Link
               href="/game/sandeq-rush"
               class="border border-white/25 bg-white/10 px-3 py-1 text-white hover:text-amber-300 hover:border-amber-400/50 transition-colors text-xs font-medium"
-              title="Versi Bahasa Indonesia"
+              title="Switch to Indonesian"
             >
-              Versi ID ↗
+              Versi Bahasa Indonesia ↗
             </Link>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          <!-- Left Column: Big Logo, Headline, Intro -->
+          <!-- Left Column -->
           <div class="lg:col-span-7 space-y-6">
             
             <!-- Game Logo & Icon Strip -->
@@ -243,19 +276,39 @@ const encyclopedias = [
             <div class="space-y-3">
               <p class="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold flex items-center gap-2">
                 <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
-                Arcade Racing · Mandar Wind Physics · Maritime Education
+                Arcade Racing · Mandar Wind Physics · Maritime Literacy
               </p>
               <h1 class="font-serif text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.08] font-normal tracking-[-0.02em] text-white drop-shadow-md">
-                Pilot the Fastest Outrigger Sailboat in the Archipelago.
+                Pilot Traditional Outrigger Racing Boats from West Sulawesi.
               </h1>
             </div>
 
             <p class="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-normal drop-shadow">
-              Cut through the waves of Makassar Strait at speeds over 30 knots! Experience authentic traditional Indonesian sailing mechanics powered by dynamic wind simulation, tactical tacking maneuvers, and crew outrigger counterbalancing.
+              Harness the winds of the Makassar Strait reaching speeds up to 30+ knots in-game! Experience traditional Mandar sailing with realistic wind simulation, tactical zig-zag tacking, and active outrigger crew hiking.
             </p>
 
-            <!-- CTA Buttons with Bright High-Contrast Styling -->
+            <!-- CTA Buttons & Status Badge -->
             <div class="flex flex-wrap items-center gap-3 pt-2">
+              {
+                isReleased && playStoreUrl ? (
+                  <a
+                    href={playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2.5 border border-emerald-500 bg-emerald-600 px-6 py-3.5 font-mono text-xs font-bold text-white transition-all hover:bg-emerald-500 shadow-xl shadow-emerald-950/40"
+                  >
+                    <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M3.6 1.9c-.3.3-.5.8-.5 1.4v17.4c0 .6.2 1.1.5 1.4l.1.1 9.8-9.8v-.2L3.7 1.8l-.1.1zM17.1 15.7l-3.6-3.6v-.2l3.6-3.6.1.1 4.3 2.5c1.2.7 1.2 1.8 0 2.5l-4.4 2.3zM13.5 12.1L3.7 21.9c.4.4 1 .4 1.6.1l11.8-6.7-3.6-3.2zM13.5 11.9l3.6-3.2L5.3 2c-.6-.3-1.2-.3-1.6.1l9.8 9.8z"/>
+                    </svg>
+                    Download on Google Play →
+                  </a>
+                ) : (
+                  <div class="inline-flex items-center gap-2.5 border border-amber-400/50 bg-amber-400/15 px-6 py-3.5 font-mono text-xs font-bold text-amber-300">
+                    <span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    Coming Soon on Google Play
+                  </div>
+                )
+              }
               <a
                 href="#gameplay-video"
                 class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3.5 font-mono text-xs font-bold text-white transition-all hover:bg-orange-500 hover:shadow-xl hover:shadow-orange-900/40"
@@ -263,25 +316,35 @@ const encyclopedias = [
                 <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-                Watch Gameplay Video
+                Watch Gameplay Preview
               </a>
               <a
-                href="#stages"
+                href="#etape"
                 class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3.5 font-mono text-xs font-medium text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
               >
                 5 Career Stages ↓
               </a>
               <a
-                href="#gallery"
+                href="#galeri"
                 class="inline-flex items-center gap-2 border border-white/30 bg-white/10 px-5 py-3.5 font-mono text-xs font-medium text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
               >
                 Screenshots ↓
               </a>
             </div>
 
+            <!-- DJKI Copyright (Rendered once active) -->
+            {
+              showDjkiCertificate && (
+                <div class="p-3 border border-amber-500/30 bg-amber-500/10 rounded font-mono text-xs text-amber-200 flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">✓ Copyright DJKI:</span>
+                  <span>Registered under DJKI No. {djkiData.nomorPencatatan} ({djkiData.tanggalSertifikat})</span>
+                </div>
+              )
+            }
+
             <!-- Quick Specs Row -->
             <div class="pt-4 flex flex-wrap gap-4 border-t border-white/15 font-mono text-xs text-slate-300">
-              <div><strong class="text-white">Target Release:</strong> Google Play Store 2026</div>
+              <div><strong class="text-white">Status:</strong> Coming Soon on Google Play (2026)</div>
               <div class="text-slate-600">•</div>
               <div><strong class="text-white">Engine:</strong> Godot 4.6.3</div>
               <div class="text-slate-600">•</div>
@@ -303,17 +366,17 @@ const encyclopedias = [
                 <span class="text-slate-400">MAKASSAR STRAIT</span>
               </div>
 
-              <!-- Animated Poster Graphic -->
+              <!-- Poster Graphic -->
               <div class="relative my-4 aspect-[16/10] overflow-hidden rounded-lg border border-white/20 bg-black group">
                 <img
-                  src="/games/sandeq-rush/screenshots/screenshot-40.png"
-                  alt="Sandeq Rush Racing Action"
+                  src="/games/sandeq-rush/screenshots/screenshot-kecepatan-penuh.png"
+                  alt="Sandeq Rush In-Game Racing"
                   class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-4">
                   <div class="font-mono text-xs text-white">
-                    <span class="text-amber-400 font-bold">POSITION 1/4 · 32 KNOTS</span>
-                    <p class="text-slate-200 text-xs mt-0.5">Leading the fleet in Majene Coastal Waters</p>
+                    <span class="text-amber-400 font-bold">POSITION 1/4 · 30+ KNOTS</span>
+                    <p class="text-slate-200 text-xs mt-0.5">Leading fleet along the Majene Coastal Stage</p>
                   </div>
                 </div>
               </div>
@@ -321,12 +384,12 @@ const encyclopedias = [
               <!-- Quick Metric Stats -->
               <div class="grid grid-cols-3 gap-2 text-center font-mono text-xs">
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
-                  <span class="block text-[10px] text-slate-400 uppercase">Max Velocity</span>
-                  <span class="text-sm font-bold text-amber-400">32+ Knots</span>
+                  <span class="block text-[10px] text-slate-400 uppercase">Top Speed</span>
+                  <span class="text-sm font-bold text-amber-400">30+ Knots</span>
                 </div>
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
-                  <span class="block text-[10px] text-slate-400 uppercase">Career Stages</span>
-                  <span class="text-sm font-bold text-white">5 Courses</span>
+                  <span class="block text-[10px] text-slate-400 uppercase">Race Stages</span>
+                  <span class="text-sm font-bold text-white">5 (5,700 m)</span>
                 </div>
                 <div class="border border-white/15 bg-white/5 p-2 rounded">
                   <span class="block text-[10px] text-slate-400 uppercase">Encyclopedia</span>
@@ -347,12 +410,12 @@ const encyclopedias = [
       <div class="wrap">
         
         <div class="max-w-3xl mb-8">
-          <SectionLabel num="01" title="Gameplay Demonstration" />
+          <SectionLabel num="01" title="Gameplay Footage" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            Witness Sandeq Rush in Real-Time Motion
+            Experience Sandeq Rush in Real-Time Action
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            Raw captured gameplay from the Godot Engine prototype. See how shifting wind directions demand real-time crew repositioning and sail angle adjustment.
+            Direct gameplay recordings captured from the Godot Engine build. Watch how dynamic wind directions demand players adjust sail trim and shift crew ballast across outriggers in real time.
           </p>
         </div>
 
@@ -369,12 +432,12 @@ const encyclopedias = [
             </div>
             <div class="hidden sm:flex items-center gap-4 text-xs text-slate-300">
               <span>FPS: 60</span>
-              <span>RES: 1280x720</span>
+              <span>RESOLUTION: 1280x720</span>
               <span>AUDIO: STEREO</span>
             </div>
           </div>
 
-          <!-- Video Element -->
+          <!-- Video Element (Clean without raw fallback text leakage) -->
           <div class="relative aspect-video w-full bg-black">
             <video
               controls
@@ -383,13 +446,12 @@ const encyclopedias = [
               class="h-full w-full object-contain"
             >
               <source src="/games/sandeq-rush/video/sandeq-rush-gameplay.mp4" type="video/mp4" />
-              Your browser does not support HTML5 video playback.
             </video>
           </div>
 
           <!-- Video Footer Caption -->
           <div class="border-t border-white/15 bg-[#0f212c] p-4 text-xs font-mono text-slate-300 flex flex-wrap justify-between items-center gap-3">
-            <span>Official Gameplay Demo v0.3.1 (Godot 4 Physics &amp; Wind Simulation)</span>
+            <span>Official Gameplay Footage Version 0.3.1 (Godot Engine Wind Mechanics)</span>
             <span class="text-amber-400 font-semibold">Developed by Alfandhy, S.T. — Polewali Mandar</span>
           </div>
 
@@ -398,17 +460,17 @@ const encyclopedias = [
       </div>
     </section>
 
-    <!-- SAILING MECHANICS & PHYSICS -->
+    <!-- MEKANIK & FISIKA ANGIN BERLAYAR -->
     <section class="py-16 sm:py-24 border-b border-rule">
       <div class="wrap">
         
         <div class="max-w-3xl mb-12">
-          <SectionLabel num="02" title="Core Mechanics & Physics" />
+          <SectionLabel num="02" title="Game Mechanics &amp; Physics" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            More Than Racing: Bringing Maritime Science to Life
+            Bringing Traditional Nautical Physics to Life
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            The Sandeq is acknowledged by maritime historians as one of the fastest sailing crafts ever conceived due to its razor-sharp hydrodynamic hull and triangular rigging. Sandeq Rush translates these authentic principles into engaging gameplay.
+            The Sandeq vessel is celebrated for its hydrodynamic hull profile and triangular lateen sail designed to capture high wind energy [SUMBER]. Sandeq Rush translates these maritime physics into an engaging and educational mobile arcade experience.
           </p>
         </div>
 
@@ -417,52 +479,52 @@ const encyclopedias = [
           <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
             <div>
               <span class="font-mono text-xs text-accent font-semibold mb-2 block">01 / WIND ANGLE</span>
-              <h3 class="font-serif text-xl text-ink font-normal mb-3">Triangular Sail Aerodynamics</h3>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Lateen Sail Aerodynamics</h3>
               <p class="text-sm text-ink-2 leading-relaxed">
-                Pull the left slider upwards to tighten sail tension during heavy gusts, or slacken sheets when wind angles shift to maintain propulsive lift.
+                Slide the left thumb controller upward to trim sails tight in gusting crosswinds, or ease sheets when headings shift to keep maximum propulsion.
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameters: Angle of Attack &amp; Aerodynamic Lift
+              Parameter: Angle of Attack &amp; Aerodynamic Lift
             </div>
           </div>
 
           <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
             <div>
-              <span class="font-mono text-xs text-accent font-semibold mb-2 block">02 / OUTRIGGER COUNTERWEIGHT</span>
-              <h3 class="font-serif text-xl text-ink font-normal mb-3">Crew Ballast on Outriggers</h3>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">02 / OUTRIGGER BALANCING</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Active Crew Ballast</h3>
               <p class="text-sm text-ink-2 leading-relaxed">
-                Strong winds exert tipping torque on the narrow hull. Shift crew members (pakkadacai) out onto the windward outrigger to counter heeling and avoid capsizing.
+                Heavy wind gusts heel the boat. Move the right slider to position your crew (pakkadacai) out onto windward outriggers to prevent capsizing.
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameters: Torque Moment &amp; Crew Gravitational Center
+              Parameter: Torsional Moment &amp; Counterweight
             </div>
           </div>
 
           <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
             <div>
-              <span class="font-mono text-xs text-accent font-semibold mb-2 block">03 / ZIG-ZAG NAVIGATION</span>
-              <h3 class="font-serif text-xl text-ink font-normal mb-3">Tacking Maneuver (Pindah Haluan)</h3>
+              <span class="font-mono text-xs text-accent font-semibold mb-2 block">03 / ZIG-ZAG TACKING</span>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Headwind Tacking Maneuver</h3>
               <p class="text-sm text-ink-2 leading-relaxed">
-                When encountering headwind stages, sailboats cannot head directly straight. Tap the tactical button to execute rapid zig-zag tacking cuts into the oncoming gale.
+                When facing headwinds, sailboats cannot steer directly into the gale. Tap the tactical turn control to zig-zag across the course and slice upwind.
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameters: Tacking Angle &amp; Turn Velocity
+              Parameter: Tacking Angle &amp; Turn Rate
             </div>
           </div>
 
           <div class="border border-rule bg-paper-2 p-6 flex flex-col justify-between">
             <div>
               <span class="font-mono text-xs text-accent font-semibold mb-2 block">04 / TOUCH ERGONOMICS</span>
-              <h3 class="font-serif text-xl text-ink font-normal mb-3">Mobile Dual-Thumb Precision</h3>
+              <h3 class="font-serif text-xl text-ink font-normal mb-3">Dual-Thumb Mobile Controls</h3>
               <p class="text-sm text-ink-2 leading-relaxed">
-                Intuitive layout tailored for landscape smartphone gaming, featuring camera notch safe-areas, auto-pause on notifications, and responsive tactile feel.
+                Balanced dual-thumb tactile controls (left for sail trim, right for outrigger crew hiking) featuring adaptive notch safe-areas and haptic feedback.
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-rule font-mono text-[11px] text-ink-2">
-              Parameters: Analog Touch Sliders &amp; Screen Safe-Area
+              Parameter: Touch Sliders &amp; Haptic Vibration
             </div>
           </div>
 
@@ -471,22 +533,22 @@ const encyclopedias = [
       </div>
     </section>
 
-    <!-- 5 CAREER STAGES -->
-    <section id="stages" class="py-16 sm:py-24 border-b border-rule bg-paper-2">
+    <!-- 5 ETAPE KARIER SANDEQ RACE -->
+    <section id="etape" class="py-16 sm:py-24 border-b border-rule bg-paper-2">
       <div class="wrap">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div class="max-w-2xl">
             <SectionLabel num="03" title="Career Mode 'Sandeq Race'" />
             <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-              5 Legendary West Sulawesi Coastal Stages
+              5 Championship Coastal Stages
             </h2>
             <p class="text-base text-ink-2 leading-relaxed">
-              Conquer the championship course by course. Collect 3 stars per stage finish to unlock confidential entries in the integrated maritime encyclopedia.
+              Conquer the championship course stage by stage. Earn 3 stars at each finish line to unlock archived Mandar maritime cultural encyclopedia entries in the game.
             </p>
           </div>
           <div class="font-mono text-xs text-ink-2 border border-rule bg-paper p-3">
-            Total Regatta Course: <span class="font-bold text-ink">4,400+ virtual meters</span>
+            Total In-Game Distance: <span class="font-bold text-ink">5,700 meters</span>
           </div>
         </div>
 
@@ -528,8 +590,8 @@ const encyclopedias = [
       </div>
     </section>
 
-    <!-- INTERACTIVE SCREENSHOT GALLERY -->
-    <section id="gallery" class="py-16 sm:py-24 border-b border-rule">
+    <!-- GALERI TANGKAPAN LAYAR INTERAKTIF -->
+    <section id="galeri" class="py-16 sm:py-24 border-b border-rule">
       <div class="wrap">
         
         <div class="max-w-3xl mb-12">
@@ -538,7 +600,7 @@ const encyclopedias = [
             High-Resolution Gameplay Captures
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            Click on any screenshot to inspect the full-resolution preview in the lightbox viewer.
+            Click on any screenshot to inspect full resolution view in the interactive lightbox.
           </p>
         </div>
 
@@ -637,17 +699,17 @@ const encyclopedias = [
       </div>
     </div>
 
-    <!-- BOATS FLEET & AI CREATIVE PIPELINE -->
+    <!-- ARMADA PERAHU & KARYA GENERATIVE AI -->
     <section class="py-16 sm:py-24 border-b border-rule bg-paper-2">
       <div class="wrap">
         
         <div class="max-w-3xl mb-12">
-          <SectionLabel num="05" title="Fleet & AI Art Pipeline" />
+          <SectionLabel num="05" title="Fleet &amp; Generative AI Pipeline" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            Authentic Maritime Heritage via AI Workflows
+            Maritime Heritage Combined with Creative AI
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            All boat illustrations, canvas sail geometry, and coastal scenery (dawn, midday, twilight along Mandar coast) were designed by Alfandhy utilizing generative AI visual pipelines (Higgsfield), carefully curated, anatomically corrected, and integrated into Godot Engine.
+            All boat illustrations, custom sail patterns, and coastal atmospheres (dawn, noon, sunset over the bay) were created by Alfandhy leveraging generative AI pipelines (Higgsfield), then retouched, anatomically corrected, and integrated into Godot Engine.
           </p>
         </div>
 
@@ -675,17 +737,17 @@ const encyclopedias = [
       </div>
     </section>
 
-    <!-- MARITIME LITERACY & ENCYCLOPEDIA -->
+    <!-- ENSIKLOPEDIA & PELESTARIAN BUDAYA -->
     <section class="py-16 sm:py-24 border-b border-rule">
       <div class="wrap">
         
         <div class="max-w-3xl mb-12">
           <SectionLabel num="06" title="Maritime Literacy" />
           <h2 class="font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-tight text-ink mt-4 mb-3">
-            Integrated Sandeq Knowledge Base
+            Integrated Sandeq Cultural Encyclopedia
           </h2>
           <p class="text-base text-ink-2 leading-relaxed">
-            Players unlock 12 cultural encyclopedia entries that unpack the nautical engineering and traditions of the Mandar seafarers. The game functions both as adrenaline-fueled entertainment and a cultural preservation catalyst.
+            Highlighted below are <strong>6 of the 12 encyclopedia entries</strong>; the remaining cards can be unlocked directly by players inside the game upon finishing career stages.
           </p>
         </div>
 
@@ -707,7 +769,7 @@ const encyclopedias = [
       </div>
     </section>
 
-    <!-- TECHNICAL SPECS & PLAY STORE COMPLIANCE -->
+    <!-- SPESIFIKASI & GOOGLE PLAY COMPLIANCE -->
     <section class="py-16 sm:py-24 bg-[#07131b] text-white border-t border-rule">
       <div class="wrap">
         
@@ -719,10 +781,10 @@ const encyclopedias = [
               COMPLIANCE &amp; USER SAFETY
             </div>
             <h2 class="font-serif text-[clamp(2.25rem,4.5vw,3.75rem)] leading-tight font-normal text-white">
-              Engineered for Google Play Store (Android 16 Standard)
+              Coming Soon to Google Play Store (Target Android 16)
             </h2>
             <p class="text-slate-200 leading-relaxed text-base">
-              Sandeq Rush adheres to current Google Play release guidelines targeting Android API level 36. Built upon zero telemetry collection and no third-party behavioral trackers, ensuring safe play for students, families, and gamers of all ages.
+              Sandeq Rush adheres to Google Play release requirements targeting Android API level 36. Built with privacy-first standards, zero background telemetry, and zero intrusive ads, making it safe for students, educators, and gamers of all ages.
             </p>
 
             <div class="pt-4 flex flex-wrap gap-4">
@@ -730,7 +792,7 @@ const encyclopedias = [
                 href="/en/game/sandeq-rush/privacy"
                 class="inline-flex items-center gap-2 border border-accent bg-accent px-6 py-3 font-mono text-xs font-bold text-white hover:bg-orange-500 transition-colors shadow-lg shadow-orange-950/40"
               >
-                Read Dedicated Privacy Policy (EN) →
+                Read Game Privacy Policy (EN) →
               </Link>
               <Link
                 href="/game/sandeq-rush/privacy"
@@ -770,7 +832,7 @@ const encyclopedias = [
               </div>
               <div class="pt-2 flex justify-between">
                 <span class="text-slate-400">Developer &amp; Art:</span>
-                <span class="text-white">Alfandhy, S.T. (West Sulawesi, ID)</span>
+                <span class="text-white">Alfandhy, S.T. (Polewali Mandar)</span>
               </div>
               <div class="pt-2 flex justify-between">
                 <span class="text-slate-400">Telemetry Policy:</span>
