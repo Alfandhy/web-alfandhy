@@ -7,16 +7,16 @@
    border-rule, text-accent, bg-sea, font-serif, font-sans, font-mono
    ============================================================ */
 @theme {
-  --color-paper: #14130f;
-  --color-paper-2: #1f1d18;
-  --color-ink: #f4f1ea;
-  --color-ink-2: #a39b8b;
-  --color-rule: #363229;
-  --color-accent: #0ea5e9; /* Electric ocean cyan/blue — maritim Sandeq & modern tech */
-  --color-sea: #162734; /* Harmoni maritim dengan background gelap */
+  --color-paper: #070d1e;
+  --color-paper-2: #0f1a36;
+  --color-ink: #f1f5f9;
+  --color-ink-2: #94a3b8;
+  --color-rule: #1e293b;
+  --color-accent: #38bdf8; /* Electric ocean cyan/blue — maritim Sandeq & modern tech */
+  --color-sea: #0c162d; /* Harmoni maritim dengan background gelap */
   /* Teks di atas blok --sea */
-  --color-sea-ink: #f4f1ea;
-  --color-sea-muted: #849cae;
+  --color-sea-ink: #f1f5f9;
+  --color-sea-muted: #94a3b8;
   --color-sea-accent: #38bdf8;
 
   --font-serif: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
@@ -35,8 +35,8 @@
   body {
     background-color: var(--color-paper);
     background-image:
-      linear-gradient(to right, rgba(244, 241, 234, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(244, 241, 234, 0.05) 1px, transparent 1px);
+      linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
     background-size: 48px 48px;
     background-position: center top;
     color: var(--color-ink);
