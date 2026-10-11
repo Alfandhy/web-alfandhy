@@ -12,14 +12,14 @@
   --color-ink: #f4f1ea;
   --color-ink-2: #a39b8b;
   --color-rule: #363229;
-  --color-accent: #ea580c; /* Disesuaikan sedikit lebih terang untuk background gelap */
-  --color-sea: #162734; /* Lebih gelap untuk harmoni dengan background hitam */
+  --color-accent: #0ea5e9; /* Electric ocean cyan/blue — maritim Sandeq & modern tech */
+  --color-sea: #162734; /* Harmoni maritim dengan background gelap */
   /* Teks di atas blok --sea */
   --color-sea-ink: #f4f1ea;
   --color-sea-muted: #849cae;
-  --color-sea-accent: #f4a06b;
+  --color-sea-accent: #38bdf8;
 
-  --font-serif: "Playfair Display", Georgia, serif;
+  --font-serif: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -79,25 +79,25 @@
     color: var(--color-ink-2);
   }
 
-  /* Display serif besar (hero) */
+  /* Display sans besar (hero) */
   .display {
-    font-family: var(--font-serif);
-    font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: clamp(3rem, 7.2vw, 7rem);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
   }
   .display em {
-    font-style: italic;
+    font-style: normal;
     color: var(--color-accent);
   }
 
   .h2 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-weight: 700;
     font-size: clamp(2rem, 4vw, 3.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.015em;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
   }
 
   /* Link teks: garis bawah tipis, menebal saat hover */
