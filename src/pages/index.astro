@@ -6,7 +6,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import WorkRow from '../components/WorkRow.astro';
 import Link from '../components/Link.astro';
-import HeroAnimation from '../components/HeroAnimation.astro';
 import { SITE, SOCIALS } from '../data/site';
 import imgAlfandhy from '../assets/images/alfandhy.png';
 
@@ -40,8 +39,7 @@ const personLd = {
     <div class="wrap">
       <p class="label r mb-10">AI Enthusiast — Polewali Mandar, Sulawesi Barat</p>
       <div class="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
-        <div class="r flex flex-col justify-between gap-8 lg:col-span-8">
-          <HeroAnimation class="w-full" />
+        <div class="r lg:col-span-8">
           <h1 class="display">Saya memakai AI untuk <em>mendesain,</em> mengajar, dan membangun game.</h1>
         </div>
 
