@@ -4,7 +4,6 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, SOCIALS, SHOP_LINKS, CONTACT } from '../data/site';
 import SocialIcon from '../components/SocialIcon.astro';
-import imgAlfandhy from '../assets/images/alfandhy.png';
 import { TRENDING } from '../data/trending';
 import { loadTrending } from '../lib/etsy';
 
@@ -29,20 +28,16 @@ const jsonLd = {
 
 <BaseLayout lang="en" {title} {description} {jsonLd} bare alternates={false}>
   <div class="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col px-4 pt-14 pb-10 sm:pt-20">
-    <!-- Profil -->
-    <header class="flex flex-col items-center text-center">
-      <Image
-        src={imgAlfandhy}
-        alt="Portrait of Alfandhy"
-        widths={[96, 192]}
-        sizes="96px"
-        loading="eager"
-        fetchpriority="high"
-        class="size-24 rounded-full border border-rule object-cover object-top"
-      />
-      <h1 class="mt-5 text-2xl font-semibold tracking-[-0.02em]">{SITE.name}</h1>
-      <p class="mt-1 font-mono text-xs text-accent">Digital Products &amp; Creative Assets</p>
-      <p class="mt-4 max-w-[34ch] text-[0.9375rem] text-ink-2">Ready-to-use digital goods for your projects — pick a store below.</p>
+    <!-- Sambutan -->
+    <header class="text-center">
+      <p class="font-mono text-xs tracking-[0.14em] text-accent uppercase">Alfandhy Studio</p>
+      <h1 class="mt-4 text-[2rem] leading-[1.1] font-semibold tracking-[-0.03em] sm:text-[2.5rem]">
+        Welcome — glad you're here!
+      </h1>
+      <p class="mx-auto mt-4 max-w-[36ch] text-[0.9375rem] text-ink-2">
+        Patterns, templates and PNG assets made to save you time. Instant download, ready to use in your next project.
+        Pick a store below and happy shopping.
+      </p>
     </header>
 
     <!-- Toko: logo masing-masing -->
