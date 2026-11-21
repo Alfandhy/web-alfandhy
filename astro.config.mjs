@@ -12,6 +12,8 @@ export default defineConfig({
   output: 'static',
   // Netlify menyajikan halaman dengan garis miring di akhir (/game → 301 → /game/).
   trailingSlash: 'ignore',
+  // Thumbnail produk Etsy diunduh & dioptimasi saat build (CSP hanya mengizinkan gambar 'self').
+  image: { domains: ['i.etsystatic.com'] },
   integrations: [
     sitemap({
       filter: (page) => !NOINDEX.some((p) => page.includes(p)),

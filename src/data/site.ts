@@ -43,21 +43,20 @@ export const personLd = (lang: 'id' | 'en') => ({
   sameAs: SOCIALS.map((s) => s.href),
 });
 
-// TAUTAN TOKO (/shop) — urutan di sini = urutan tombol di halaman.
-// Set `featured: true` untuk menyorot satu tautan.
+// TAUTAN TOKO (/shop) — urutan di sini = urutan logo di halaman. `color` = warna merek.
 export const SHOP_LINKS = [
   {
     id: 'etsy',
     label: 'Etsy',
     href: 'https://www.etsy.com/shop/AlfandhyStudio',
-    featured: true,
+    color: '#F1641E',
     desc: 'Digital downloads, templates & printables',
   },
   {
     id: 'gumroad',
     label: 'Gumroad',
     href: 'https://pngasset.gumroad.com/',
-    featured: false,
+    color: '#FF90E8',
     desc: 'PNG assets & graphic resources',
   },
 ] as const;
