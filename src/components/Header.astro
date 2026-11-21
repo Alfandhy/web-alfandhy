@@ -7,192 +7,79 @@ interface Props {
 
 const { lang = 'id' } = Astro.props;
 const t = DICT[lang];
-const nav = t.nav;
-
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isEn = lang === 'en';
-const homeHref = isEn ? '/en' : '/';
+const homeHref = isEn ? '/en/' : '/';
 
-// Target URL for language toggle
-// If currently on /privacy -> /en/privacy; if on /en -> /; etc.
-const toggleTargetHref = isEn
-  ? path.replace(/^\/en(\/|$)/, '/') || '/'
-  : (path === '/' ? '/en' : `/en${path}`);
+// Tautan ke versi bahasa lain dari halaman yang sama.
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const idPath = path.replace(/^\/en(\/|$)/, '/');
+const enPath = idPath === '/' ? '/en/' : `/en${idPath}`;
+
+// Tandai menu aktif (abaikan tautan jangkar).
+const isActive = (href: string) => !href.includes('#') && path.startsWith(href);
 ---
 
 <header class="border-b border-rule">
-  <div class="wrap flex h-[72px] items-center justify-between">
-    <a href={homeHref} id="brand" class="font-serif text-[1.375rem] font-medium tracking-[-0.01em]">
-      Alfandhy<span class="text-accent">.</span>
-    </a>
+  <div class="wrap flex h-16 items-center justify-between gap-6">
+    <a href={homeHref} class="text-[1.125rem] font-semibold tracking-[-0.01em]">Alfandhy</a>
 
-    <div class="flex items-center gap-6 lg:gap-8">
+    <div class="flex items-center gap-6">
       <nav aria-label={isEn ? 'Primary' : 'Utama'} class="hidden sm:block">
-        <ul class="flex items-center gap-5 text-[0.9375rem] lg:gap-7">
+        <ul class="flex items-center gap-7 text-[0.9375rem]">
           {
-            nav.map((item) => (
-              <li class="relative group">
-                {item.children ? (
-                  <div class="relative py-2">
-                    <button
-                      type="button"
-                      class="flex items-center gap-1.5 text-ink-2 transition-colors hover:text-ink cursor-pointer focus:outline-none"
-                      aria-haspopup="true"
-                    >
-                      <span>{item.label}</span>
-                      <svg class="h-3 w-3 text-ink-2/70 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-
-                    <!-- Dropdown Menu -->
-                    <div class="absolute left-0 top-full pt-2 w-60 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150 z-40">
-                      <div class="border border-rule bg-paper-2/95 shadow-xl p-2 backdrop-blur-md">
-                        <div class="px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-2/70 border-b border-rule/60 mb-1">
-                          {isEn ? 'Game Projects' : 'Koleksi Game'}
-                        </div>
-                        {item.children.map((sub) => (
-                          <a
-                            href={sub.href}
-                            class="flex items-center justify-between px-2.5 py-2 hover:bg-paper text-sm text-ink transition-colors group/sub"
-                          >
-                            <span class="font-medium group-hover/sub:text-accent transition-colors">{sub.label}</span>
-                            <span class:list={[
-                              'font-mono text-[10px] px-1.5 py-0.5 border',
-                              sub.badge === 'New' ? 'border-accent/40 text-accent bg-accent/10' : 'border-rule text-ink-2'
-                            ]}>
-                              {sub.badge}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    id={`nav-${item.label.toLowerCase()}`}
-                    class="text-ink-2 transition-colors hover:text-ink"
-                  >
-                    {item.label}
-                  </a>
-                )}
+            t.nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  class:list={['transition-colors hover:text-ink', isActive(item.href) ? 'text-ink' : 'text-ink-2']}
+                >
+                  {item.label}
+                </a>
               </li>
             ))
           }
         </ul>
       </nav>
 
-      <!-- Language Switcher ID | EN -->
-      <div class="flex items-center border border-rule/80 bg-paper-2/60 p-0.5 font-mono text-xs">
-        <a
-          href={isEn ? toggleTargetHref : '#'}
-          class:list={[
-            'px-2 py-0.5 transition-colors',
-            !isEn ? 'bg-ink text-paper font-medium' : 'text-ink-2 hover:text-ink'
-          ]}
-          aria-current={!isEn ? 'true' : undefined}
-          title="Versi Bahasa Indonesia"
-        >
-          ID
-        </a>
-        <span class="text-rule">/</span>
-        <a
-          href={isEn ? '#' : toggleTargetHref}
-          class:list={[
-            'px-2 py-0.5 transition-colors',
-            isEn ? 'bg-ink text-paper font-medium' : 'text-ink-2 hover:text-ink'
-          ]}
-          aria-current={isEn ? 'true' : undefined}
-          title="English version"
-        >
-          EN
-        </a>
-      </div>
-
-      <button
-        id="menu-open"
-        type="button"
-        class="label !text-ink sm:hidden"
-        aria-controls="mobile-menu"
-        aria-expanded="false"
+      <a
+        href={isEn ? idPath : enPath}
+        hreflang={isEn ? 'id' : 'en'}
+        lang={isEn ? 'id' : 'en'}
+        class="text-sm text-ink-2 transition-colors hover:text-ink"
+        title={isEn ? 'Baca dalam Bahasa Indonesia' : 'Read in English'}
       >
+        {isEn ? 'ID' : 'EN'}
+      </a>
+
+      <button id="menu-open" type="button" class="text-[0.9375rem] sm:hidden" aria-controls="mobile-menu" aria-expanded="false">
         {t.common.menu}
       </button>
     </div>
   </div>
 </header>
 
-<!-- Menu teks penuh layar (mobile) -->
-<div id="mobile-menu" class="fixed inset-0 z-50 hidden flex-col bg-paper sm:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-  <div class="wrap flex h-[72px] items-center justify-between border-b border-rule">
-    <a href={homeHref} class="font-serif text-[1.375rem] font-medium tracking-[-0.01em]">Alfandhy<span class="text-accent">.</span></a>
-    <button id="menu-close" type="button" class="label !text-ink">{t.common.close}</button>
+<!-- Menu layar penuh (mobile) -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden flex-col bg-paper sm:hidden" role="dialog" aria-modal="true" aria-label={t.common.menu}>
+  <div class="wrap flex h-16 items-center justify-between border-b border-rule">
+    <a href={homeHref} class="text-[1.125rem] font-semibold tracking-[-0.01em]">Alfandhy</a>
+    <button id="menu-close" type="button" class="text-[0.9375rem]">{t.common.close}</button>
   </div>
-  <nav aria-label="Menu mobile" class="wrap flex-1 overflow-y-auto pt-6 pb-10">
+  <nav aria-label={t.common.menu} class="wrap flex-1 overflow-y-auto pt-4 pb-10">
     <ul>
+      <li class="border-b border-rule">
+        <a href={homeHref} class="block py-4 text-[1.75rem] font-medium">{t.common.home}</a>
+      </li>
       {
-        nav.map((item, i) => (
-          <li class="border-b border-rule py-3">
-            {item.children ? (
-              <div>
-                <div class="flex items-baseline justify-between font-serif text-[2.25rem] leading-tight text-ink">
-                  {item.label}
-                  <span class="label">{String(i + 1).padStart(2, '0')}</span>
-                </div>
-                <ul class="mt-3 pl-4 space-y-2 border-l-2 border-accent/40">
-                  {item.children.map((sub) => (
-                    <li>
-                      <a
-                        href={sub.href}
-                        class="flex items-center justify-between py-1.5 font-sans text-base text-ink-2 hover:text-accent"
-                      >
-                        <span>{sub.label}</span>
-                        <span class="font-mono text-xs text-accent">[{sub.badge}]</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <a
-                href={item.href}
-                id={`mnav-${item.label.toLowerCase()}`}
-                class="flex items-baseline justify-between font-serif text-[2.25rem] leading-tight text-ink"
-              >
-                {item.label}
-                <span class="label">{String(i + 1).padStart(2, '0')}</span>
-              </a>
-            )}
+        t.nav.map((item) => (
+          <li class="border-b border-rule">
+            <a href={item.href} class="block py-4 text-[1.75rem] font-medium">
+              {item.label}
+            </a>
           </li>
         ))
       }
     </ul>
-    
-    <!-- Language Switcher in Mobile Menu -->
-    <div class="mt-8 flex items-center justify-between border-t border-rule pt-6">
-      <span class="font-mono text-xs text-ink-2">{isEn ? 'Language:' : 'Pilih Bahasa:'}</span>
-      <div class="flex items-center border border-rule bg-paper-2 font-mono text-xs">
-        <a
-          href={isEn ? toggleTargetHref : '#'}
-          class:list={[
-            'px-3 py-1',
-            !isEn ? 'bg-ink text-paper font-medium' : 'text-ink-2'
-          ]}
-        >
-          ID (Indonesia)
-        </a>
-        <a
-          href={isEn ? '#' : toggleTargetHref}
-          class:list={[
-            'px-3 py-1',
-            isEn ? 'bg-ink text-paper font-medium' : 'text-ink-2'
-          ]}
-        >
-          EN (English)
-        </a>
-      </div>
-    </div>
   </nav>
 </div>
 

@@ -1,0 +1,149 @@
+---
+// Beranda (dipakai oleh / dan /en/).
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../SectionLabel.astro';
+import WorkRow from '../WorkRow.astro';
+import { SITE, personLd } from '../../data/site';
+import { DICT, type Lang } from '../../data/i18n';
+import imgAlfandhy from '../../assets/images/alfandhy.png';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = DICT[lang];
+const prefix = lang === 'en' ? '/en' : '';
+
+const featured = (await getCollection('work', ({ data }) => data.featured)).sort((a, b) => a.data.order - b.data.order);
+
+const nowDate = new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'id-ID', { month: 'long', year: 'numeric' }).format(new Date());
+
+const jsonLd = [
+  personLd(lang),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    name: 'Alfandhy',
+    url: `${SITE.url}/`,
+    inLanguage: lang === 'en' ? 'en' : 'id',
+    author: { '@id': `${SITE.url}/#person` },
+  },
+];
+---
+
+<BaseLayout lang={lang} type="profile" jsonLd={jsonLd}>
+  <!-- HERO -->
+  <section class="pt-12 pb-20 sm:pt-20 sm:pb-28">
+    <div class="wrap grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end md:gap-8">
+      <div class="md:col-span-7 lg:col-span-8">
+        <p class="label mb-6">{t.hero.eyebrow}</p>
+        <h1 class="display max-w-[16ch]">{t.hero.headline}</h1>
+        <p class="mt-7 max-w-[52ch] text-[1.125rem] text-ink-2">{t.hero.bio}</p>
+        <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-[1rem]">
+          <a href="#karya" class="link">{t.hero.ctaWork}</a>
+          <a href={`${prefix}/about/`} class="link text-ink-2">{t.hero.ctaAbout}</a>
+        </div>
+      </div>
+
+      <div class="max-w-[360px] md:col-span-5 md:max-w-none lg:col-span-4">
+        <Image
+          src={imgAlfandhy}
+          alt={t.hero.altPhoto}
+          widths={[360, 560, 832]}
+          sizes="(min-width: 768px) 34vw, 360px"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/5] w-full rounded-sm object-cover grayscale-[15%]"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- KARYA -->
+  <section id="karya" class="scroll-mt-6 pb-20 sm:pb-28">
+    <div class="wrap">
+      <SectionLabel title={t.work.title}>
+        <a href={`${prefix}/game/`} class="label link">{t.work.gameLink}</a>
+      </SectionLabel>
+
+      {
+        featured.map((w) => (
+          <WorkRow
+            title={w.data.title}
+            summary={w.data.summary}
+            href={`${prefix}${w.data.href ?? `/work/${w.id}`}/`}
+            tags={w.data.tags}
+            cover={w.data.cover}
+            coverAlt={w.data.coverAlt}
+          />
+        ))
+      }
+
+      <h3 class="label mt-14 mb-2">{t.work.more}</h3>
+      <ul class="r border-t border-rule">
+        {
+          t.work.others.map((o) => {
+            const external = o.href.startsWith('http');
+            return (
+              <li class="border-b border-rule">
+                <a
+                  href={o.href}
+                  {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+                  class="group grid grid-cols-1 gap-1 py-5 sm:grid-cols-12 sm:gap-6"
+                >
+                  <span class="text-[1.25rem] font-medium transition-colors group-hover:text-accent sm:col-span-4">{o.title}</span>
+                  <span class="text-ink-2 sm:col-span-6">{o.text}</span>
+                  <span class="text-sm text-ink-2 sm:col-span-2 sm:text-right">
+                    {o.meta}
+                    {external ? ' ↗' : ''}
+                  </span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- PENDEKATAN -->
+  <section id="pendekatan" class="pb-20 sm:pb-28">
+    <div class="wrap">
+      <SectionLabel title={t.approach.title} />
+      <div class="r grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+        <ul class="text-ink-2 md:col-span-4">
+          {t.approach.items.map((item) => <li class="border-b border-rule py-3 text-[1.0625rem]">{item}</li>)}
+        </ul>
+        <div class="space-y-5 text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.45] tracking-[-0.01em] md:col-span-7 md:col-start-6">
+          <p>
+            {t.approach.quote1}<span class="text-accent">{t.approach.quote1Emp}</span>{t.approach.quote1Post}
+          </p>
+          <p class="text-ink-2">{t.approach.quote2}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKARANG -->
+  <section id="sekarang">
+    <div class="wrap">
+      <SectionLabel title={t.now.title}>
+        <span class="label">{nowDate}</span>
+      </SectionLabel>
+      <dl class="r grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8">
+        {
+          t.now.items.map((n) => (
+            <div>
+              <dt class="label mb-2">{n.label}</dt>
+              <dd class="max-w-[32ch]">{n.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</BaseLayout>

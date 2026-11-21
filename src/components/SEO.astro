@@ -1,49 +1,76 @@
 ---
 import { SITE } from '../data/site';
+import { DICT, type Lang } from '../data/i18n';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'profile';
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  lang?: Lang;
+  /** false = halaman satu bahasa, tanpa pasangan hreflang ID/EN. */
+  alternates?: boolean;
 }
 
-const {
-  title,
-  description = SITE.description,
-  image = SITE.ogImage,
-  type = 'website',
-  noindex = false,
-  jsonLd,
-} = Astro.props;
+const { title, description, image = SITE.ogImage, imageAlt, type = 'website', noindex = false, jsonLd, lang = 'id', alternates = true } = Astro.props;
 
-const fullTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — AI Enthusiast · Design · Edu · Games`;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
-const imageUrl = new URL(image, Astro.site ?? SITE.url).href;
+const t = DICT[lang].meta;
+const desc = description ?? t.description;
+
+// Judul: "Halaman — Alfandhy"; jangan menggandakan nama bila sudah ada.
+const fullTitle = !title ? t.homeTitle : title.includes(SITE.name) ? title : `${title} — ${SITE.name}`;
+
+// URL kanonis selalu memakai garis miring di akhir, sama seperti yang disajikan Netlify.
+const site = Astro.site ?? new URL(SITE.url);
+const withSlash = (p: string) => (p.endsWith('/') ? p : `${p}/`);
+const path = withSlash(Astro.url.pathname);
+const canonical = new URL(path, site).href;
+
+// Pasangan halaman ID ↔ EN (semua halaman punya versi kedua bahasa).
+const idPath = path.replace(/^\/en(\/|$)/, '/');
+const enPath = idPath === '/' ? '/en/' : `/en${idPath}`;
+const idUrl = new URL(idPath, site).href;
+const enUrl = new URL(enPath, site).href;
+
+const imageUrl = new URL(image, site).href;
 ---
 
 <title>{fullTitle}</title>
-<meta name="description" content={description} />
+<meta name="description" content={desc} />
 <link rel="canonical" href={canonical} />
-{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+<meta name="author" content={SITE.fullName} />
+
+{
+  !noindex && alternates && (
+    <>
+      <link rel="alternate" hreflang="id" href={idUrl} />
+      <link rel="alternate" hreflang="en" href={enUrl} />
+      <link rel="alternate" hreflang="x-default" href={idUrl} />
+    </>
+  )
+}
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE.name} />
-<meta property="og:locale" content={SITE.locale} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'id_ID'} />
+<meta property="og:locale:alternate" content={lang === 'en' ? 'id_ID' : 'en_US'} />
 <meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={desc} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt ?? fullTitle} />
 
-<!-- Twitter Card -->
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={desc} />
 <meta name="twitter:image" content={imageUrl} />
 
 {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

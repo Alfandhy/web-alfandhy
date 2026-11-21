@@ -3,18 +3,24 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+import { DICT } from '../data/i18n';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'profile';
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   lang?: 'id' | 'en';
+  /** Tanpa header & footer — untuk halaman tautan (mis. /shop). */
+  bare?: boolean;
+  alternates?: boolean;
 }
 
-const { lang = 'id', ...props } = Astro.props;
+const { lang = 'id', bare = false, ...props } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +28,7 @@ const { lang = 'id', ...props } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#070D1E" />
+    <meta name="theme-color" content={SITE.themeColor} />
     <meta name="google-site-verification" content="newRCdCIu4Xnfpz2Fr80bQlN5FwX-Tjzbg8xzuMPA6s" />
     <script>
       document.documentElement.classList.remove('no-js');
@@ -37,23 +43,23 @@ const { lang = 'id', ...props } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap"
     />
 
-    <SEO {...props} />
+    <SEO lang={lang} {...props} />
   </head>
   <body class="flex min-h-dvh flex-col">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">
-      {lang === 'en' ? 'Skip to content' : 'Lewati ke konten'}
+      {DICT[lang].common.skipToContent}
     </a>
-    <Header lang={lang} />
+    {!bare && <Header lang={lang} />}
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer lang={lang} />
+    {!bare && <Footer lang={lang} />}
 
     <script>
-      // Satu-satunya animasi berbasis JS: muncul perlahan saat scroll.
+      // Muncul perlahan saat scroll.
       const els = document.querySelectorAll('.r');
       if (!('IntersectionObserver' in window)) {
         els.forEach((e) => e.classList.add('in'));
