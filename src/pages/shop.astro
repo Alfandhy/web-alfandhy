@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, SOCIALS, SHOP_LINKS, CONTACT } from '../data/site';
 import SocialIcon from '../components/SocialIcon.astro';
 import { TRENDING } from '../data/trending';
-import { loadTrending } from '../lib/etsy';
+import { loadTrending } from '../lib/products';
 
 const trending = await loadTrending(TRENDING);
 // Satu produk → kartu lebar (gambar kiri, teks kanan); dua atau lebih → grid 2 kolom.
@@ -98,8 +98,8 @@ const jsonLd = {
                       <img src={p.image} alt={p.title} loading="lazy" class="size-full object-cover" />
                     )
                   ) : (
-                    <span class="flex size-full items-center justify-center text-[#F1641E]">
-                      <SocialIcon id="etsy" class="size-10 opacity-60" />
+                    <span class:list={['flex size-full items-center justify-center', p.store === 'gumroad' ? 'text-[#FF90E8]' : 'text-[#F1641E]']}>
+                      <SocialIcon id={p.store === 'gumroad' ? 'gumroad' : 'etsy'} class="size-10 opacity-60" />
                     </span>
                   )}
                   {p.badge && (
@@ -109,7 +109,8 @@ const jsonLd = {
                 <span class:list={['block', !solo && 'mt-2']}>
                   <span class:list={['line-clamp-2 block leading-snug text-ink transition-colors group-hover:text-accent', solo ? 'text-[0.9375rem] font-semibold' : 'text-[0.8125rem]']}>{p.title}</span>
                   {p.price && <span class="mt-0.5 block font-mono text-xs text-ink-2">{p.price}</span>}
-                  {solo && <span class="mt-2 block font-mono text-[11px] text-ink-2 transition-colors group-hover:text-accent">View on Etsy ↗</span>}
+                  {!solo && <span class="mt-1 block font-mono text-[10px] text-ink-2 transition-colors group-hover:text-accent">{p.store === 'gumroad' ? 'Gumroad' : 'Etsy'} ↗</span>}
+                  {solo && <span class="mt-2 block font-mono text-[11px] text-ink-2 transition-colors group-hover:text-accent">View on {p.store === 'gumroad' ? 'Gumroad' : 'Etsy'} ↗</span>}
                 </span>
               </a>
             </li>

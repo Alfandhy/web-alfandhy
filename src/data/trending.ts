@@ -1,4 +1,6 @@
-// PRODUK TRENDING di /shop — cukup tempel link listing Etsy.
+// PRODUK TRENDING di /shop — cukup tempel link produk Etsy atau Gumroad.
+//
+// Gumroad: thumbnail & judul diambil otomatis dari halaman produk saat build.
 //
 // Thumbnail, judul & harga diambil otomatis saat build lewat Etsy Open API
 // bila env var ETSY_API_KEY diisi (format "keystring:shared_secret", lihat
@@ -7,7 +9,7 @@
 // Field yang diisi manual selalu menang atas data otomatis.
 
 export interface TrendingItem {
-  /** Link listing, mis. https://www.etsy.com/listing/1234567890/nama-produk */
+  /** Link produk, mis. https://www.etsy.com/listing/123/nama atau https://nama.gumroad.com/l/produk */
   url: string;
   /** Opsional: judul pendek pengganti judul Etsy (judul Etsy sering terlalu panjang). */
   title?: string;
@@ -24,6 +26,10 @@ export const TRENDING: TrendingItem[] = [
     url: 'https://www.etsy.com/listing/4622130573/100-sportswear-seamless-patterns-bundle',
     title: '100 Sportswear Seamless Patterns Bundle',
     image: 'https://i.etsystatic.com/47231213/r/il/374556/8948338933/il_570xN.8948338933_h4lt.jpg',
+  },
+  {
+    url: 'https://pngasset.gumroad.com/l/liquid-chrome',
+    title: 'Liquid Chrome — 10 Gothic Streetwear T-Shirt Designs',
   },
   // { url: 'https://www.etsy.com/listing/1234567890/nama-produk', title: 'Nama pendek' },
 ];

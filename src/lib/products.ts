@@ -1,9 +1,13 @@
-// Ambil data listing Etsy saat build (Etsy Open API v3).
-// Halaman etsy.com memblokir pengambilan otomatis, jadi hanya API resmi yang dipakai.
+// Ambil data produk trending saat build.
+// - Etsy: lewat Etsy Open API v3 (halaman etsy.com memblokir pengambilan otomatis).
+// - Gumroad: dari tag og:title / og:image di halaman produknya.
 import type { TrendingItem } from '../data/trending';
+
+export type Store = 'etsy' | 'gumroad' | 'other';
 
 export interface TrendingCard {
   url: string;
+  store: Store;
   title: string;
   image?: string;
   price?: string;
@@ -11,6 +15,28 @@ export interface TrendingCard {
 }
 
 const API = 'https://api.etsy.com/v3/application/listings';
+
+const storeOf = (url: string): Store =>
+  /etsy\.com\//i.test(url) ? 'etsy' : /gumroad\.com\//i.test(url) ? 'gumroad' : 'other';
+
+const meta = (html: string, prop: string) =>
+  html.match(new RegExp(`<meta[^>]+property="${prop}"[^>]+content="([^"]+)"`, 'i'))?.[1]
+    ?.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
+async function fetchGumroad(url: string) {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (alfandhy.my.id build)' } });
+    if (!res.ok) {
+      console.warn(`[gumroad] ${url}: HTTP ${res.status}`);
+      return undefined;
+    }
+    const html = await res.text();
+    return { title: meta(html, 'og:title'), image: meta(html, 'og:image'), price: undefined as string | undefined };
+  } catch (e) {
+    console.warn(`[gumroad] ${url}: ${(e as Error).message}`);
+    return undefined;
+  }
+}
 
 const listingId = (url: string) => url.match(/etsy\.com\/(?:[a-z-]+\/)?listing\/(\d+)/i)?.[1];
 
@@ -64,15 +90,21 @@ export async function loadTrending(items: TrendingItem[]): Promise<TrendingCard[
   const key = import.meta.env.ETSY_API_KEY ?? process.env.ETSY_API_KEY;
   return Promise.all(
     items.map(async (it) => {
-      const id = listingId(it.url);
-      const api = id && key ? await fetchListing(id, key) : undefined;
+      const store = storeOf(it.url);
+      const id = store === 'etsy' ? listingId(it.url) : undefined;
+      const needsFetch = !it.image || !it.title;
+      const api =
+        id && key && needsFetch ? await fetchListing(id, key)
+        : store === 'gumroad' && needsFetch ? await fetchGumroad(it.url)
+        : undefined;
       let image = it.image ?? api?.image;
       if (image && /^https?:/.test(image) && !(await reachable(image))) {
-        console.warn(`[etsy] gambar tidak bisa diunduh, dilewati: ${image}`);
+        console.warn(`[trending] gambar tidak bisa diunduh, dilewati: ${image}`);
         image = undefined;
       }
       return {
         url: it.url,
+        store,
         title: it.title ?? api?.title ?? titleFromSlug(it.url),
         image,
         price: it.price ?? api?.price,
