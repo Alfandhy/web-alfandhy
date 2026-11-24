@@ -16,6 +16,7 @@ const work = defineCollection({
       tools: z.array(z.string()).default([]),
       featured: z.boolean().default(false),
       summary: z.string(),
+      summaryEn: z.string().optional(), // ringkasan untuk /en/ (bila kosong pakai summary)
       // --- tambahan tampilan ---
       tags: z.array(z.string()).default([]), // label kecil di WorkRow
       order: z.number().default(99), // urutan di beranda (kecil = atas)

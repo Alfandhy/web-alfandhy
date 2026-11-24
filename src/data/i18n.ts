@@ -32,10 +32,10 @@ export const DICT = {
       more: 'Karya lain',
       others: [
         {
-          title: 'SMEGTA MEDIA',
-          text: 'Motion loop dan aset visual untuk Adobe Stock, sekaligus ruang belajar siswa ekstrakurikuler.',
-          href: '/about/#smegta',
-          meta: 'Microstock',
+          title: 'Alfandhy Studio',
+          text: 'Motion loop, ilustrasi, dan aset visual di Adobe Stock.',
+          href: 'https://stock.adobe.com/id/contributor/210268087/Alva',
+          meta: 'Adobe Stock',
         },
         {
           title: 'Desain grafis',
@@ -148,10 +148,10 @@ export const DICT = {
       more: 'Other work',
       others: [
         {
-          title: 'SMEGTA MEDIA',
-          text: 'Motion loops and visual assets for Adobe Stock, made with students in an extracurricular program.',
-          href: '/en/about/#smegta',
-          meta: 'Microstock',
+          title: 'Alfandhy Studio',
+          text: 'Motion loops, illustrations, and visual assets on Adobe Stock.',
+          href: 'https://stock.adobe.com/id/contributor/210268087/Alva',
+          meta: 'Adobe Stock',
         },
         {
           title: 'Graphic design',

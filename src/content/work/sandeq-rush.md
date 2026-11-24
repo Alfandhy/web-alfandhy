@@ -10,6 +10,7 @@ cover: ./sandeq-rush-cover.png
 coverAlt: Gameplay balap perahu Sandeq Rush berkecepatan 32 knot
 tags: [Game, Android, '2026']
 summary: Game balap perahu Sandeq khas Mandar untuk Android, dengan aset visual yang dikembangkan memakai AI.
+summaryEn: An Android racing game about the Sandeq, the traditional Mandar sailboat, with visual assets developed using AI.
 placeholder: sea
 placeholderLabel: '[Screenshot gameplay]'
 ---
