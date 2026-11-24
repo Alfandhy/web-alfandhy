@@ -5,7 +5,8 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionLabel from '../SectionLabel.astro';
 import WorkRow from '../WorkRow.astro';
-import { SITE, personLd } from '../../data/site';
+import { SITE, SOCIALS, personLd } from '../../data/site';
+import SocialIcon from '../SocialIcon.astro';
 import { DICT, type Lang } from '../../data/i18n';
 import imgAlfandhy from '../../assets/images/alfandhy.png';
 
@@ -43,6 +44,22 @@ const jsonLd = [
         <p class="label mb-6">{t.hero.eyebrow}</p>
         <h1 class="display max-w-[16ch]">{t.hero.headline}</h1>
         <p class="mt-7 max-w-[52ch] text-[1.125rem] text-ink-2">{t.hero.bio}</p>
+        <ul class="mt-6 flex flex-wrap gap-3" aria-label={lang === 'en' ? 'Social media' : 'Media sosial'}>
+          {SOCIALS.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="me noopener"
+                aria-label={s.label}
+                title={s.label}
+                class="flex size-11 items-center justify-center rounded-full border border-rule text-ink-2 transition-colors hover:border-accent hover:text-accent"
+              >
+                <SocialIcon id={s.id} class="size-[18px]" />
+              </a>
+            </li>
+          ))}
+        </ul>
         <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-[1rem]">
           <a href="#karya" class="link">{t.hero.ctaWork}</a>
           <a href={`${prefix}/about/`} class="link text-ink-2">{t.hero.ctaAbout}</a>

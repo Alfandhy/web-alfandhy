@@ -21,7 +21,7 @@ export const DICT = {
     hero: {
       eyebrow: 'Polewali Mandar, Sulawesi Barat',
       headline: 'Halo, saya Alfandhy. Saya mengajar, mendesain, dan membuat game.',
-      bio: 'Guru di SMK Negeri Tapango, pendiri SMEGTA MEDIA, dan saat ini sedang menyelesaikan Sandeq Rush, game balap perahu Sandeq untuk Android.',
+      bio: 'Menciptakan sesuatu dengan ide sendiri, membangunnya menjadi sesuatu yang bernilai, dan memberikan manfaat kepada orang lain.',
       ctaWork: 'Lihat karya',
       ctaAbout: 'Tentang saya',
       altPhoto: 'Foto Alfandhy, S.T.',
@@ -137,7 +137,7 @@ export const DICT = {
     hero: {
       eyebrow: 'Polewali Mandar, West Sulawesi',
       headline: "Hi, I'm Alfandhy. I teach, design, and make games.",
-      bio: "I teach at SMK Negeri Tapango, founded SMEGTA MEDIA, and I'm currently finishing Sandeq Rush, a traditional Sandeq boat racing game for Android.",
+      bio: 'Create from my own ideas, build them into something of value, and use it to benefit others.',
       ctaWork: 'See work',
       ctaAbout: 'About me',
       altPhoto: 'Portrait of Alfandhy, S.T.',

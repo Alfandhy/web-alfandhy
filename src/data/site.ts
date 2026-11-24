@@ -15,6 +15,7 @@ export const SOCIALS = [
   { id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@alfandhyyy' },
   { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/alfandhyyy/' },
   { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/alfandhy-243623155/' },
+  { id: 'threads', label: 'Threads', href: 'https://www.threads.com/@alfandhyyy' },
 ] as const;
 
 export const CONTACT = {
